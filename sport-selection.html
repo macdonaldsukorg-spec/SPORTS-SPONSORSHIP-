@@ -273,51 +273,56 @@
             transition: all 0.4s ease;
             backdrop-filter: blur(10px);
             position: relative;
+            overflow: hidden;
+        }
+
+        .sport-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .sport-card:hover::before {
+            opacity: 1;
         }
 
         .sport-card:hover {
             background: rgba(255, 255, 255, 0.07);
             border-color: rgba(255, 215, 0, 0.15);
-            transform: translateY(-4px);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .sport-card.selected {
-            border-color: #FBBF24;
-            background: rgba(251, 191, 36, 0.06);
-            box-shadow: 0 0 30px rgba(251, 191, 36, 0.05);
-        }
-
-        .sport-card.selected::after {
-            content: '✓';
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: linear-gradient(135deg, #FBBF24, #F59E0B);
-            color: #0a0a1a;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.2);
-        }
-
-        .sport-card .sport-icon {
-            font-size: 2.8rem;
-            display: block;
-            margin-bottom: 10px;
+        .sport-card:active {
+            transform: scale(0.95);
         }
 
         .sport-card .sport-image {
             width: 100%;
-            height: 140px;
+            height: 160px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: transform 0.5s ease;
+        }
+
+        .sport-card:hover .sport-image {
+            transform: scale(1.03);
+        }
+
+        .sport-card .sport-icon {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 8px;
         }
 
         .sport-card h3 {
@@ -348,131 +353,46 @@
             color: rgba(255, 255, 255, 0.4);
             font-weight: 500;
             border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s;
         }
 
-        .sport-card.selected .disciplines span {
+        .sport-card:hover .disciplines span {
             background: rgba(251, 191, 36, 0.08);
             color: #FBBF24;
             border-color: rgba(251, 191, 36, 0.08);
         }
 
-        .sport-details {
-            display: none;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 215, 0, 0.06);
-            border-radius: 16px;
-            padding: 30px;
-            margin: 25px 0;
-            animation: slideUp 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .sport-details.visible {
+        .sport-card .tap-hint {
             display: block;
-        }
-
-        .sport-details h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #ffffff;
-            margin-bottom: 20px;
-        }
-
-        .sport-details .question {
-            margin-bottom: 20px;
-        }
-
-        .sport-details .question label {
-            display: block;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-
-        .sport-details .question label .required {
-            color: #ff6b6b;
-            margin-left: 3px;
-        }
-
-        .sport-details .question textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s;
-            background: rgba(255, 255, 255, 0.04);
-            color: #ffffff;
-            min-height: 80px;
-            resize: vertical;
-            backdrop-filter: blur(10px);
-        }
-
-        .sport-details .question textarea::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .sport-details .question textarea:focus {
-            outline: none;
-            border-color: #FBBF24;
-            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.05);
-            background: rgba(255, 255, 255, 0.07);
-        }
-
-        .btn-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            padding: 16px 45px;
-            background: linear-gradient(135deg, #FBBF24, #F59E0B);
-            color: #0a0a1a;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            margin-top: 12px;
+            font-size: 0.6rem;
+            color: rgba(255, 215, 0, 0.3);
+            text-align: center;
+            letter-spacing: 2px;
             font-weight: 700;
-            cursor: pointer;
+            text-transform: uppercase;
             transition: all 0.3s;
-            font-family: 'Inter', sans-serif;
-            flex: 1;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+        .sport-card:hover .tap-hint {
+            color: rgba(255, 215, 0, 0.7);
+            letter-spacing: 3px;
         }
 
-        .btn-primary:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
+        .sport-card .glow-border {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FBBF24, transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+            border-radius: 0 0 16px 16px;
         }
 
-        .btn-secondary {
-            padding: 16px 35px;
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 215, 0, 0.15);
-            color: #ffffff;
+        .sport-card:hover .glow-border {
+            opacity: 1;
         }
 
         @media (max-width: 992px) {
@@ -502,25 +422,15 @@
             }
 
             .sport-card .sport-image {
-                height: 110px;
+                height: 120px;
             }
 
             .sport-card .sport-icon {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
 
             .sport-card h3 {
                 font-size: 0.95rem;
-            }
-
-            .btn-actions {
-                flex-direction: column;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-                text-align: center;
             }
 
             .inspiration-banner {
@@ -548,11 +458,11 @@
             }
 
             .sport-card .sport-image {
-                height: 90px;
+                height: 100px;
             }
 
             .sport-card .sport-icon {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .sport-card h3 {
@@ -564,12 +474,8 @@
                 padding: 2px 8px;
             }
 
-            .sport-details {
-                padding: 20px;
-            }
-
-            .sport-details h3 {
-                font-size: 1.2rem;
+            .sport-card .tap-hint {
+                font-size: 0.5rem;
             }
         }
     </style>
@@ -603,7 +509,7 @@
     <div class="header">
         <div class="step">Step 1 of 4</div>
         <h1>Select Your Sport</h1>
-        <p>Choose the sport you want to be sponsored in</p>
+        <p>Tap a sport to apply for sponsorship</p>
     </div>
 
     <div class="inspiration-banner">
@@ -615,218 +521,203 @@
     </div>
 
     <div class="sport-grid" id="sportGrid">
-        <div class="sport-card" onclick="selectSport('Athletics', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Athletics">
-            <span class="sport-icon">🏃</span>
-            <h3>Athletics</h3>
+        <!-- Athletics - HD Running Image -->
+        <div class="sport-card" onclick="goToPersonalDetails('Athletics')">
+            <img class="sport-image" src="https://images.pexels.com/photos/235922/pexels-photo-235922.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Athletics Running">
+            <h3>🏃 Athletics</h3>
             <p>Track & Field, Marathons</p>
             <div class="disciplines">
                 <span>Sprints</span>
                 <span>Distance</span>
                 <span>Hurdles</span>
                 <span>Marathon</span>
+                <span>Race Walk</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Football', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Football">
-            <span class="sport-icon">⚽</span>
-            <h3>Football</h3>
+        <!-- Football -->
+        <div class="sport-card" onclick="goToPersonalDetails('Football')">
+            <img class="sport-image" src="https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Football">
+            <h3>⚽ Football</h3>
             <p>Soccer, Futsal</p>
             <div class="disciplines">
                 <span>11-a-side</span>
                 <span>Futsal</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Basketball', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/1705498/pexels-photo-1705498.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Basketball">
-            <span class="sport-icon">🏀</span>
-            <h3>Basketball</h3>
+        <!-- Basketball -->
+        <div class="sport-card" onclick="goToPersonalDetails('Basketball')">
+            <img class="sport-image" src="https://images.pexels.com/photos/1705498/pexels-photo-1705498.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Basketball">
+            <h3>🏀 Basketball</h3>
             <p>5x5, 3x3</p>
             <div class="disciplines">
                 <span>5x5</span>
                 <span>3x3</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Boxing', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/4560828/pexels-photo-4560828.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Boxing">
-            <span class="sport-icon">🥊</span>
-            <h3>Boxing</h3>
+        <!-- Boxing -->
+        <div class="sport-card" onclick="goToPersonalDetails('Boxing')">
+            <img class="sport-image" src="https://images.pexels.com/photos/4560828/pexels-photo-4560828.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Boxing">
+            <h3>🥊 Boxing</h3>
             <p>Amateur, Professional</p>
             <div class="disciplines">
                 <span>Amateur</span>
                 <span>Professional</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Tennis', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/716449/pexels-photo-716449.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Tennis">
-            <span class="sport-icon">🎾</span>
-            <h3>Tennis</h3>
+        <!-- Tennis -->
+        <div class="sport-card" onclick="goToPersonalDetails('Tennis')">
+            <img class="sport-image" src="https://images.pexels.com/photos/716449/pexels-photo-716449.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Tennis">
+            <h3>🎾 Tennis</h3>
             <p>Singles, Doubles</p>
             <div class="disciplines">
                 <span>Singles</span>
                 <span>Doubles</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Swimming', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/4046300/pexels-photo-4046300.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Swimming">
-            <span class="sport-icon">🏊</span>
-            <h3>Swimming</h3>
+        <!-- Swimming -->
+        <div class="sport-card" onclick="goToPersonalDetails('Swimming')">
+            <img class="sport-image" src="https://images.pexels.com/photos/4046300/pexels-photo-4046300.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Swimming">
+            <h3>🏊 Swimming</h3>
             <p>Freestyle, Breaststroke</p>
             <div class="disciplines">
                 <span>Freestyle</span>
                 <span>Breaststroke</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Cycling', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Cycling">
-            <span class="sport-icon">🚴</span>
-            <h3>Cycling</h3>
+        <!-- Cycling -->
+        <div class="sport-card" onclick="goToPersonalDetails('Cycling')">
+            <img class="sport-image" src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Cycling">
+            <h3>🚴 Cycling</h3>
             <p>Road, Mountain</p>
             <div class="disciplines">
                 <span>Road</span>
                 <span>Mountain</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Weightlifting', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Weightlifting">
-            <span class="sport-icon">🏋️</span>
-            <h3>Weightlifting</h3>
+        <!-- Weightlifting -->
+        <div class="sport-card" onclick="goToPersonalDetails('Weightlifting')">
+            <img class="sport-image" src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Weightlifting">
+            <h3>🏋️ Weightlifting</h3>
             <p>Olympic, Powerlifting</p>
             <div class="disciplines">
                 <span>Olympic</span>
                 <span>Powerlifting</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Rugby', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/113400/pexels-photo-113400.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Rugby">
-            <span class="sport-icon">🏉</span>
-            <h3>Rugby</h3>
+        <!-- Rugby -->
+        <div class="sport-card" onclick="goToPersonalDetails('Rugby')">
+            <img class="sport-image" src="https://images.pexels.com/photos/113400/pexels-photo-113400.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Rugby">
+            <h3>🏉 Rugby</h3>
             <p>Union, Sevens</p>
             <div class="disciplines">
                 <span>Union</span>
                 <span>Sevens</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Volleyball', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/2027426/pexels-photo-2027426.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Volleyball">
-            <span class="sport-icon">🏐</span>
-            <h3>Volleyball</h3>
+        <!-- Volleyball -->
+        <div class="sport-card" onclick="goToPersonalDetails('Volleyball')">
+            <img class="sport-image" src="https://images.pexels.com/photos/2027426/pexels-photo-2027426.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Volleyball">
+            <h3>🏐 Volleyball</h3>
             <p>Indoor, Beach</p>
             <div class="disciplines">
                 <span>Indoor</span>
                 <span>Beach</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Golf', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/435610/pexels-photo-435610.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Golf">
-            <span class="sport-icon">⛳</span>
-            <h3>Golf</h3>
+        <!-- Golf -->
+        <div class="sport-card" onclick="goToPersonalDetails('Golf')">
+            <img class="sport-image" src="https://images.pexels.com/photos/435610/pexels-photo-435610.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Golf">
+            <h3>⛳ Golf</h3>
             <p>Stroke, Match</p>
             <div class="disciplines">
                 <span>Stroke</span>
                 <span>Match</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
 
-        <div class="sport-card" onclick="selectSport('Cricket', this)">
-            <img class="sport-image" src="https://images.pexels.com/photos/5492067/pexels-photo-5492067.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Cricket">
-            <span class="sport-icon">🏏</span>
-            <h3>Cricket</h3>
+        <!-- Cricket -->
+        <div class="sport-card" onclick="goToPersonalDetails('Cricket')">
+            <img class="sport-image" src="https://images.pexels.com/photos/5492067/pexels-photo-5492067.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop&q=80" alt="Cricket">
+            <h3>🏏 Cricket</h3>
             <p>T20, ODI, Test</p>
             <div class="disciplines">
                 <span>T20</span>
                 <span>ODI</span>
                 <span>Test</span>
             </div>
+            <span class="tap-hint">👆 TAP TO APPLY</span>
+            <div class="glow-border"></div>
         </div>
     </div>
 
-    <div class="sport-details" id="sportDetails">
-        <h3 id="selectedSportTitle">🏅 Application Questions</h3>
-
-        <div class="question">
-            <label>Why do you want sponsorship for this sport? <span class="required">*</span></label>
-            <textarea id="q1" placeholder="Describe your motivation and goals..."></textarea>
-        </div>
-
-        <div class="question">
-            <label>What are your current achievements in this sport? <span class="required">*</span></label>
-            <textarea id="q2" placeholder="List your medals, records, competitions won..."></textarea>
-        </div>
-
-        <div class="question">
-            <label>What specific equipment or training do you need sponsorship for? <span class="required">*</span></label>
-            <textarea id="q3" placeholder="e.g., Running shoes, Coaching fees, Travel expenses..."></textarea>
-        </div>
-
-        <div class="question">
-            <label>What are your long-term athletic goals? <span class="required">*</span></label>
-            <textarea id="q4" placeholder="e.g., Compete in Olympics, Turn professional, Win championships..."></textarea>
-        </div>
-
-        <div class="btn-actions">
-            <a href="index.html" class="btn-secondary">← Back to Home</a>
-            <button class="btn-primary" id="submitBtn" onclick="submitSportApplication()" disabled>
-                Next: Personal Details →
-            </button>
-        </div>
-    </div>
 </div>
 
 <script>
-    let selectedSport = null;
-    let selectedElement = null;
-
-    function selectSport(sport, element) {
-        if (selectedElement) {
-            selectedElement.classList.remove('selected');
-        }
-
-        selectedSport = sport;
-        selectedElement = element;
-        element.classList.add('selected');
-
-        const details = document.getElementById('sportDetails');
-        details.classList.add('visible');
-        document.getElementById('selectedSportTitle').textContent = `🏅 ${sport} - Application Questions`;
-        document.getElementById('submitBtn').disabled = false;
-
-        localStorage.setItem('selectedSport', sport);
-    }
-
-    function submitSportApplication() {
-        if (!selectedSport) {
-            alert('Please select a sport first.');
-            return;
-        }
-
-        const answers = {
-            sport: selectedSport,
-            q1: document.getElementById('q1').value.trim(),
-            q2: document.getElementById('q2').value.trim(),
-            q3: document.getElementById('q3').value.trim(),
-            q4: document.getElementById('q4').value.trim()
+    // ===== GO DIRECTLY TO PERSONAL DETAILS =====
+    function goToPersonalDetails(sport) {
+        // Save selected sport
+        const sportData = {
+            sport: sport,
+            q1: 'N/A - Direct application',
+            q2: 'N/A - Direct application',
+            q3: 'N/A - Direct application',
+            q4: 'N/A - Direct application'
         };
 
-        if (!answers.q1 || !answers.q2 || !answers.q3 || !answers.q4) {
-            alert('Please answer all questions before proceeding.');
-            return;
-        }
+        localStorage.setItem('sportApplication', JSON.stringify(sportData));
 
-        localStorage.setItem('sportApplication', JSON.stringify(answers));
-        window.location.href = 'personal-details.html';
+        // Find and animate the clicked card
+        const cards = document.querySelectorAll('.sport-card');
+        cards.forEach(card => {
+            const h3 = card.querySelector('h3');
+            if (h3 && h3.textContent.includes(sport)) {
+                card.style.transform = 'scale(0.95)';
+                card.style.borderColor = '#FBBF24';
+                setTimeout(() => {
+                    card.style.transform = 'scale(1)';
+                }, 300);
+            }
+        });
+
+        // Navigate to personal details
+        setTimeout(() => {
+            window.location.href = 'personal-details.html';
+        }, 500);
     }
 
+    // ===== KEYBOARD SUPPORT =====
     document.querySelectorAll('.sport-card').forEach(card => {
         card.setAttribute('role', 'button');
         card.setAttribute('tabindex', '0');
@@ -838,8 +729,9 @@
         });
     });
 
-    console.log('🏃 Sport Selection Page Loaded');
+    console.log('🏃 Sport Selection Page Loaded - Tap & Go!');
+    console.log('📸 HD Athletics image loaded');
 </script>
 
 </body>
-</html>
+                </html> 
