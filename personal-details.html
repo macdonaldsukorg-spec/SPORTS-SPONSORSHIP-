@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Details - Sports Sponsorship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            background: #0a0a1a;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                url('https://images.pexels.com/photos/235922/pexels-photo-235922.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
+            z-index: 0;
+            animation: zoomBackground 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes zoomBackground {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 26, 0.7) 0%, rgba(10, 10, 26, 0.4) 50%, rgba(10, 10, 26, 0.7) 100%);
+            z-index: 0;
+        }
+
+        .glass-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: orbPulse 8s infinite alternate ease-in-out;
+        }
+
+        .glass-orb-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12), transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .glass-orb-2 {
+            width: 350px;
+            height: 350px;
+            bottom: -80px;
+            left: -80px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1), transparent 70%);
+            animation-delay: 2s;
+        }
+
+        @keyframes orbPulse {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            animation: slideUp 0.6s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px) scale(0.97); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header .step {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.12);
+            color: #FBBF24;
+            padding: 6px 24px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.08);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: #ffffff;
+            margin: 15px 0 8px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-50%);
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .progress-step .circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .progress-step.completed .circle {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34D399;
+            border-color: rgba(52, 211, 153, 0.1);
+        }
+
+        .progress-step.active .circle {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            box-shadow: 0 5px 20px rgba(251, 191, 36, 0.25);
+            border-color: transparent;
+        }
+
+        .progress-step .label {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-step.completed .label {
+            color: #34D399;
+        }
+
+        .progress-step.active .label {
+            color: #FBBF24;
+        }
+
+        .inspiration-banner {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .inspiration-banner .quote-icon {
+            font-size: 1.6rem;
+            color: #FBBF24;
+            opacity: 0.7;
+        }
+
+        .inspiration-banner .quote-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .inspiration-banner .quote-text strong {
+            color: #ffffff;
+            font-style: normal;
+        }
+
+        .inspiration-banner .quote-author {
+            font-size: 0.7rem;
+            color: #FBBF24;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .selected-sport-display {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .selected-sport-display .label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #FBBF24;
+        }
+
+        .selected-sport-display .name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .selected-sport-display .change-btn {
+            background: none;
+            border: none;
+            color: #FBBF24;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+            font-family: 'Inter', sans-serif;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+            margin-left: auto;
+        }
+
+        .selected-sport-display .change-btn:hover {
+            background: rgba(251, 191, 36, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input::placeholder,
+        .form-group select::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FBBF24;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.05);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+
+        .form-group select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group .hint {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 5px;
+            font-weight: 300;
+        }
+
+        .team-member-count {
+            background: rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .team-member-count .fee-preview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .team-member-count .fee-preview .label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        .team-member-count .fee-preview .amount {
+            color: #FBBF24;
+            font-size: 1.4rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .team-member-count .fee-preview .detail {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            width: 100%;
+            text-align: right;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 5px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .toggle-group .toggle-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .toggle-group .toggle-btn.active {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.15);
+        }
+
+        .toggle-group .toggle-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .team-fields {
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .team-fields.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-upload-wrapper {
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .image-upload-wrapper:hover {
+            border-color: #FBBF24;
+            background: rgba(251, 191, 36, 0.03);
+        }
+
+        .image-upload-wrapper .upload-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .image-upload-wrapper p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .image-upload-wrapper .sub {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 5px;
+        }
+
+        .image-upload-wrapper .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .image-preview {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 2px solid #FBBF24;
+        }
+
+        .image-preview .remove-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 16px;
+            background: rgba(231, 76, 60, 0.7);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+
+        .image-preview .remove-btn:hover {
+            background: rgba(192, 57, 43, 0.8);
+        }
+
+        .btn-next {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 12px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.15);
+            color: #ffffff;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+                max-height: 95vh;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .progress-bar {
+                display: none;
+            }
+
+            .footer-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-back {
+                width: 100%;
+                text-align: center;
+            }
+
+            .toggle-group {
+                flex-direction: column;
+            }
+
+            .selected-sport-display {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .selected-sport-display .change-btn {
+                margin-left: 0;
+            }
+
+            .inspiration-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .team-member-count .fee-preview {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .team-member-count .fee-preview .detail {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-orb glass-orb-1"></div>
+<div class="glass-orb glass-orb-2"></div>
+
+<div class="container">
+
+    <div class="progress-bar">
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Sport Selection</div>
+        </div>
+        <div class="progress-step active">
+            <div class="circle">2</div>
+            <div class="label">Personal Details</div>
+        </div>
+        <div class="progress-step">
+            <div class="circle">3</div>
+            <div class="label">Application</div>
+        </div>
+        <div class="progress-step">
+            <div class="circle">4</div>
+            <div class="label">Payment</div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="step">Step 2 of 4</div>
+        <h1>Personal Details</h1>
+        <p>Tell us about yourself to connect with the right sponsors</p>
+    </div>
+
+    <div class="inspiration-banner">
+        <span class="quote-icon">🏃</span>
+        <span class="quote-text">
+            "<strong>No human is limited.</strong> The only way to define your limits is by going beyond them."
+        </span>
+        <span class="quote-author">— Eliud Kipchoge</span>
+    </div>
+
+    <div class="selected-sport-display" id="sportDisplay">
+        <span class="label">🏅 Selected Sport</span>
+        <span class="name" id="sportNameDisplay">No sport selected</span>
+        <button class="change-btn" onclick="goBackToSport()">Change →</button>
+    </div>
+
+    <form id="personalDetailsForm" onsubmit="return false;">
+
+        <div class="form-group">
+            <label>Applicant Type <span class="required">*</span></label>
+            <div class="toggle-group" id="applicantType">
+                <button type="button" class="toggle-btn active" data-value="individual" onclick="setApplicantType('individual')">
+                    🏃 Individual Athlete
+                </button>
+                <button type="button" class="toggle-btn" data-value="team" onclick="setApplicantType('team')">
+                    👥 Team / Club
+                </button>
+            </div>
+        </div>
+
+        <div id="individualFields">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" placeholder="e.g., John Mwangi" required>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" placeholder="e.g., john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" placeholder="e.g., 254712345678" required>
+                    <div class="hint">Your M-PESA registered number</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="teamFields" class="team-fields">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Team/Club Name <span class="required">*</span></label>
+                    <input type="text" id="teamName" placeholder="e.g., Nairobi City Stars">
+                </div>
+                <div class="form-group">
+                    <label>Team Captain/Contact <span class="required">*</span></label>
+                    <input type="text" id="teamContact" placeholder="e.g., John Mwangi">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Team Email <span class="required">*</span></label>
+                    <input type="email" id="teamEmail" placeholder="e.g., team@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Team Phone <span class="required">*</span></label>
+                    <input type="tel" id="teamPhone" placeholder="e.g., 254712345678">
+                    <div class="hint">Contact number for team communications</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Team Founded Year</label>
+                <input type="number" id="teamFounded" placeholder="e.g., 2020" min="1900" max="2026">
+            </div>
+
+            <div class="team-member-count" id="teamMemberCount">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Number of Team Members <span class="required" id="memberCountRequired">*</span></label>
+                    <input type="number" id="teamMembers" placeholder="e.g., 10" min="1" max="100" value="5" onchange="updateFeePreview()" oninput="updateFeePreview()">
+                    <div class="hint" id="memberCountHint">Enter the number of athletes in your team</div>
+                </div>
+                <div class="fee-preview" id="feePreview">
+                    <span class="label">💰 Estimated Application Fee</span>
+                    <span class="amount" id="feePreviewAmount">Ksh. 10,000</span>
+                    <span class="detail" id="feePreviewDetail">Flat Fee • Other Sports</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Team Description <span class="required">*</span></label>
+                <textarea id="teamDescription" placeholder="Tell us about your team, history, achievements, and goals..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Team Photo/Logo</label>
+                <div class="image-upload-wrapper" id="teamImageUpload">
+                    <span class="upload-icon">📸</span>
+                    <p><strong>Click to upload</strong> team photo or logo</p>
+                    <p class="sub">JPG, PNG or GIF (Max 5MB)</p>
+                    <input type="file" class="file-input" accept="image/*" onchange="previewTeamImage(this)">
+                </div>
+                <div class="image-preview" id="teamImagePreview">
+                    <img id="teamImagePreviewImg" src="" alt="Team Photo">
+                    <button class="remove-btn" onclick="removeTeamImage()">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="gender">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Nationality</label>
+                <input type="text" id="nationality" placeholder="e.g., Kenyan">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Current Residence</label>
+            <input type="text" id="residence" placeholder="e.g., Nairobi, Kenya">
+        </div>
+
+        <div class="form-group">
+            <label>Brief Bio <span class="required">*</span></label>
+            <textarea id="bio" placeholder="Tell us about your athletic journey, achievements, and what drives you..." required></textarea>
+            <div class="hint">Minimum 50 characters</div>
+        </div>
+
+        <div class="form-group">
+            <label>Profile Photo</label>
+            <div class="image-upload-wrapper" id="individualImageUpload">
+                <span class="upload-icon">📸</span>
+                <p><strong>Click to upload</strong> your profile photo</p>
+                <p class="sub">JPG, PNG or GIF (Max 5MB)</p>
+                <input type="file" class="file-input" accept="image/*" onchange="previewIndividualImage(this)">
+            </div>
+            <div class="image-preview" id="individualImagePreview">
+                <img id="individualImagePreviewImg" src="" alt="Profile Photo">
+                <button class="remove-btn" onclick="removeIndividualImage()">Remove</button>
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <a href="sport-selection.html" class="btn-back">← Back</a>
+            <button type="button" class="btn-next" onclick="submitPersonalDetails()">
+                Next: Application Summary →
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    let selectedSport = '';
+    let isAthletics = false;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const sportData = JSON.parse(localStorage.getItem('sportApplication') || '{}');
+
+        if (sportData.sport) {
+            selectedSport = sportData.sport;
+            document.getElementById('sportNameDisplay').textContent = sportData.sport;
+
+            const athleticsSports = ['Athletics', 'Track & Field', 'Marathon', 'Sprints', 'Distance', 'Hurdles', 'Race Walk', 'Cross Country'];
+            isAthletics = athleticsSports.some(a => sportData.sport && sportData.sport.includes(a));
+
+            updateTeamMemberVisibility();
+        } else {
+            document.getElementById('sportNameDisplay').textContent = 'No sport selected';
+        }
+
+        setApplicantType('individual');
+        updateFeePreview();
+    });
+
+    function updateTeamMemberVisibility() {
+        const memberCountDiv = document.getElementById('teamMemberCount');
+        if (isAthletics) {
+            memberCountDiv.style.display = 'block';
+            document.getElementById('memberCountRequired').textContent = '*';
+            document.getElementById('memberCountHint').textContent = 'Enter the number of athletes in your team (Ksh. 2,000 per athlete)';
+        } else {
+            memberCountDiv.style.display = 'block';
+            document.getElementById('memberCountRequired').textContent = '';
+            document.getElementById('memberCountHint').textContent = 'Flat fee of Ksh. 10,000 for teams in other sports';
+            updateFeePreview();
+        }
+    }
+
+    function updateFeePreview() {
+        const teamMembers = parseInt(document.getElementById('teamMembers').value) || 0;
+        const feePreviewAmount = document.getElementById('feePreviewAmount');
+        const feePreviewDetail = document.getElementById('feePreviewDetail');
+
+        if (isAthletics) {
+            const feePerHead = 2000;
+            const totalFee = teamMembers * feePerHead;
+            feePreviewAmount.textContent = `Ksh. ${totalFee.toLocaleString()}`;
+            feePreviewDetail.textContent = `${teamMembers} athletes × Ksh. 2,000 per head`;
+        } else {
+            feePreviewAmount.textContent = 'Ksh. 10,000';
+            feePreviewDetail.textContent = 'Flat Fee • Other Sports';
+        }
+    }
+
+    function goBackToSport() {
+        window.location.href = 'sport-selection.html';
+    }
+
+    let applicantType = 'individual';
+
+    function setApplicantType(type) {
+        applicantType = type;
+
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.value === type);
+        });
+
+        document.getElementById('individualFields').style.display = type === 'individual' ? 'block' : 'none';
+        document.getElementById('teamFields').classList.toggle('visible', type === 'team');
+
+        const individualInputs = document.querySelectorAll('#individualFields input, #individualFields textarea');
+        const teamInputs = document.querySelectorAll('#teamFields input, #teamFields textarea');
+
+        individualInputs.forEach(input => {
+            if (input.id !== 'fullName' && input.id !== 'dob' && input.id !== 'email' && input.id !== 'phone') {
+                input.required = type === 'individual';
+            }
+        });
+
+        teamInputs.forEach(input => {
+            input.required = type === 'team';
+        });
+
+        updateFeePreview();
+    }
+
+    function previewIndividualImage(input) {
+        const preview = document.getElementById('individualImagePreview');
+        const img = document.getElementById('individualImagePreviewImg');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                img.src = e.target.result;
+                preview.style.display = 'block';
+                document.getElementById('individualImageUpload').style.display = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeIndividualImage() {
+        document.getElementById('individualImagePreview').style.display = 'none';
+        document.getElementById('individualImageUpload').style.display = 'block';
+        document.getElementById('individualImagePreviewImg').src = '';
+        document.querySelector('#individualImageUpload .file-input').value = '';
+    }
+
+    function previewTeamImage(input) {
+        const preview = document.getElementById('teamImagePreview');
+        const img = document.getElementById('teamImagePreviewImg');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                img.src = e.target.result;
+                preview.style.display = 'block';
+                document.getElementById('teamImageUpload').style.display = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeTeamImage() {
+        document.getElementById('teamImagePreview').style.display = 'none';
+        document.getElementById('teamImageUpload').style.display = 'block';
+        document.getElementById('teamImagePreviewImg').src = '';
+        document.querySelector('#teamImageUpload .file-input').value = '';
+    }
+
+    function submitPersonalDetails() {
+        const gender = document.getElementById('gender').value;
+        const nationality = document.getElementById('nationality').value;
+        const residence = document.getElementById('residence').value;
+        const bio = document.getElementById('bio').value;
+
+        let data = { applicantType, gender, nationality, residence, bio };
+
+        const sportData = JSON.parse(localStorage.getItem('sportApplication') || '{}');
+        if (!sportData.sport) {
+            alert('Please select a sport first.');
+            return;
+        }
+
+        if (applicantType === 'individual') {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const dob = document.getElementById('dob').value;
+
+            if (!fullName || !email || !phone || !dob || !bio) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            if (!phone.match(/^2547\d{8}$/)) {
+                alert('Phone must be in format: 2547XXXXXXXX');
+                return;
+            }
+
+            if (bio.length < 50) {
+                alert('Bio must be at least 50 characters.');
+                return;
+            }
+
+            data = { ...data, fullName, email, phone, dob };
+        } else {
+            const teamName = document.getElementById('teamName').value;
+            const teamContact = document.getElementById('teamContact').value;
+            const teamEmail = document.getElementById('teamEmail').value;
+            const teamPhone = document.getElementById('teamPhone').value;
+            const teamDescription = document.getElementById('teamDescription').value;
+
+            if (!teamName || !teamContact || !teamEmail || !teamPhone || !teamDescription) {
+                alert('Please fill in all team required fields.');
+                return;
+            }
+
+            if (!teamPhone.match(/^2547\d{8}$/)) {
+                alert('Team phone must be in format: 2547XXXXXXXX');
+                return;
+            }
+
+            if (teamDescription.length < 50) {
+                alert('Team description must be at least 50 characters.');
+                return;
+            }
+
+            const teamMembers = parseInt(document.getElementById('teamMembers').value) || 0;
+
+            data = {
+                ...data,
+                teamName,
+                teamContact,
+                teamEmail,
+                teamPhone,
+                teamFounded: document.getElementById('teamFounded').value,
+                teamDescription,
+                teamMembers: teamMembers
+            };
+        }
+
+        const fullData = {
+            ...data,
+            sport: sportData.sport,
+            isAthletics: isAthletics,
+            sportQuestions: {
+                q1: sportData.q1,
+                q2: sportData.q2,
+                q3: sportData.q3,
+                q4: sportData.q4
+            }
+        };
+
+        let feeAmount = 2000;
+        if (applicantType === 'team') {
+            if (isAthletics) {
+                const teamMembers = parseInt(document.getElementById('teamMembers').value) || 0;
+                feeAmount = teamMembers * 2000;
+            } else {
+                feeAmount = 10000;
+            }
+        }
+
+        const feeInfo = {
+            amount: feeAmount,
+            type: applicantType,
+            sport: sportData.sport,
+            isAthletics: isAthletics,
+            teamMembers: applicantType === 'team' ? parseInt(document.getElementById('teamMembers').value) || 0 : 0,
+            detail: applicantType === 'team' 
+                ? (isAthletics ? `Team • Athletics (${parseInt(document.getElementById('teamMembers').value) || 0} athletes × Ksh. 2,000)` : 'Team • Other Sports (Flat Fee)')
+                : 'Individual Athlete'
+        };
+
+        localStorage.setItem('applicationFee', JSON.stringify(feeInfo));
+        localStorage.setItem('athleteData', JSON.stringify(fullData));
+        window.location.href = 'application-success.html';
+    }
+
+    console.log('📝 Personal Details Page Loaded');
+</script>
+
+</body>
+</html>
