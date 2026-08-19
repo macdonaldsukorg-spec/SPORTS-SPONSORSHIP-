@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Complete - Sports Sponsorship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            background: #0a0a1a;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 26, 0.75) 0%, rgba(10, 10, 26, 0.5) 50%, rgba(10, 10, 26, 0.75) 100%),
+                url('https://images.pexels.com/photos/1531415074968-036ba1b3da5a/pexels-photo-1531415074968-036ba1b3da5a.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
+            z-index: 0;
+            animation: zoomCrowd 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes zoomCrowd {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 26, 0.6) 0%, rgba(10, 10, 26, 0.3) 50%, rgba(10, 10, 26, 0.6) 100%);
+            z-index: 0;
+        }
+
+        .glass-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: orbPulse 8s infinite alternate ease-in-out;
+        }
+
+        .glass-orb-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08), transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .glass-orb-2 {
+            width: 350px;
+            height: 350px;
+            bottom: -80px;
+            left: -80px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.06), transparent 70%);
+            animation-delay: 2s;
+        }
+
+        @keyframes orbPulse {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            animation: slideUp 0.8s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px) scale(0.97); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .step {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.12);
+            color: #FBBF24;
+            padding: 6px 24px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.08);
+            margin-bottom: 15px;
+        }
+
+        .success-banner {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.15);
+            position: relative;
+        }
+
+        .success-banner .crowd-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .success-banner:hover .crowd-image {
+            transform: scale(1.02);
+        }
+
+        .success-banner .overlay-text {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .header .highlight {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.12);
+            color: #FBBF24;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.08);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-50%);
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .progress-step .circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .progress-step.completed .circle {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34D399;
+            border-color: rgba(52, 211, 153, 0.1);
+        }
+
+        .progress-step.active .circle {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            box-shadow: 0 5px 20px rgba(251, 191, 36, 0.25);
+            border-color: transparent;
+        }
+
+        .progress-step .label {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-step.completed .label {
+            color: #34D399;
+        }
+
+        .progress-step.active .label {
+            color: #FBBF24;
+        }
+
+        .inspiration-banner {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .inspiration-banner .quote-icon {
+            font-size: 1.6rem;
+            color: #FBBF24;
+            opacity: 0.7;
+        }
+
+        .inspiration-banner .quote-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .inspiration-banner .quote-text strong {
+            color: #ffffff;
+            font-style: normal;
+        }
+
+        .inspiration-banner .quote-author {
+            font-size: 0.7rem;
+            color: #FBBF24;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .summary {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .summary .row:last-child {
+            border-bottom: none;
+        }
+
+        .summary .label {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .summary .value {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .review-status {
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.08);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 15px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .review-status .status-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .review-status .status-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .review-status .status-text strong {
+            color: #FBBF24;
+        }
+
+        .next-steps {
+            background: rgba(255, 215, 0, 0.04);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .next-steps h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+        }
+
+        .next-steps ul li {
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .next-steps ul li:last-child {
+            border-bottom: none;
+        }
+
+        .next-steps ul li .icon {
+            font-size: 1.2rem;
+            width: 35px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .btn-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 18px 35px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.15);
+            color: #ffffff;
+        }
+
+        .btn-actions .btn-secondary {
+            flex: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+                max-height: 95vh;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .progress-bar {
+                display: none;
+            }
+
+            .btn-actions {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                flex: 1;
+            }
+
+            .summary .row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .summary .value {
+                text-align: left;
+            }
+
+            .inspiration-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .review-status {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .success-banner .crowd-image {
+                height: 140px;
+            }
+
+            .success-banner .overlay-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                border-radius: 20px;
+            }
+
+            .next-steps ul li {
+                font-size: 0.85rem;
+                padding: 8px 0;
+            }
+
+            .next-steps ul li .icon {
+                width: 28px;
+                font-size: 1rem;
+            }
+
+            .success-banner .crowd-image {
+                height: 120px;
+            }
+
+            .review-status .status-text {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-orb glass-orb-1"></div>
+<div class="glass-orb glass-orb-2"></div>
+
+<div class="container">
+
+    <div class="progress-bar">
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Sport Selection</div>
+        </div>
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Personal Details</div>
+        </div>
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Application</div>
+        </div>
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Payment</div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="step">Application Complete</div>
+
+        <div class="success-banner">
+            <img class="crowd-image" src="https://images.pexels.com/photos/1531415074968-036ba1b3da5a/pexels-photo-1531415074968-036ba1b3da5a.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop" alt="Cheering Crowd">
+            <span class="overlay-text">🎉 Celebrating Your Success</span>
+        </div>
+
+        <h1>Application Submitted Successfully!</h1>
+        <p>Your sponsorship application has been successfully submitted and is currently under review.</p>
+        <div class="highlight">⏳ Your application is currently under review</div>
+    </div>
+
+    <div class="review-status">
+        <span class="status-icon">📋</span>
+        <span class="status-text">
+            <strong>Application Status:</strong> Your application has been received and is now being reviewed by our sponsorship team. 
+            You will receive feedback within 24-48 hours.
+        </span>
+    </div>
+
+    <div class="inspiration-banner">
+        <span class="quote-icon">🏃</span>
+        <span class="quote-text">
+            "<strong>No human is limited.</strong> Your journey to greatness starts now."
+        </span>
+        <span class="quote-author">— Eliud Kipchoge</span>
+    </div>
+
+    <div class="summary" id="summaryContainer">
+        <!-- Dynamically filled -->
+    </div>
+
+    <div class="next-steps">
+        <h3>📋 What Happens Next?</h3>
+        <ul>
+            <li><span class="icon">📧</span> Check your email for a confirmation message</li>
+            <li><span class="icon">⏳</span> Our team will review your application within 24-48 hours</li>
+            <li><span class="icon">📞</span> You will receive a call from our sponsorship team</li>
+            <li><span class="icon">🏆</span> Once approved, you'll be connected with sponsors!</li>
+        </ul>
+    </div>
+
+    <div class="btn-actions">
+        <a href="index.html" class="btn-primary">🏠 Back to Home</a>
+        <a href="payment.html" class="btn-secondary">← View Payment</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
+        const sportData = JSON.parse(localStorage.getItem('sportApplication') || '{}');
+        const eventData = JSON.parse(localStorage.getItem('selectedEvent') || '{}');
+        const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
+
+        const summary = document.getElementById('summaryContainer');
+
+        const applicantType = athleteData.applicantType || 'individual';
+        const sport = sportData.sport || '';
+        const feeAmount = feeData.amount || 2000;
+        const paymentMethod = athleteData.paymentMethod || 'Not specified';
+
+        const methodNames = {
+            'mastercard': 'Mastercard',
+            'mpesa': 'M-PESA',
+            'airtel': 'Airtel Money'
+        };
+
+        let summaryHTML = `
+            <div class="row">
+                <span class="label">🏅 Sport</span>
+                <span class="value">${sport || 'Not selected'}</span>
+            </div>
+        `;
+
+        if (applicantType === 'individual') {
+            summaryHTML += `
+                <div class="row">
+                    <span class="label">👤 Applicant</span>
+                    <span class="value">${athleteData.fullName || 'Not provided'}</span>
+                </div>
+                <div class="row">
+                    <span class="label">📧 Email</span>
+                    <span class="value">${athleteData.email || 'Not provided'}</span>
+                </div>
+                <div class="row">
+                    <span class="label">📱 Phone</span>
+                    <span class="value">${athleteData.phone || 'Not provided'}</span>
+                </div>
+            `;
+        } else {
+            summaryHTML += `
+                <div class="row">
+                    <span class="label">👥 Team</span>
+                    <span class="value">${athleteData.teamName || 'Not provided'}</span>
+                </div>
+                <div class="row">
+                    <span class="label">👤 Contact</span>
+                    <span class="value">${athleteData.teamContact || 'Not provided'}</span>
+                </div>
+                <div class="row">
+                    <span class="label">📧 Email</span>
+                    <span class="value">${athleteData.teamEmail || 'Not provided'}</span>
+                </div>
+                <div class="row">
+                    <span class="label">📱 Phone</span>
+                    <span class="value">${athleteData.teamPhone || 'Not provided'}</span>
+                </div>
+            `;
+        }
+
+        summaryHTML += `
+            <div class="row">
+                <span class="label">💰 Amount Paid</span>
+                <span class="value" style="color: #34D399;">Ksh. ${feeAmount.toLocaleString()}</span>
+            </div>
+            <div class="row">
+                <span class="label">💳 Payment Method</span>
+                <span class="value">${methodNames[paymentMethod] || paymentMethod}</span>
+            </div>
+        `;
+
+        if (eventData.name) {
+            summaryHTML += `
+                <div class="row">
+                    <span class="label">📅 Event</span>
+                    <span class="value">${eventData.name}</span>
+                </div>
+            `;
+        }
+
+        summaryHTML += `
+            <div class="row" style="border-bottom: none;">
+                <span class="label">📊 Status</span>
+                <span class="value" style="color: #FBBF24; display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
+                    <span style="display: inline-block; width: 8px; height: 8px; background: #FBBF24; border-radius: 50%; animation: pulse 1.5s infinite;"></span>
+                    Under Review
+                </span>
+            </div>
+        `;
+
+        summary.innerHTML = summaryHTML;
+    });
+
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+</body>
+</html>
