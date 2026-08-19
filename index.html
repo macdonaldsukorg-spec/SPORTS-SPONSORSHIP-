@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Sports Sponsorship Platform 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background: #0a0a1a;
+            color: #ffffff;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a1a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #FBBF24, #F59E0B); border-radius: 10px; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            overflow: hidden;
+            background: #0a0a1a;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 26, 0.92) 0%, rgba(20, 15, 40, 0.75) 50%, rgba(10, 10, 26, 0.92) 100%),
+                url('https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
+            z-index: 0;
+            animation: zoomBackground 35s infinite alternate ease-in-out;
+        }
+
+        @keyframes zoomBackground {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        .lighting-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .light-ray {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: lightPulse 8s infinite alternate ease-in-out;
+        }
+
+        .light-ray-1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -150px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2), transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .light-ray-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -200px;
+            left: -150px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.15), transparent 70%);
+            animation-delay: 2s;
+        }
+
+        @keyframes lightPulse {
+            0% { opacity: 0.15; transform: scale(0.8); }
+            100% { opacity: 0.35; transform: scale(1.2); }
+        }
+
+        .bouncing-ball-container {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bouncing-ball {
+            position: absolute;
+            border-radius: 50%;
+            animation: bounceBall 9s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.1);
+        }
+
+        .bouncing-ball::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            border-radius: 50%;
+            background: inherit;
+            opacity: 0.08;
+            filter: blur(30px);
+            animation: glowPulse 3s infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.05; transform: scale(0.8); }
+            100% { opacity: 0.15; transform: scale(1.3); }
+        }
+
+        .bouncing-ball:nth-child(1) {
+            top: 8%;
+            left: 3%;
+            animation-delay: 0s;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle at 35% 35%, #EF4444, #B91C1C);
+            box-shadow: 0 0 60px rgba(239, 68, 68, 0.2);
+        }
+        .bouncing-ball:nth-child(1)::after { content: '🏀'; font-size: 2rem; }
+
+        .bouncing-ball:nth-child(2) {
+            top: 18%;
+            right: 4%;
+            animation-delay: 1.8s;
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 35% 35%, #FBBF24, #D97706);
+            box-shadow: 0 0 60px rgba(251, 191, 36, 0.2);
+        }
+        .bouncing-ball:nth-child(2)::after { content: '⚽'; font-size: 1.8rem; }
+
+        .bouncing-ball:nth-child(3) {
+            bottom: 22%;
+            left: 4%;
+            animation-delay: 3.6s;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 35% 35%, #818CF8, #4338CA);
+            box-shadow: 0 0 80px rgba(129, 140, 248, 0.2);
+        }
+        .bouncing-ball:nth-child(3)::after { content: '🏐'; font-size: 2.2rem; }
+
+        .bouncing-ball:nth-child(4) {
+            bottom: 12%;
+            right: 3%;
+            animation-delay: 5.4s;
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(circle at 35% 35%, #34D399, #059669);
+            box-shadow: 0 0 60px rgba(52, 211, 153, 0.2);
+        }
+        .bouncing-ball:nth-child(4)::after { content: '🏊'; font-size: 2rem; }
+
+        .bouncing-ball:nth-child(5) {
+            top: 48%;
+            left: 1%;
+            animation-delay: 7.2s;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 35% 35%, #F472B6, #BE185D);
+            box-shadow: 0 0 50px rgba(244, 114, 182, 0.2);
+        }
+        .bouncing-ball:nth-child(5)::after { content: '🎾'; font-size: 1.6rem; }
+
+        .bouncing-ball:nth-child(6) {
+            top: 38%;
+            right: 1%;
+            animation-delay: 9s;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 35% 35%, #FCD34D, #B45309);
+            box-shadow: 0 0 60px rgba(252, 211, 77, 0.2);
+        }
+        .bouncing-ball:nth-child(6)::after { content: '🏏'; font-size: 1.8rem; }
+
+        @keyframes bounceBall {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.4; }
+            12% { transform: translateY(-120px) rotate(-12deg) scale(1.1); opacity: 1; }
+            25% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+            37% { transform: translateY(-80px) rotate(8deg) scale(1.06); opacity: 1; }
+            50% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+            62% { transform: translateY(-40px) rotate(-6deg) scale(1.03); opacity: 1; }
+            75% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.6; }
+            87% { transform: translateY(-20px) rotate(3deg) scale(1.01); opacity: 0.9; }
+            100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.4; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1050px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.08);
+            color: #FBBF24;
+            padding: 10px 32px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 215, 0, 0.12);
+            backdrop-filter: blur(12px);
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.08;
+            animation: fadeInUp 1s ease;
+            letter-spacing: -1px;
+            color: #ffffff;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B, #FBBF24);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerGradient 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmerGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0 48px;
+            animation: fadeInUp 1.4s ease;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats .stat {
+            text-align: center;
+            padding: 20px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+            min-width: 140px;
+        }
+
+        .hero-stats .stat:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 215, 0, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .hero-stats .stat .number {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #FBBF24;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .hero-stats .stat .label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.6s ease;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 40px rgba(251, 191, 36, 0.25);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 50px rgba(251, 191, 36, 0.35);
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 42px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            backdrop-filter: blur(12px);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #FBBF24;
+            transform: translateY(-3px);
+        }
+
+        /* ===== CALENDAR SECTION ===== */
+        .calendar-section {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1040 50%, #0a0a1a 100%);
+            padding: 70px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 215, 0, 0.06);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.06);
+        }
+
+        .calendar-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.02), transparent 60%);
+            animation: rotateBg 35s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .calendar-section .content {
+            position: relative;
+            z-index: 1;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .calendar-section .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            padding: 6px 24px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+        }
+
+        .calendar-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .calendar-section h2 span {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .calendar-section .subtitle {
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 1.05rem;
+            font-weight: 400;
+            max-width: 750px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .calendar-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px 20px 22px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .calendar-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FBBF24, #F59E0B);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .calendar-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.25);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .calendar-item:hover::before {
+            opacity: 1;
+        }
+
+        .calendar-item:active {
+            transform: scale(0.97);
+        }
+
+        .calendar-item .cal-date {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.12);
+            color: #FBBF24;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .calendar-item:hover .cal-date {
+            background: rgba(251, 191, 36, 0.2);
+        }
+
+        .calendar-item .cal-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+            transition: color 0.3s;
+        }
+
+        .calendar-item:hover .cal-name {
+            color: #FBBF24;
+        }
+
+        .calendar-item .cal-location {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .calendar-item .cal-location::before {
+            content: '📍';
+            font-size: 0.8rem;
+        }
+
+        .calendar-item .cal-organizer {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s;
+        }
+
+        .calendar-item:hover .cal-organizer {
+            background: rgba(251, 191, 36, 0.1);
+            color: #FBBF24;
+            border-color: rgba(251, 191, 36, 0.15);
+        }
+
+        .calendar-item .click-hint {
+            display: none;
+            margin-top: 8px;
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .calendar-item:hover .click-hint {
+            display: block;
+        }
+
+        .calendar-item.ripple {
+            animation: rippleEffect 0.4s ease;
+        }
+
+        @keyframes rippleEffect {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 100px 20px;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            color: #0a0a1a;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 32px;
+            max-width: 1250px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+            border-color: #FBBF24;
+        }
+
+        .feature-card .feature-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+            background: #e5e7eb;
+        }
+
+        .feature-card:hover .feature-image {
+            transform: scale(1.02);
+        }
+
+        .feature-card .feature-content {
+            padding: 28px 30px 32px;
+            position: relative;
+        }
+
+        .feature-card .feature-content .feature-icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feature-card .feature-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #0a0a1a;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .feature-card .feature-content p {
+            font-family: 'Inter', sans-serif;
+            color: #6b7280;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        .feature-card .feature-content .feature-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 14px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .feature-tag {
+            box-shadow: 0 4px 25px rgba(251, 191, 36, 0.25);
+            transform: scale(1.03);
+        }
+
+        .footer {
+            background: #0a0a1a;
+            color: #ffffff;
+            padding: 50px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FBBF24, transparent);
+        }
+
+        .footer .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .footer .logo span {
+            color: #FBBF24;
+        }
+
+        .footer p {
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-links a {
+            font-family: 'Inter', sans-serif;
+            color: rgba(255, 255, 255, 0.25);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.85rem;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .footer .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FBBF24, #F59E0B);
+            transition: width 0.3s;
+        }
+
+        .footer .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer .footer-links a:hover {
+            color: #FBBF24;
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.8rem; }
+            .hero-stats { gap: 20px; }
+            .hero-stats .stat { padding: 16px 24px; min-width: 120px; }
+            .hero-stats .stat .number { font-size: 2.4rem; }
+            .bouncing-ball-container .bouncing-ball { display: none; }
+            .light-ray { display: none; }
+            .calendar-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+            .calendar-section h2 { font-size: 2.4rem; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 40px 15px; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero p { font-size: 1rem; }
+            .hero-stats { flex-direction: column; gap: 12px; }
+            .hero-stats .stat { width: 100%; padding: 14px 20px; }
+            .hero-stats .stat .number { font-size: 2rem; }
+            .cta-primary, .cta-secondary { padding: 16px 30px; font-size: 0.9rem; width: 100%; justify-content: center; }
+            .cta-group { flex-direction: column; width: 100%; }
+            .features { padding: 60px 15px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-card .feature-image { height: 180px; }
+            .calendar-section { padding: 40px 15px; }
+            .calendar-section h2 { font-size: 2rem; }
+            .calendar-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .calendar-item { padding: 16px 16px 18px; }
+            .calendar-item .cal-name { font-size: 0.85rem; }
+            .hero-badge { font-size: 0.65rem; padding: 8px 18px; letter-spacing: 2px; }
+            .calendar-item .click-hint { display: block; font-size: 0.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .feature-card .feature-image { height: 160px; }
+            .feature-card .feature-content { padding: 22px 20px 26px; }
+            .feature-card .feature-content h3 { font-size: 1.2rem; }
+            .calendar-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .calendar-item { padding: 14px 14px 16px; }
+            .calendar-item .cal-name { font-size: 0.75rem; }
+            .calendar-item .cal-date { font-size: 0.6rem; }
+            .calendar-item .cal-location { font-size: 0.65rem; }
+            .calendar-item .cal-organizer { font-size: 0.5rem; padding: 1px 10px; }
+            .calendar-section .subtitle { font-size: 0.9rem; }
+            .footer .logo { font-size: 1.5rem; }
+            .footer .footer-links { gap: 18px; }
+            .footer .footer-links a { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero">
+    <div class="hero-background"></div>
+
+    <div class="lighting-overlay">
+        <div class="light-ray light-ray-1"></div>
+        <div class="light-ray light-ray-2"></div>
+    </div>
+
+    <div class="bouncing-ball-container">
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+        <div class="bouncing-ball"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-badge">🏆 2026 Sponsorship Program</div>
+        <h1>Get Sponsored in<br><span class="highlight">Your Sport</span></h1>
+        <p>Join Kenya's premier sports sponsorship platform. Connect with leading brands, showcase your talent, and accelerate your athletic career on the road to the biggest competitions in 2026.</p>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="number">50+</span>
+                <span class="label">Sports Available</span>
+            </div>
+            <div class="stat">
+                <span class="number">1,200+</span>
+                <span class="label">Athletes Sponsored</span>
+            </div>
+            <div class="stat">
+                <span class="number">Ksh. 50M+</span>
+                <span class="label">Total Sponsorship</span>
+            </div>
+        </div>
+
+        <div class="cta-group">
+            <a href="sport-selection.html" class="cta-primary">Apply Now →</a>
+            <a href="#calendar" class="cta-secondary">View Events</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CALENDAR SECTION ===== -->
+<section class="calendar-section" id="calendar">
+    <div class="content">
+        <div class="tag">🇰🇪 Kenya Athletics Calendar</div>
+        <h2>Upcoming <span>Runs & Races</span></h2>
+        <p class="subtitle">
+            Kenya is home to the world's best runners. Tap on any event below to apply for sponsorship and showcase your talent on the global stage.
+        </p>
+
+        <div class="calendar-grid">
+            <!-- AUGUST -->
+            <div class="calendar-item" onclick="goToApply('Coffee Run 2026 – The Blend', '23 Aug 2026', 'Ngong Forest, Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 23 Aug 2026</span>
+                <div class="cal-name">Coffee Run 2026 – The Blend</div>
+                <div class="cal-location">Ngong Forest, Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('4:21 Team Trek Challenge', '29 Aug 2026', 'Ngong Hills, Kajiado', 'Fit Savanna')">
+                <span class="cal-date">📅 29 Aug 2026</span>
+                <div class="cal-name">4:21 Team Trek Challenge</div>
+                <div class="cal-location">Ngong Hills, Kajiado</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('hAVoc TRaiLS Challenge', '29 Aug 2026', 'Lake Naivasha', 'Fit Savanna')">
+                <span class="cal-date">📅 29 Aug 2026</span>
+                <div class="cal-name">hAVoc TRaiLS Challenge</div>
+                <div class="cal-location">Lake Naivasha</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <!-- SEPTEMBER -->
+            <div class="calendar-item" onclick="goToApply('AGC Tenwek Half Marathon', '5 Sep 2026', 'Bomet', 'Fit Savanna')">
+                <span class="cal-date">📅 5 Sep 2026</span>
+                <div class="cal-name">AGC Tenwek Half Marathon</div>
+                <div class="cal-location">Bomet</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Strathmore Annual Run', '5 Sep 2026', 'Strathmore University, Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 5 Sep 2026</span>
+                <div class="cal-name">Strathmore Annual Run</div>
+                <div class="cal-location">Strathmore University, Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Meru University Mountain Run', '6 Sep 2026', 'Meru', 'Fit Savanna')">
+                <span class="cal-date">📅 6 Sep 2026</span>
+                <div class="cal-name">Meru University Mountain Run</div>
+                <div class="cal-location">Meru</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Imani Seven Folks Half Marathon', '10 Sep 2026', 'Kaburu Dam', 'Fit Savanna')">
+                <span class="cal-date">📅 10 Sep 2026</span>
+                <div class="cal-name">Imani Seven Folks Half Marathon</div>
+                <div class="cal-location">Kaburu Dam</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Mosoriot Gaa Community Cross Country', '12 Sep 2026', 'Mosoriot', 'Fit Savanna')">
+                <span class="cal-date">📅 12 Sep 2026</span>
+                <div class="cal-name">Mosoriot Gaa Community Cross Country</div>
+                <div class="cal-location">Mosoriot</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Enchilai Run for the Mind', '19 Sep 2026', 'The Hub Karen, Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 19 Sep 2026</span>
+                <div class="cal-name">Enchilai Run for the Mind</div>
+                <div class="cal-location">The Hub Karen, Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Nairobi Diamond Run', '20 Sep 2026', 'Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 20 Sep 2026</span>
+                <div class="cal-name">Nairobi Diamond Run</div>
+                <div class="cal-location">Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Be Bold Go Gold Walk/Run', '26 Sep 2026', 'KALRO Grounds, Muguga', 'Fit Savanna')">
+                <span class="cal-date">📅 26 Sep 2026</span>
+                <div class="cal-name">Be Bold Go Gold Walk/Run</div>
+                <div class="cal-location">KALRO Grounds, Muguga</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <!-- OCTOBER -->
+            <div class="calendar-item" onclick="goToApply('Nyarington Runner\'s Challenge', '10 Oct 2026', 'Nyari, Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 10 Oct 2026</span>
+                <div class="cal-name">Nyarington Runner's Challenge</div>
+                <div class="cal-location">Nyari, Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Wildman Watamu Beach Run', '10 Oct 2026', 'Watamu, Kilifi County', 'Fit Savanna')">
+                <span class="cal-date">📅 10 Oct 2026</span>
+                <div class="cal-name">Wildman Watamu Beach Run</div>
+                <div class="cal-location">Watamu, Kilifi County</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Shujaa Run', '20 Oct 2026', 'Elementaita', 'Run Beyond')">
+                <span class="cal-date">📅 20 Oct 2026</span>
+                <div class="cal-name">Shujaa Run</div>
+                <div class="cal-location">Elementaita</div>
+                <span class="cal-organizer">Run Beyond</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Standard Chartered Nairobi Marathon', '25 Oct 2026', 'Uhuru Gardens, Nairobi', 'Run Beyond')">
+                <span class="cal-date">📅 25 Oct 2026</span>
+                <div class="cal-name">Standard Chartered Nairobi Marathon</div>
+                <div class="cal-location">Uhuru Gardens, Nairobi</div>
+                <span class="cal-organizer">Run Beyond</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Sole Mates Run Challenge', '31 Oct 2026', 'Ngong Forest Sanctuary', 'Run Beyond')">
+                <span class="cal-date">📅 31 Oct 2026</span>
+                <div class="cal-name">Sole Mates Run Challenge</div>
+                <div class="cal-location">Ngong Forest Sanctuary</div>
+                <span class="cal-organizer">Run Beyond</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <!-- NOVEMBER -->
+            <div class="calendar-item" onclick="goToApply('UltraMARAthon', '14 Nov 2026', 'Maasai Mara', 'Run Beyond')">
+                <span class="cal-date">📅 14 Nov 2026</span>
+                <div class="cal-name">UltraMARAthon</div>
+                <div class="cal-location">Maasai Mara</div>
+                <span class="cal-organizer">Run Beyond</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Coffee Run – The Brew', '14 Nov 2026', 'Ngong Forest', 'Fit Savanna')">
+                <span class="cal-date">📅 14 Nov 2026</span>
+                <div class="cal-name">Coffee Run – The Brew</div>
+                <div class="cal-location">Ngong Forest</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Good Vibes Only Run', '28 Nov 2026', 'Kiambu', 'Fit Savanna')">
+                <span class="cal-date">📅 28 Nov 2026</span>
+                <div class="cal-name">Good Vibes Only Run</div>
+                <div class="cal-location">Kiambu</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <!-- DECEMBER -->
+            <div class="calendar-item" onclick="goToApply('Neon Run Nairobi Christmas Edition', '5 Dec 2026', 'Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 5 Dec 2026</span>
+                <div class="cal-name">Neon Run Nairobi Christmas Edition</div>
+                <div class="cal-location">Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+
+            <div class="calendar-item" onclick="goToApply('Night Run Twist 4', '11 Dec 2026', 'Karen, Nairobi', 'Fit Savanna')">
+                <span class="cal-date">📅 11 Dec 2026</span>
+                <div class="cal-name">Night Run Twist 4</div>
+                <div class="cal-location">Karen, Nairobi</div>
+                <span class="cal-organizer">Fit Savanna</span>
+                <div class="click-hint">👆 Tap to apply for sponsorship</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features">
+    <div class="section-header">
+        <div class="tag">Why Join</div>
+        <h2>Your Path to Sponsorship</h2>
+        <p>Everything you need to get sponsored and succeed</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <img class="feature-image" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" alt="Discover Sponsors">
+            <div class="feature-content">
+                <span class="feature-icon">🤝</span>
+                <h3>Discover Sponsors</h3>
+                <p>Connect with leading brands and sponsors actively seeking talented athletes across all sports disciplines.</p>
+                <span class="feature-tag">Connect Now</span>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <img class="feature-image" src="https://images.pexels.com/photos/2403047/pexels-photo-2403047.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" alt="Showcase Excellence">
+            <div class="feature-content">
+                <span class="feature-icon">🏅</span>
+                <h3>Showcase Excellence</h3>
+                <p>Build a professional profile highlighting your achievements, medals, records, and performance highlights.</p>
+                <span class="feature-tag">Build Profile</span>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <img class="feature-image" src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop" alt="Secure Funding">
+            <div class="feature-content">
+                <span class="feature-icon">💳</span>
+                <h3>Secure Funding</h3>
+                <p>Receive sponsorship funds directly to your M-PESA account within 24 hours of approval and verification.</p>
+                <span class="feature-tag">Get Funded</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="logo">Sports<span>Sponsorship</span></div>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="sport-selection.html">Apply</a>
+        <a href="#calendar">Events</a>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+    </div>
+    <p>© 2026 Sports Sponsorship Platform. All rights reserved.</p>
+    <p style="margin-top: 6px; font-size: 0.75rem; color: rgba(255,255,255,0.15);">Empowering athletes across Kenya</p>
+</footer>
+
+<script>
+    // ===== FUNCTION TO NAVIGATE TO SECOND PAGE WITH EVENT DATA =====
+    function goToApply(eventName, eventDate, eventLocation, organizer) {
+        // Add ripple animation
+        const items = document.querySelectorAll('.calendar-item');
+        items.forEach(item => {
+            item.classList.remove('ripple');
+        });
+        event.currentTarget.classList.add('ripple');
+
+        // Store event data in localStorage to use on the second page
+        const eventData = {
+            name: eventName,
+            date: eventDate,
+            location: eventLocation,
+            organizer: organizer
+        };
+
+        localStorage.setItem('selectedEvent', JSON.stringify(eventData));
+
+        // Navigate to sport selection page
+        window.location.href = 'sport-selection.html';
+    }
+
+    // ===== KEYBOARD ACCESSIBILITY: Enter key support =====
+    document.querySelectorAll('.calendar-item').forEach(item => {
+        item.setAttribute('role', 'button');
+        item.setAttribute('tabindex', '0');
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+
+    console.log('🏆 Sports Sponsorship Platform 2026');
+    console.log('📅 Kenya Athletics Calendar loaded with ' + document.querySelectorAll('.calendar-item').length + ' events');
+    console.log('👆 Tap any event to apply for sponsorship');
+</script>
+
+</body>
+</html>
