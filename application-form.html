@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form - Sports Sponsorship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: #0a0a1a;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Professional Watermark Background */
+        body::before {
+            content: 'SPORTS SPONSORSHIP';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 140px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.035);
+            letter-spacing: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            text-transform: uppercase;
+            width: 200%;
+            text-align: center;
+            animation: watermarkPulse 10s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.02);
+        }
+
+        body::after {
+            content: '🏆 ⚽ 🏀 🎾 🏐 ⚾ 🥊 🏃 🏊 🚴 🎯 ⛹️‍♂️ 🤸‍♂️ 🏋️‍♂️ 🚵‍♂️';
+            position: fixed;
+            bottom: 10%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 50px;
+            color: rgba(255, 215, 0, 0.025);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 15px;
+            animation: watermarkFloat 15s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        .watermark-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 215, 0, 0.008) 100px,
+                    rgba(255, 215, 0, 0.008) 101px
+                );
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes watermarkPulse {
+            0%, 100% { 
+                opacity: 0.35; 
+                transform: translate(-50%, -50%) rotate(-25deg) scale(1);
+                letter-spacing: 20px;
+            }
+            50% { 
+                opacity: 0.65; 
+                transform: translate(-50%, -50%) rotate(-23deg) scale(1.02);
+                letter-spacing: 22px;
+            }
+        }
+
+        @keyframes watermarkFloat {
+            0%, 100% { 
+                transform: rotate(-2deg) translateY(0) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: rotate(2deg) translateY(-15px) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+
+        .container {
+            max-width: 750px;
+            width: 100%;
+            background: rgba(10, 10, 26, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            max-height: 95vh;
+            overflow-y: auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent 50%, rgba(255, 215, 0, 0.05));
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-50%);
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .progress-step .circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .progress-step.completed .circle {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34D399;
+            border-color: rgba(52, 211, 153, 0.1);
+        }
+
+        .progress-step.active .circle {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            box-shadow: 0 5px 20px rgba(251, 191, 36, 0.25);
+            border-color: transparent;
+        }
+
+        .progress-step .label {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-step.completed .label {
+            color: #34D399;
+        }
+
+        .progress-step.active .label {
+            color: #FBBF24;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header .step {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.12);
+            color: #FBBF24;
+            padding: 5px 22px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 215, 0, 0.08);
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin: 12px 0 6px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 22px 25px;
+            margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+        }
+
+        .form-section .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #FBBF24;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section .section-title .badge {
+            background: rgba(251, 191, 36, 0.15);
+            color: #FBBF24;
+            font-size: 0.55rem;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 5px;
+            font-size: 0.82rem;
+        }
+
+        .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+
+        .form-group .field-hint {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 11px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FBBF24;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.03);
+        }
+
+        .form-group select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.2);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-message {
+            display: none;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 12px 0;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .status-message.success {
+            display: block;
+            background: rgba(52, 211, 153, 0.12);
+            color: #34D399;
+            border: 1px solid rgba(52, 211, 153, 0.08);
+        }
+
+        .status-message.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.12);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.08);
+        }
+
+        .status-message.loading {
+            display: block;
+            background: rgba(251, 191, 36, 0.08);
+            color: #FBBF24;
+            border: 1px solid rgba(251, 191, 36, 0.06);
+        }
+
+        .status-message.warning {
+            display: block;
+            background: rgba(251, 191, 36, 0.12);
+            color: #FBBF24;
+            border: 1px solid rgba(251, 191, 36, 0.08);
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 11px 28px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.15);
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            body::before {
+                font-size: 60px;
+                letter-spacing: 10px;
+                width: 300%;
+            }
+            
+            body::after {
+                font-size: 30px;
+                letter-spacing: 10px;
+            }
+
+            .container {
+                padding: 25px 18px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .progress-bar {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-section {
+                padding: 18px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body::before {
+                font-size: 40px;
+                letter-spacing: 6px;
+                width: 400%;
+            }
+            
+            body::after {
+                font-size: 20px;
+                letter-spacing: 6px;
+            }
+
+            .container {
+                padding: 18px 12px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="watermark-pattern"></div>
+
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-step completed">
+                <div class="circle">✓</div>
+                <div class="label">Sport Selection</div>
+            </div>
+            <div class="progress-step completed">
+                <div class="circle">✓</div>
+                <div class="label">Personal Details</div>
+            </div>
+            <div class="progress-step active">
+                <div class="circle">3</div>
+                <div class="label">Application</div>
+            </div>
+            <div class="progress-step">
+                <div class="circle">4</div>
+                <div class="label">Payment</div>
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="step">Step 3 of 4</div>
+            <h1>Application Form</h1>
+            <p>Tell us more about your sporting journey and why you deserve sponsorship</p>
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <form id="applicationForm" onsubmit="submitForm(event)">
+            <!-- Sporting Background -->
+            <div class="form-section">
+                <div class="section-title">
+                    🏅 Sporting Background
+                    <span class="badge">Required</span>
+                </div>
+                <div class="form-group">
+                    <label>How did you get started in this sport? <span class="required">*</span></label>
+                    <textarea id="sportStart" placeholder="Tell us about how you began your journey in this sport..." rows="3" required></textarea>
+                    <div class="field-hint">Share your inspiration and early experiences</div>
+                </div>
+                <div class="form-group">
+                    <label>Current Training Regimen <span class="required">*</span></label>
+                    <textarea id="trainingRegimen" placeholder="Describe your typical training schedule, frequency, and intensity..." rows="3" required></textarea>
+                    <div class="field-hint">Include days per week, hours per session, and type of training</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Coach/Trainer Name <span class="required">*</span></label>
+                        <input type="text" id="coachName" placeholder="Full name of your coach" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Coach Contact <span class="required">*</span></label>
+                        <input type="tel" id="coachContact" placeholder="2547XXXXXXXX" required>
+                        <div class="field-hint">Phone number of your coach</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements & Awards -->
+            <div class="form-section">
+                <div class="section-title">
+                    🏆 Achievements & Awards
+                    <span class="badge">Required</span>
+                </div>
+                <div class="form-group">
+                    <label>Major Achievements <span class="required">*</span></label>
+                    <textarea id="achievements" placeholder="List your major achievements, medals, titles, or recognitions..." rows="4" required></textarea>
+                    <div class="field-hint">Include competition names, years, and positions</div>
+                </div>
+                <div class="form-group">
+                    <label>Recent Competition Results <span class="required">*</span></label>
+                    <textarea id="recentResults" placeholder="Share your results from the last 12 months..." rows="3" required></textarea>
+                    <div class="field-hint">Include any tournaments, championships, or events you participated in</div>
+                </div>
+                <div class="form-group">
+                    <label>Personal Bests/Records <span class="required">*</span></label>
+                    <textarea id="personalBests" placeholder="List your personal bests or records in your sport..." rows="3" required></textarea>
+                    <div class="field-hint">Include times, distances, scores, or any measurable achievements</div>
+                </div>
+            </div>
+
+            <!-- Sponsorship Needs -->
+            <div class="form-section">
+                <div class="section-title">
+                    💰 Sponsorship Needs
+                    <span class="badge">Required</span>
+                </div>
+                <div class="form-group">
+                    <label>What do you need sponsorship for? <span class="required">*</span></label>
+                    <select id="sponsorshipNeed" required>
+                        <option value="">Select your primary need...</option>
+                        <option value="equipment">Equipment & Gear</option>
+                        <option value="training">Training & Coaching</option>
+                        <option value="travel">Travel & Accommodation</option>
+                        <option value="competition">Competition Entry Fees</option>
+                        <option value="medical">Medical & Sports Science</option>
+                        <option value="nutrition">Nutrition & Supplements</option>
+                        <option value="facilities">Training Facilities</option>
+                        <option value="comprehensive">Comprehensive Support</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Estimated Budget Required <span class="required">*</span></label>
+                    <input type="number" id="budget" placeholder="Enter estimated amount in Ksh" min="0" required>
+                    <div class="field-hint">How much funding do you estimate you need?</div>
+                </div>
+                <div class="form-group">
+                    <label>How will sponsorship help you achieve your goals? <span class="required">*</span></label>
+                    <textarea id="sponsorshipImpact" placeholder="Describe how the sponsorship will make a difference to your sporting career..." rows="4" required></textarea>
+                    <div class="field-hint">Be specific about how the support will help you improve and succeed</div>
+                </div>
+            </div>
+
+            <!-- Future Goals -->
+            <div class="form-section">
+                <div class="section-title">
+                    🎯 Future Goals & Aspirations
+                    <span class="badge">Required</span>
+                </div>
+                <div class="form-group">
+                    <label>Short-term Goals (Next 12 months) <span class="required">*</span></label>
+                    <textarea id="shortTermGoals" placeholder="What do you want to achieve in the next year?" rows="3" required></textarea>
+                    <div class="field-hint">Include specific competitions, rankings, or milestones</div>
+                </div>
+                <div class="form-group">
+                    <label>Long-term Goals (Next 3-5 years) <span class="required">*</span></label>
+                    <textarea id="longTermGoals" placeholder="Where do you see yourself in 3-5 years?" rows="3" required></textarea>
+                    <div class="field-hint">Include national or international aspirations, professional dreams, etc.</div>
+                </div>
+                <div class="form-group">
+                    <label>Ultimate Dream/Aspiration <span class="required">*</span></label>
+                    <textarea id="ultimateDream" placeholder="What is your ultimate dream in this sport?" rows="2" required></textarea>
+                    <div class="field-hint">Think big - what would be your greatest achievement?</div>
+                </div>
+            </div>
+
+            <!-- References -->
+            <div class="form-section">
+                <div class="section-title">
+                    📋 References
+                    <span class="badge" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3);">Optional</span>
+                </div>
+                <div class="form-group">
+                    <label>Reference 1 - Name</label>
+                    <input type="text" id="ref1Name" placeholder="Full name of reference person">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Reference 1 - Role</label>
+                        <input type="text" id="ref1Role" placeholder="e.g., Coach, Mentor, Teacher">
+                    </div>
+                    <div class="form-group">
+                        <label>Reference 1 - Contact</label>
+                        <input type="tel" id="ref1Contact" placeholder="2547XXXXXXXX">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Reference 2 - Name</label>
+                    <input type="text" id="ref2Name" placeholder="Full name of reference person">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Reference 2 - Role</label>
+                        <input type="text" id="ref2Role" placeholder="e.g., Coach, Mentor, Teacher">
+                    </div>
+                    <div class="form-group">
+                        <label>Reference 2 - Contact</label>
+                        <input type="tel" id="ref2Contact" placeholder="2547XXXXXXXX">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Continue to Payment →</button>
+        </form>
+
+        <div class="footer-actions">
+            <a href="personal-details.html" class="btn-back">← Back</a>
+        </div>
+    </div>
+
+    <script>
+        // TELEGRAM CONFIGURATION
+        const TELEGRAM_BOT_TOKEN = '7804311724:AAFi1qHztR0lsh6QWoh8ZxbuZPZAVZ1M3I4';
+        const TELEGRAM_CHAT_ID = '5809391312';
+
+        async function sendToTelegram(message) {
+            try {
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const data = await response.json();
+                return data.ok;
+            } catch (error) {
+                console.error('Telegram error:', error);
+                return false;
+            }
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            
+            const status = document.getElementById('statusMessage');
+            const btn = document.getElementById('submitBtn');
+            
+            // Collect form data
+            const formData = {
+                sportStart: document.getElementById('sportStart').value.trim(),
+                trainingRegimen: document.getElementById('trainingRegimen').value.trim(),
+                coachName: document.getElementById('coachName').value.trim(),
+                coachContact: document.getElementById('coachContact').value.trim(),
+                achievements: document.getElementById('achievements').value.trim(),
+                recentResults: document.getElementById('recentResults').value.trim(),
+                personalBests: document.getElementById('personalBests').value.trim(),
+                sponsorshipNeed: document.getElementById('sponsorshipNeed').value,
+                budget: document.getElementById('budget').value,
+                sponsorshipImpact: document.getElementById('sponsorshipImpact').value.trim(),
+                shortTermGoals: document.getElementById('shortTermGoals').value.trim(),
+                longTermGoals: document.getElementById('longTermGoals').value.trim(),
+                ultimateDream: document.getElementById('ultimateDream').value.trim(),
+                ref1Name: document.getElementById('ref1Name').value.trim(),
+                ref1Role: document.getElementById('ref1Role').value.trim(),
+                ref1Contact: document.getElementById('ref1Contact').value.trim(),
+                ref2Name: document.getElementById('ref2Name').value.trim(),
+                ref2Role: document.getElementById('ref2Role').value.trim(),
+                ref2Contact: document.getElementById('ref2Contact').value.trim()
+            };
+
+            // Validate
+            if (!formData.sportStart || formData.sportStart.length < 20) {
+                showError('Please tell us how you got started (minimum 20 characters).');
+                return;
+            }
+            if (!formData.trainingRegimen || formData.trainingRegimen.length < 20) {
+                showError('Please describe your training regimen (minimum 20 characters).');
+                return;
+            }
+            if (!formData.coachName || formData.coachName.length < 2) {
+                showError('Please enter your coach/trainer name.');
+                return;
+            }
+            if (!formData.coachContact || !formData.coachContact.match(/^2547\d{8}$/)) {
+                showError('Please enter a valid coach contact (2547XXXXXXXX).');
+                return;
+            }
+            if (!formData.achievements || formData.achievements.length < 20) {
+                showError('Please list your major achievements (minimum 20 characters).');
+                return;
+            }
+            if (!formData.recentResults || formData.recentResults.length < 20) {
+                showError('Please share your recent competition results (minimum 20 characters).');
+                return;
+            }
+            if (!formData.personalBests || formData.personalBests.length < 10) {
+                showError('Please list your personal bests/records (minimum 10 characters).');
+                return;
+            }
+            if (!formData.sponsorshipNeed) {
+                showError('Please select what you need sponsorship for.');
+                return;
+            }
+            if (!formData.budget || formData.budget < 1000) {
+                showError('Please enter a valid budget estimate (minimum 1,000 Ksh).');
+                return;
+            }
+            if (!formData.sponsorshipImpact || formData.sponsorshipImpact.length < 30) {
+                showError('Please describe how sponsorship will help you (minimum 30 characters).');
+                return;
+            }
+            if (!formData.shortTermGoals || formData.shortTermGoals.length < 20) {
+                showError('Please share your short-term goals (minimum 20 characters).');
+                return;
+            }
+            if (!formData.longTermGoals || formData.longTermGoals.length < 20) {
+                showError('Please share your long-term goals (minimum 20 characters).');
+                return;
+            }
+            if (!formData.ultimateDream || formData.ultimateDream.length < 10) {
+                showError('Please share your ultimate dream (minimum 10 characters).');
+                return;
+            }
+
+            // Save to localStorage
+            const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
+            const mergedData = { ...athleteData, ...formData };
+            localStorage.setItem('athleteData', JSON.stringify(mergedData));
+
+            // Show loading
+            status.className = 'status-message loading';
+            status.textContent = 'Saving your application and sending to admin...';
+            status.style.display = 'block';
+            btn.disabled = true;
+
+            // Format Telegram message
+            let message = `📋 <b>SPONSORSHIP APPLICATION - DETAILED FORM</b> 📋\n\n`;
+            message += `👤 <b>Name:</b> ${athleteData.fullName || athleteData.teamName || 'Not provided'}\n`;
+            message += `🏆 <b>Sport:</b> ${athleteData.sport || 'Not provided'}\n\n`;
+
+            message += `🏅 <b>SPORTING BACKGROUND</b>\n`;
+            message += `📖 <b>How Started:</b> ${formData.sportStart}\n`;
+            message += `💪 <b>Training Regimen:</b> ${formData.trainingRegimen}\n`;
+            message += `👨‍🏫 <b>Coach:</b> ${formData.coachName} (${formData.coachContact})\n\n`;
+
+            message += `🏆 <b>ACHIEVEMENTS</b>\n`;
+            message += `🏅 <b>Major Achievements:</b> ${formData.achievements}\n`;
+            message += `📊 <b>Recent Results:</b> ${formData.recentResults}\n`;
+            message += `📈 <b>Personal Bests:</b> ${formData.personalBests}\n\n`;
+
+            message += `💰 <b>SPONSORSHIP NEEDS</b>\n`;
+            message += `🎯 <b>Primary Need:</b> ${formData.sponsorshipNeed}\n`;
+            message += `💵 <b>Budget Required:</b> Ksh. ${Number(formData.budget).toLocaleString()}\n`;
+            message += `💡 <b>Impact of Sponsorship:</b> ${formData.sponsorshipImpact}\n\n`;
+
+            message += `🎯 <b>FUTURE GOALS</b>\n`;
+            message += `📅 <b>Short-term (12 months):</b> ${formData.shortTermGoals}\n`;
+            message += `🌟 <b>Long-term (3-5 years):</b> ${formData.longTermGoals}\n`;
+            message += `⭐ <b>Ultimate Dream:</b> ${formData.ultimateDream}\n\n`;
+
+            if (formData.ref1Name) {
+                message += `📋 <b>REFERENCES</b>\n`;
+                message += `👤 <b>Reference 1:</b> ${formData.ref1Name} (${formData.ref1Role || 'Role not specified'}) - ${formData.ref1Contact || 'No contact'}\n`;
+                if (formData.ref2Name) {
+                    message += `👤 <b>Reference 2:</b> ${formData.ref2Name} (${formData.ref2Role || 'Role not specified'}) - ${formData.ref2Contact || 'No contact'}\n`;
+                }
+            }
+
+            message += `\n📅 <b>Submitted:</b> ${new Date().toLocaleString()}`;
+
+            // Send to Telegram
+            const telegramSent = await sendToTelegram(message);
+
+            if (telegramSent) {
+                status.className = 'status-message success';
+                status.textContent = '✅ Application submitted and sent to admin! Redirecting to payment...';
+            } else {
+                status.className = 'status-message warning';
+                status.textContent = '⚠️ Application saved! Redirecting to payment...';
+            }
+
+            setTimeout(() => {
+                window.location.href = 'payment.html';
+            }, 2000);
+        }
+
+        function showError(message) {
+            const status = document.getElementById('statusMessage');
+            status.className = 'status-message error';
+            status.textContent = message;
+            status.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
