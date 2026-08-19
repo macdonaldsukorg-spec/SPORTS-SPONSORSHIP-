@@ -23,7 +23,7 @@
         }
 
         .container {
-            max-width: 650px;
+            max-width: 750px;
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
@@ -152,16 +152,50 @@
             font-size: 0.95rem;
         }
 
-        .form-group {
+        .form-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 22px 25px;
             margin-bottom: 22px;
+        }
+
+        .form-section .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #FBBF24;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section .section-title .badge {
+            background: rgba(251, 191, 36, 0.15);
+            color: #FBBF24;
+            font-size: 0.55rem;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 6px;
-            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-size: 0.82rem;
         }
 
         .form-group label .required {
@@ -169,28 +203,44 @@
             margin-left: 3px;
         }
 
+        .form-group .field-hint {
+            font-size: 0.6rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
+            padding: 11px 15px;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 10px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
             transition: all 0.3s;
             font-family: 'Inter', sans-serif;
         }
 
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.25);
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #FBBF24;
             background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.03);
         }
 
         .form-group select option {
@@ -198,17 +248,17 @@
             color: #ffffff;
         }
 
-        .form-group .hint {
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 4px;
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
         .applicant-type-toggle {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-bottom: 22px;
+            margin-bottom: 5px;
         }
 
         .applicant-type-toggle .toggle-option {
@@ -221,6 +271,7 @@
             transition: all 0.3s;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
         }
 
         .applicant-type-toggle .toggle-option:hover {
@@ -233,6 +284,12 @@
             border-color: #FBBF24;
             color: #FBBF24;
             box-shadow: 0 0 30px rgba(251, 191, 36, 0.05);
+        }
+
+        .toggle-option .toggle-icon {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
         }
 
         .team-fields {
@@ -256,6 +313,7 @@
             transition: all 0.3s;
             font-family: 'Inter', sans-serif;
             margin-top: 10px;
+            letter-spacing: 0.5px;
         }
 
         .btn-submit:hover {
@@ -300,6 +358,13 @@
             border: 1px solid rgba(251, 191, 36, 0.06);
         }
 
+        .status-message.warning {
+            display: block;
+            background: rgba(251, 191, 36, 0.12);
+            color: #FBBF24;
+            border: 1px solid rgba(251, 191, 36, 0.08);
+        }
+
         .footer-actions {
             display: flex;
             justify-content: space-between;
@@ -328,6 +393,16 @@
             color: #ffffff;
         }
 
+        .location-group {
+            border-left: 2px solid rgba(251, 191, 36, 0.15);
+            padding-left: 16px;
+            margin-left: 4px;
+        }
+
+        .location-group .form-group:last-child {
+            margin-bottom: 0;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 25px 18px;
@@ -343,6 +418,20 @@
 
             .applicant-type-toggle {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-section {
+                padding: 18px 16px;
+            }
+
+            .location-group {
+                padding-left: 8px;
+                margin-left: 2px;
             }
         }
 
@@ -391,85 +480,268 @@
         <div id="statusMessage" class="status-message"></div>
 
         <form id="personalDetailsForm" onsubmit="submitForm(event)">
-            <div class="form-group">
-                <label>Applicant Type <span class="required">*</span></label>
-                <div class="applicant-type-toggle">
-                    <div class="toggle-option selected" data-type="individual" onclick="selectApplicantType('individual')">
-                        👤 Individual
-                    </div>
-                    <div class="toggle-option" data-type="team" onclick="selectApplicantType('team')">
-                        👥 Team / Club
+            <!-- Applicant Type -->
+            <div class="form-section">
+                <div class="section-title">
+                    👤 Applicant Type
+                    <span class="badge">Required</span>
+                </div>
+                <div class="form-group">
+                    <div class="applicant-type-toggle">
+                        <div class="toggle-option selected" data-type="individual" onclick="selectApplicantType('individual')">
+                            <span class="toggle-icon">🏃</span>
+                            Individual Athlete
+                        </div>
+                        <div class="toggle-option" data-type="team" onclick="selectApplicantType('team')">
+                            <span class="toggle-icon">👥</span>
+                            Team / Club
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div id="individualFields">
+            <!-- Personal Information -->
+            <div class="form-section" id="individualFields">
+                <div class="section-title">
+                    📋 Personal Information
+                    <span class="badge">Required</span>
+                </div>
                 <div class="form-group">
                     <label>Full Name <span class="required">*</span></label>
                     <input type="text" id="fullName" placeholder="Enter your full name" required>
                 </div>
                 <div class="form-group">
-                    <label>Email Address <span class="required">*</span></label>
-                    <input type="email" id="email" placeholder="you@example.com" required>
+                    <label>Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" required>
                 </div>
-                <div class="form-group">
-                    <label>Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="phone" placeholder="2547XXXXXXXX" required>
-                    <div class="hint">Include country code (e.g., 2547XXXXXXXX)</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <select id="gender" required>
+                            <option value="">Select...</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality <span class="required">*</span></label>
+                        <input type="text" id="nationality" placeholder="e.g., Kenyan" required>
+                    </div>
+                </div>
+                
+                <!-- Location Hierarchy -->
+                <div class="location-group">
+                    <div class="form-group">
+                        <label>County <span class="required">*</span></label>
+                        <select id="county" required onchange="updateSubcounties('county', 'subcounty', 'constituency', 'location', 'sublocation')">
+                            <option value="">Select County...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subcounty <span class="required">*</span></label>
+                        <select id="subcounty" required onchange="updateConstituencies('county', 'subcounty', 'constituency', 'location', 'sublocation')">
+                            <option value="">Select Subcounty...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Constituency <span class="required">*</span></label>
+                        <select id="constituency" required onchange="updateLocations('county', 'constituency', 'location', 'sublocation')">
+                            <option value="">Select Constituency...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location <span class="required">*</span></label>
+                        <select id="location" required onchange="updateSublocations('county', 'location', 'sublocation')">
+                            <option value="">Select Location...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sublocation <span class="required">*</span></label>
+                        <select id="sublocation" required>
+                            <option value="">Select Sublocation...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="2547XXXXXXXX" required>
+                        <div class="field-hint">Include country code (e.g., 2547XXXXXXXX)</div>
+                    </div>
                 </div>
             </div>
 
-            <div id="teamFields" class="team-fields">
+            <!-- Team Information -->
+            <div class="form-section team-fields" id="teamFields">
+                <div class="section-title">
+                    🏛️ Team Information
+                    <span class="badge">Required</span>
+                </div>
                 <div class="form-group">
                     <label>Team/Club Name <span class="required">*</span></label>
                     <input type="text" id="teamName" placeholder="Enter your team name">
                 </div>
                 <div class="form-group">
-                    <label>Team Captain/Contact Person <span class="required">*</span></label>
-                    <input type="text" id="teamContact" placeholder="Full name of team captain">
-                </div>
-                <div class="form-group">
-                    <label>Team Email <span class="required">*</span></label>
-                    <input type="email" id="teamEmail" placeholder="team@example.com">
-                </div>
-                <div class="form-group">
-                    <label>Team Phone <span class="required">*</span></label>
-                    <input type="tel" id="teamPhone" placeholder="2547XXXXXXXX">
-                </div>
-                <div class="form-group">
-                    <label>Number of Team Members <span class="required">*</span></label>
-                    <input type="number" id="teamMembers" placeholder="e.g., 15">
+                    <label>Year Established <span class="required">*</span></label>
+                    <input type="number" id="teamEstablished" placeholder="e.g., 2015" min="1900" max="2026">
                 </div>
                 <div class="form-group">
                     <label>Team Category <span class="required">*</span></label>
                     <select id="teamCategory">
                         <option value="">Select category...</option>
                         <option value="school">School Team</option>
+                        <option value="college">College/University Team</option>
                         <option value="club">Club Team</option>
-                        <option value="national">National Team</option>
                         <option value="regional">Regional Team</option>
+                        <option value="national">National Team</option>
+                        <option value="professional">Professional Team</option>
                         <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Team Captain/Contact Person <span class="required">*</span></label>
+                    <input type="text" id="teamContact" placeholder="Full name of team captain">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Team Email <span class="required">*</span></label>
+                        <input type="email" id="teamEmail" placeholder="team@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Team Phone <span class="required">*</span></label>
+                        <input type="tel" id="teamPhone" placeholder="2547XXXXXXXX">
+                        <div class="field-hint">Include country code</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Number of Team Members <span class="required">*</span></label>
+                        <input type="number" id="teamMembers" placeholder="e.g., 15" min="2">
+                    </div>
+                    <div class="form-group">
+                        <label>Home Stadium/Venue <span class="required">*</span></label>
+                        <input type="text" id="teamVenue" placeholder="Name of home stadium/venue">
+                    </div>
+                </div>
+                
+                <!-- Location Hierarchy for Team -->
+                <div class="location-group">
+                    <div class="form-group">
+                        <label>County <span class="required">*</span></label>
+                        <select id="teamCounty" required onchange="updateSubcounties('teamCounty', 'teamSubcounty', 'teamConstituency', 'teamLocation', 'teamSublocation')">
+                            <option value="">Select County...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subcounty <span class="required">*</span></label>
+                        <select id="teamSubcounty" required onchange="updateConstituencies('teamCounty', 'teamSubcounty', 'teamConstituency', 'teamLocation', 'teamSublocation')">
+                            <option value="">Select Subcounty...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Constituency <span class="required">*</span></label>
+                        <select id="teamConstituency" required onchange="updateLocations('teamCounty', 'teamConstituency', 'teamLocation', 'teamSublocation')">
+                            <option value="">Select Constituency...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Location <span class="required">*</span></label>
+                        <select id="teamLocation" required onchange="updateSublocations('teamCounty', 'teamLocation', 'teamSublocation')">
+                            <option value="">Select Location...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sublocation <span class="required">*</span></label>
+                        <select id="teamSublocation" required>
+                            <option value="">Select Sublocation...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Team Achievements <span class="required">*</span></label>
+                    <textarea id="teamAchievements" placeholder="List your team's major achievements, titles, or recognitions..." rows="3"></textarea>
+                    <div class="field-hint">Include recent competition results, championships, or notable performances</div>
+                </div>
+            </div>
+
+            <!-- Sport Details -->
+            <div class="form-section">
+                <div class="section-title">
+                    🏆 Sport Details
+                    <span class="badge">Required</span>
+                </div>
+                <div class="form-group">
+                    <label>Sport <span class="required">*</span></label>
+                    <select id="sport" required>
+                        <option value="">Select your sport...</option>
+                        <option value="athletics">Athletics</option>
+                        <option value="badminton">Badminton</option>
+                        <option value="basketball">Basketball</option>
+                        <option value="boxing">Boxing</option>
+                        <option value="cricket">Cricket</option>
+                        <option value="cycling">Cycling</option>
+                        <option value="football">Football</option>
+                        <option value="golf">Golf</option>
+                        <option value="handball">Handball</option>
+                        <option value="hockey">Hockey</option>
+                        <option value="judo">Judo</option>
+                        <option value="karate">Karate</option>
+                        <option value="rugby">Rugby</option>
+                        <option value="swimming">Swimming</option>
+                        <option value="taekwondo">Taekwondo</option>
+                        <option value="tennis">Tennis</option>
+                        <option value="volleyball">Volleyball</option>
+                        <option value="weightlifting">Weightlifting</option>
+                        <option value="wrestling">Wrestling</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Years of Experience <span class="required">*</span></label>
+                    <input type="number" id="experience" placeholder="Number of years competing" min="0" required>
+                    <div class="field-hint">How many years have you been involved in this sport?</div>
+                </div>
+                <div class="form-group">
+                    <label>Current Level <span class="required">*</span></label>
+                    <select id="level" required>
+                        <option value="">Select your current level...</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="elite">Elite</option>
+                        <option value="professional">Professional</option>
                     </select>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Sport <span class="required">*</span></label>
-                <select id="sport" required>
-                    <option value="">Select your sport...</option>
-                    <option value="athletics">Athletics</option>
-                    <option value="basketball">Basketball</option>
-                    <option value="football">Football</option>
-                    <option value="volleyball">Volleyball</option>
-                    <option value="swimming">Swimming</option>
-                    <option value="tennis">Tennis</option>
-                    <option value="rugby">Rugby</option>
-                    <option value="cricket">Cricket</option>
-                    <option value="boxing">Boxing</option>
-                    <option value="cycling">Cycling</option>
-                    <option value="golf">Golf</option>
-                    <option value="other">Other</option>
-                </select>
+            <!-- Additional Information -->
+            <div class="form-section">
+                <div class="section-title">
+                    📝 Additional Information
+                    <span class="badge" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3);">Optional</span>
+                </div>
+                <div class="form-group">
+                    <label>Previous Sponsorship Experience</label>
+                    <select id="previousSponsorship">
+                        <option value="">Select...</option>
+                        <option value="none">None</option>
+                        <option value="previous">Yes, previously sponsored</option>
+                        <option value="current">Yes, currently sponsored</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Why do you want to be sponsored? <span class="required">*</span></label>
+                    <textarea id="sponsorshipGoal" placeholder="Tell us why you're seeking sponsorship and how it will help you achieve your goals..." rows="4" required></textarea>
+                    <div class="field-hint">Be specific about your goals, aspirations, and how sponsorship will make a difference</div>
+                </div>
             </div>
 
             <button type="submit" class="btn-submit" id="submitBtn">Continue to Application →</button>
@@ -485,15 +757,317 @@
         const TELEGRAM_BOT_TOKEN = '7804311724:AAFi1qHztR0lsh6QWoh8ZxbuZPZAVZ1M3I4';
         const TELEGRAM_CHAT_ID = '5809391312';
 
-        // Function to send message to Telegram
+        // Complete Kenya Location Data with proper hierarchy
+        const locationData = {
+            'nairobi': {
+                subcounties: ['Embakasi', 'Kasarani', 'Langata', 'Makadara', 'Starehe', 'Westlands'],
+                constituencies: {
+                    'Embakasi': ['Embakasi Central', 'Embakasi East', 'Embakasi North', 'Embakasi South', 'Embakasi West'],
+                    'Kasarani': ['Kasarani', 'Roysambu', 'Ruaraka'],
+                    'Langata': ['Karen', 'Langata', 'Mugumoini'],
+                    'Makadara': ['Makadara', 'Maringo', 'Harambee'],
+                    'Starehe': ['Starehe', 'Kamukunji', 'Central'],
+                    'Westlands': ['Westlands', 'Dagoretti']
+                },
+                locations: {
+                    'Embakasi Central': ['Imara Daima', 'Komarock', 'Kayole', 'Tassia'],
+                    'Embakasi East': ['Pipeline', 'Kwa Njenga', 'Umoja'],
+                    'Embakasi North': ['Dandora', 'Kariobangi South', 'Githurai'],
+                    'Embakasi South': ['Mukuru', 'Kwa Reuben', 'Kware'],
+                    'Embakasi West': ['Kariobangi', 'Utawala', 'Mwiki', 'Njiru'],
+                    'Kasarani': ['Kasarani', 'Kamulu', 'Ruiru'],
+                    'Roysambu': ['Roysambu', 'Zimmerman', 'Mwiki'],
+                    'Ruaraka': ['Ruaraka', 'Baba Dogo', 'Korogocho'],
+                    'Karen': ['Karen', 'Dagoretti', 'Langata'],
+                    'Langata': ['Langata', 'Nairobi West', 'South C'],
+                    'Mugumoini': ['Mugumoini', 'Kibera', 'Makina'],
+                    'Makadara': ['Makadara', 'Maringo', 'Harambee'],
+                    'Maringo': ['Maringo', 'Bahati', 'Ngara'],
+                    'Harambee': ['Harambee', 'Kariokor', 'Pumwani'],
+                    'Starehe': ['Starehe', 'Ngara', 'Pangani'],
+                    'Kamukunji': ['Kamukunji', 'Eastleigh', 'Muthurwa'],
+                    'Central': ['Central', 'KICC', 'Nairobi CBD'],
+                    'Westlands': ['Westlands', 'Parklands', 'Highridge'],
+                    'Dagoretti': ['Dagoretti', 'Kawangware', 'Riruta']
+                },
+                sublocations: {
+                    'Imara Daima': ['Imara Daima', 'Fedha', 'Baraka Estate'],
+                    'Komarock': ['Komarock', 'Komarock North', 'Komarock South'],
+                    'Kayole': ['Kayole', 'Kayole North', 'Kayole South'],
+                    'Tassia': ['Tassia', 'Tassia North', 'Tassia South'],
+                    'Pipeline': ['Pipeline', 'Pipeline North', 'Pipeline South'],
+                    'Umoja': ['Umoja', 'Umoja North', 'Umoja South'],
+                    'Kasarani': ['Kasarani', 'Kasarani North', 'Kasarani South'],
+                    'Ruiru': ['Ruiru', 'Ruiru North', 'Ruiru South'],
+                    'Githurai': ['Githurai', 'Githurai North', 'Githurai South'],
+                    'Langata': ['Langata', 'Langata South', 'Langata North'],
+                    'Karen': ['Karen', 'Karen North', 'Karen South'],
+                    'Kibera': ['Kibera', 'Kibera North', 'Kibera South'],
+                    'Westlands': ['Westlands', 'Westlands North', 'Westlands South'],
+                    'Parklands': ['Parklands', 'Parklands North', 'Parklands South'],
+                    'Dagoretti': ['Dagoretti', 'Dagoretti North', 'Dagoretti South'],
+                    'Kawangware': ['Kawangware', 'Kawangware North', 'Kawangware South'],
+                    'Eastleigh': ['Eastleigh', 'Eastleigh North', 'Eastleigh South'],
+                    'Muthurwa': ['Muthurwa', 'Muthurwa North', 'Muthurwa South']
+                }
+            },
+            'mombasa': {
+                subcounties: ['Changamwe', 'Jomvu', 'Kisauni', 'Mvita', 'Nyali', 'Likoni'],
+                constituencies: {
+                    'Changamwe': ['Changamwe', 'Airport', 'Magongo'],
+                    'Jomvu': ['Jomvu', 'Mikindani', 'Miritini'],
+                    'Kisauni': ['Kisauni', 'Mombasa', 'Bamburi'],
+                    'Mvita': ['Mvita', 'Tononoka', 'Majengo'],
+                    'Nyali': ['Nyali', 'Kongowea', 'Mtopanga'],
+                    'Likoni': ['Likoni', 'Mtongwe', 'Shika Adabu']
+                },
+                locations: {
+                    'Changamwe': ['Changamwe', 'Port Reitz', 'Magongo'],
+                    'Airport': ['Moi Airport', 'Kipevu', 'Makupa'],
+                    'Mvita': ['Mvita', 'Tudor', 'Makadara'],
+                    'Nyali': ['Nyali', 'Kongowea', 'Mtopanga'],
+                    'Likoni': ['Likoni', 'Mtongwe', 'Shika Adabu']
+                },
+                sublocations: {
+                    'Changamwe': ['Changamwe North', 'Changamwe South', 'Changamwe Central'],
+                    'Mvita': ['Mvita North', 'Mvita South', 'Mvita Central'],
+                    'Nyali': ['Nyali North', 'Nyali South', 'Nyali Central'],
+                    'Likoni': ['Likoni North', 'Likoni South', 'Likoni Central']
+                }
+            },
+            'kisumu': {
+                subcounties: ['Kisumu Central', 'Kisumu East', 'Kisumu West', 'Seme', 'Nyando'],
+                constituencies: {
+                    'Kisumu Central': ['Kisumu Central', 'Railway', 'Mamboleo'],
+                    'Kisumu East': ['Kisumu East', 'Kibuye', 'Nyalenda'],
+                    'Kisumu West': ['Kisumu West', 'Kona', 'Kathianga'],
+                    'Seme': ['Seme', 'Kombewa', 'Kachieng'],
+                    'Nyando': ['Nyando', 'Ahero', 'Miwani']
+                },
+                locations: {
+                    'Kisumu Central': ['Central', 'Mamboleo', 'Railway'],
+                    'Kisumu East': ['Kibuye', 'Kondele', 'Nyalenda'],
+                    'Kisumu West': ['Kona', 'Kathianga', 'Kombewa'],
+                    'Nyando': ['Ahero', 'Miwani', 'Ondiek']
+                },
+                sublocations: {
+                    'Central': ['Central North', 'Central South', 'Central East'],
+                    'Kibuye': ['Kibuye North', 'Kibuye South', 'Kibuye Central'],
+                    'Kondele': ['Kondele North', 'Kondele South', 'Kondele Central'],
+                    'Ahero': ['Ahero North', 'Ahero South', 'Ahero Central']
+                }
+            },
+            'nakuru': {
+                subcounties: ['Nakuru City', 'Nakuru East', 'Nakuru North', 'Nakuru South', 'Rongai', 'Naivasha'],
+                constituencies: {
+                    'Nakuru City': ['Nakuru East', 'Nakuru West', 'Nakuru Central'],
+                    'Nakuru East': ['Nakuru East', 'Lanet', 'Kaptembwa'],
+                    'Nakuru North': ['Nakuru North', 'Bahati', 'Kabatini'],
+                    'Nakuru South': ['Nakuru South', 'Kihingo', 'Shabab'],
+                    'Rongai': ['Rongai', 'Molo', 'Turbo'],
+                    'Naivasha': ['Naivasha', 'Kinungi', 'Longonot']
+                },
+                locations: {
+                    'Nakuru East': ['Kaptembwa', 'Lanet', 'Nakuru CBD'],
+                    'Nakuru West': ['Nakuru West', 'Shabab', 'Kihingo'],
+                    'Nakuru North': ['Bahati', 'Kabatini', 'Dundori'],
+                    'Naivasha': ['Naivasha', 'Kinungi', 'Longonot']
+                },
+                sublocations: {
+                    'Kaptembwa': ['Kaptembwa North', 'Kaptembwa South', 'Kaptembwa Central'],
+                    'Lanet': ['Lanet North', 'Lanet South', 'Lanet Central'],
+                    'Nakuru CBD': ['CBD North', 'CBD South', 'CBD Central'],
+                    'Naivasha': ['Naivasha North', 'Naivasha South', 'Naivasha Central']
+                }
+            },
+            'kiambu': {
+                subcounties: ['Kiambu Town', 'Kikuyu', 'Limuru', 'Lari', 'Githunguri', 'Ruiru', 'Thika'],
+                constituencies: {
+                    'Kiambu Town': ['Kiambu Town', 'Tigoni', 'Ndumberi'],
+                    'Kikuyu': ['Kikuyu', 'Kinoo', 'Kabete'],
+                    'Limuru': ['Limuru', 'Tigoni', 'Karuri'],
+                    'Ruiru': ['Ruiru', 'Mwiki', 'Kahawa'],
+                    'Thika': ['Thika Town', 'Gatuanyaga', 'Kiganjo']
+                },
+                locations: {
+                    'Kiambu Town': ['Kiambu CBD', 'Tigoni', 'Ndumberi'],
+                    'Kikuyu': ['Kikuyu', 'Kinoo', 'Kabete'],
+                    'Limuru': ['Limuru', 'Tigoni', 'Karuri'],
+                    'Ruiru': ['Ruiru', 'Mwiki', 'Kahawa'],
+                    'Thika': ['Thika CBD', 'Gatuanyaga', 'Kiganjo']
+                },
+                sublocations: {
+                    'Kiambu CBD': ['CBD North', 'CBD South', 'CBD Central'],
+                    'Tigoni': ['Tigoni North', 'Tigoni South', 'Tigoni Central'],
+                    'Ruiru': ['Ruiru North', 'Ruiru South', 'Ruiru Central'],
+                    'Thika CBD': ['CBD North', 'CBD South', 'CBD Central']
+                }
+            },
+            'machakos': {
+                subcounties: ['Machakos Town', 'Athi River', 'Mavoko', 'Kathiani', 'Kangundo', 'Matungulu'],
+                constituencies: {
+                    'Machakos Town': ['Machakos Town', 'Kola', 'Kalisitu'],
+                    'Athi River': ['Athi River', 'Syokimau', 'Mlolongo'],
+                    'Mavoko': ['Mavoko', 'Syokimau', 'Mlolongo'],
+                    'Kathiani': ['Kathiani', 'Mbiuni', 'Kaewa'],
+                    'Kangundo': ['Kangundo', 'Tala', 'Mumbuni'],
+                    'Matungulu': ['Matungulu', 'Kangundo', 'Tala']
+                },
+                locations: {
+                    'Machakos Town': ['Machakos CBD', 'Kola', 'Kalisitu'],
+                    'Athi River': ['Athi River', 'Syokimau', 'Mlolongo'],
+                    'Mavoko': ['Mavoko', 'Syokimau', 'Mlolongo'],
+                    'Kathiani': ['Kathiani', 'Mbiuni', 'Kaewa']
+                },
+                sublocations: {
+                    'Machakos CBD': ['CBD North', 'CBD South', 'CBD Central'],
+                    'Athi River': ['Athi River North', 'Athi River South', 'Athi River Central'],
+                    'Syokimau': ['Syokimau North', 'Syokimau South', 'Syokimau Central'],
+                    'Mlolongo': ['Mlolongo North', 'Mlolongo South', 'Mlolongo Central']
+                }
+            },
+            'kajiado': {
+                subcounties: ['Kajiado Central', 'Kajiado North', 'Kajiado South', 'Kajiado East', 'Kajiado West'],
+                constituencies: {
+                    'Kajiado Central': ['Kajiado Central', 'Matapato', 'Iloodokilani'],
+                    'Kajiado North': ['Kajiado North', 'Ngong', 'Rongai'],
+                    'Kajiado South': ['Kajiado South', 'Loodokilani', 'Magadi'],
+                    'Kajiado East': ['Kajiado East', 'Isinya', 'Kitengela'],
+                    'Kajiado West': ['Kajiado West', 'Kiserian', 'Ngong']
+                },
+                locations: {
+                    'Kajiado Central': ['Kajiado Town', 'Matapato', 'Iloodokilani'],
+                    'Kajiado North': ['Ngong', 'Rongai', 'Ongata Rongai'],
+                    'Kajiado South': ['Magadi', 'Loodokilani', 'Kajiado South'],
+                    'Kajiado East': ['Isinya', 'Kitengela', 'Athi River'],
+                    'Kajiado West': ['Kiserian', 'Ngong', 'Rongai']
+                },
+                sublocations: {
+                    'Kajiado Town': ['Kajiado North', 'Kajiado South', 'Kajiado Central'],
+                    'Ngong': ['Ngong North', 'Ngong South', 'Ngong Central'],
+                    'Rongai': ['Rongai North', 'Rongai South', 'Rongai Central'],
+                    'Kitengela': ['Kitengela North', 'Kitengela South', 'Kitengela Central']
+                }
+            }
+        };
+
+        // Populate counties
+        function populateCounties() {
+            const counties = Object.keys(locationData);
+            const selects = ['county', 'teamCounty'];
+            
+            selects.forEach(selectId => {
+                const select = document.getElementById(selectId);
+                if (!select) return;
+                select.innerHTML = '<option value="">Select County...</option>';
+                counties.sort().forEach(county => {
+                    const option = document.createElement('option');
+                    option.value = county;
+                    option.textContent = county.charAt(0).toUpperCase() + county.slice(1);
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        function updateSubcounties(countyId, subcountyId, constituencyId, locationId, sublocationId) {
+            const county = document.getElementById(countyId).value;
+            const subcountySelect = document.getElementById(subcountyId);
+            const constituencySelect = document.getElementById(constituencyId);
+            const locationSelect = document.getElementById(locationId);
+            const sublocationSelect = document.getElementById(sublocationId);
+
+            // Reset all dependent dropdowns
+            constituencySelect.innerHTML = '<option value="">Select Constituency...</option>';
+            locationSelect.innerHTML = '<option value="">Select Location...</option>';
+            sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
+
+            if (county && locationData[county]) {
+                subcountySelect.innerHTML = '<option value="">Select Subcounty...</option>';
+                locationData[county].subcounties.sort().forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    subcountySelect.appendChild(option);
+                });
+            } else {
+                subcountySelect.innerHTML = '<option value="">Select Subcounty...</option>';
+            }
+        }
+
+        function updateConstituencies(countyId, subcountyId, constituencyId, locationId, sublocationId) {
+            const county = document.getElementById(countyId).value;
+            const subcounty = document.getElementById(subcountyId).value;
+            const constituencySelect = document.getElementById(constituencyId);
+            const locationSelect = document.getElementById(locationId);
+            const sublocationSelect = document.getElementById(sublocationId);
+
+            // Reset location and sublocation
+            locationSelect.innerHTML = '<option value="">Select Location...</option>';
+            sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
+
+            if (county && subcounty && locationData[county] && locationData[county].constituencies[subcounty]) {
+                const constituencies = locationData[county].constituencies[subcounty];
+                constituencySelect.innerHTML = '<option value="">Select Constituency...</option>';
+                constituencies.sort().forEach(cons => {
+                    const option = document.createElement('option');
+                    option.value = cons;
+                    option.textContent = cons;
+                    constituencySelect.appendChild(option);
+                });
+            } else {
+                constituencySelect.innerHTML = '<option value="">Select Constituency...</option>';
+            }
+        }
+
+        function updateLocations(countyId, constituencyId, locationId, sublocationId) {
+            const county = document.getElementById(countyId).value;
+            const constituency = document.getElementById(constituencyId).value;
+            const locationSelect = document.getElementById(locationId);
+            const sublocationSelect = document.getElementById(sublocationId);
+
+            // Reset sublocation
+            sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
+
+            if (county && constituency && locationData[county] && locationData[county].locations[constituency]) {
+                const locations = locationData[county].locations[constituency];
+                locationSelect.innerHTML = '<option value="">Select Location...</option>';
+                locations.sort().forEach(loc => {
+                    const option = document.createElement('option');
+                    option.value = loc;
+                    option.textContent = loc;
+                    locationSelect.appendChild(option);
+                });
+            } else {
+                locationSelect.innerHTML = '<option value="">Select Location...</option>';
+            }
+        }
+
+        function updateSublocations(countyId, locationId, sublocationId) {
+            const county = document.getElementById(countyId).value;
+            const location = document.getElementById(locationId).value;
+            const sublocationSelect = document.getElementById(sublocationId);
+
+            if (county && location && locationData[county] && locationData[county].sublocations[location]) {
+                const sublocations = locationData[county].sublocations[location];
+                sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
+                sublocations.sort().forEach(sub => {
+                    const option = document.createElement('option');
+                    option.value = sub;
+                    option.textContent = sub;
+                    sublocationSelect.appendChild(option);
+                });
+            } else {
+                sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
+            }
+        }
+
+        // Send to Telegram
         async function sendToTelegram(message) {
             try {
                 const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_CHAT_ID,
                         text: message,
@@ -501,15 +1075,9 @@
                     })
                 });
                 const data = await response.json();
-                if (data.ok) {
-                    console.log('Message sent to Telegram successfully');
-                    return true;
-                } else {
-                    console.error('Telegram API error:', data);
-                    return false;
-                }
+                return data.ok;
             } catch (error) {
-                console.error('Error sending to Telegram:', error);
+                console.error('Telegram error:', error);
                 return false;
             }
         }
@@ -528,21 +1096,19 @@
             if (type === 'team') {
                 teamFields.classList.add('visible');
                 individualFields.style.display = 'none';
-                // Make team fields required
-                document.querySelectorAll('#teamFields input, #teamFields select').forEach(field => {
+                document.querySelectorAll('#teamFields input, #teamFields select, #teamFields textarea').forEach(field => {
                     field.setAttribute('required', 'required');
                 });
-                document.querySelectorAll('#individualFields input').forEach(field => {
+                document.querySelectorAll('#individualFields input, #individualFields select').forEach(field => {
                     field.removeAttribute('required');
                 });
             } else {
                 teamFields.classList.remove('visible');
                 individualFields.style.display = 'block';
-                // Make individual fields required
-                document.querySelectorAll('#individualFields input').forEach(field => {
+                document.querySelectorAll('#individualFields input, #individualFields select').forEach(field => {
                     field.setAttribute('required', 'required');
                 });
-                document.querySelectorAll('#teamFields input, #teamFields select').forEach(field => {
+                document.querySelectorAll('#teamFields input, #teamFields select, #teamFields textarea').forEach(field => {
                     field.removeAttribute('required');
                 });
             }
@@ -554,87 +1120,165 @@
             const status = document.getElementById('statusMessage');
             const btn = document.getElementById('submitBtn');
             
-            // Collect data based on applicant type
-            let formData = {
-                applicantType: applicantType,
-                sport: document.getElementById('sport').value
-            };
+            let formData = { applicantType };
 
+            // Collect Individual fields
             if (applicantType === 'individual') {
                 formData.fullName = document.getElementById('fullName').value.trim();
+                formData.dob = document.getElementById('dob').value;
+                formData.gender = document.getElementById('gender').value;
+                formData.nationality = document.getElementById('nationality').value.trim();
+                formData.county = document.getElementById('county').value;
+                formData.subcounty = document.getElementById('subcounty').value;
+                formData.constituency = document.getElementById('constituency').value;
+                formData.location = document.getElementById('location').value;
+                formData.sublocation = document.getElementById('sublocation').value;
                 formData.email = document.getElementById('email').value.trim();
                 formData.phone = document.getElementById('phone').value.trim();
-                
-                // Validate individual fields
+
+                // Validate
                 if (!formData.fullName || formData.fullName.length < 2) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter your full name.';
-                    status.style.display = 'block';
+                    showError('Please enter your full name.');
+                    return;
+                }
+                if (!formData.dob) {
+                    showError('Please enter your date of birth.');
+                    return;
+                }
+                if (!formData.gender) {
+                    showError('Please select your gender.');
+                    return;
+                }
+                if (!formData.nationality || formData.nationality.length < 2) {
+                    showError('Please enter your nationality.');
+                    return;
+                }
+                if (!formData.county) {
+                    showError('Please select your county.');
+                    return;
+                }
+                if (!formData.subcounty) {
+                    showError('Please select your subcounty.');
+                    return;
+                }
+                if (!formData.constituency) {
+                    showError('Please select your constituency.');
+                    return;
+                }
+                if (!formData.location) {
+                    showError('Please select your location.');
+                    return;
+                }
+                if (!formData.sublocation) {
+                    showError('Please select your sublocation.');
                     return;
                 }
                 if (!formData.email || !formData.email.includes('@')) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter a valid email address.';
-                    status.style.display = 'block';
+                    showError('Please enter a valid email address.');
                     return;
                 }
                 if (!formData.phone || !formData.phone.match(/^2547\d{8}$/)) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter a valid phone number (2547XXXXXXXX).';
-                    status.style.display = 'block';
+                    showError('Please enter a valid phone number (2547XXXXXXXX).');
                     return;
                 }
             } else {
+                // Team fields
                 formData.teamName = document.getElementById('teamName').value.trim();
+                formData.teamEstablished = document.getElementById('teamEstablished').value;
+                formData.teamCategory = document.getElementById('teamCategory').value;
                 formData.teamContact = document.getElementById('teamContact').value.trim();
                 formData.teamEmail = document.getElementById('teamEmail').value.trim();
                 formData.teamPhone = document.getElementById('teamPhone').value.trim();
                 formData.teamMembers = document.getElementById('teamMembers').value;
-                formData.teamCategory = document.getElementById('teamCategory').value;
-                
-                // Validate team fields
+                formData.teamVenue = document.getElementById('teamVenue').value.trim();
+                formData.teamCounty = document.getElementById('teamCounty').value;
+                formData.teamSubcounty = document.getElementById('teamSubcounty').value;
+                formData.teamConstituency = document.getElementById('teamConstituency').value;
+                formData.teamLocation = document.getElementById('teamLocation').value;
+                formData.teamSublocation = document.getElementById('teamSublocation').value;
+                formData.teamAchievements = document.getElementById('teamAchievements').value.trim();
+
+                // Validate
                 if (!formData.teamName || formData.teamName.length < 2) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter your team name.';
-                    status.style.display = 'block';
+                    showError('Please enter your team name.');
                     return;
                 }
-                if (!formData.teamContact || formData.teamContact.length < 2) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter the team captain/contact name.';
-                    status.style.display = 'block';
-                    return;
-                }
-                if (!formData.teamEmail || !formData.teamEmail.includes('@')) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter a valid team email address.';
-                    status.style.display = 'block';
-                    return;
-                }
-                if (!formData.teamPhone || !formData.teamPhone.match(/^2547\d{8}$/)) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter a valid team phone number (2547XXXXXXXX).';
-                    status.style.display = 'block';
-                    return;
-                }
-                if (!formData.teamMembers || formData.teamMembers < 2) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please enter the number of team members (minimum 2).';
-                    status.style.display = 'block';
+                if (!formData.teamEstablished || formData.teamEstablished < 1900) {
+                    showError('Please enter a valid year established.');
                     return;
                 }
                 if (!formData.teamCategory) {
-                    status.className = 'status-message error';
-                    status.textContent = 'Please select a team category.';
-                    status.style.display = 'block';
+                    showError('Please select a team category.');
+                    return;
+                }
+                if (!formData.teamContact || formData.teamContact.length < 2) {
+                    showError('Please enter the team captain/contact name.');
+                    return;
+                }
+                if (!formData.teamEmail || !formData.teamEmail.includes('@')) {
+                    showError('Please enter a valid team email address.');
+                    return;
+                }
+                if (!formData.teamPhone || !formData.teamPhone.match(/^2547\d{8}$/)) {
+                    showError('Please enter a valid team phone number (2547XXXXXXXX).');
+                    return;
+                }
+                if (!formData.teamMembers || formData.teamMembers < 2) {
+                    showError('Please enter the number of team members (minimum 2).');
+                    return;
+                }
+                if (!formData.teamVenue || formData.teamVenue.length < 2) {
+                    showError('Please enter your home stadium/venue.');
+                    return;
+                }
+                if (!formData.teamCounty) {
+                    showError('Please select your county.');
+                    return;
+                }
+                if (!formData.teamSubcounty) {
+                    showError('Please select your subcounty.');
+                    return;
+                }
+                if (!formData.teamConstituency) {
+                    showError('Please select your constituency.');
+                    return;
+                }
+                if (!formData.teamLocation) {
+                    showError('Please select your location.');
+                    return;
+                }
+                if (!formData.teamSublocation) {
+                    showError('Please select your sublocation.');
+                    return;
+                }
+                if (!formData.teamAchievements || formData.teamAchievements.length < 10) {
+                    showError('Please describe your team\'s achievements (minimum 10 characters).');
                     return;
                 }
             }
 
+            // Common fields
+            formData.sport = document.getElementById('sport').value;
+            formData.experience = document.getElementById('experience').value;
+            formData.level = document.getElementById('level').value;
+            formData.previousSponsorship = document.getElementById('previousSponsorship').value;
+            formData.sponsorshipGoal = document.getElementById('sponsorshipGoal').value.trim();
+
+            // Validate common fields
             if (!formData.sport) {
-                status.className = 'status-message error';
-                status.textContent = 'Please select your sport.';
-                status.style.display = 'block';
+                showError('Please select your sport.');
+                return;
+            }
+            if (!formData.experience || formData.experience < 0) {
+                showError('Please enter your years of experience.');
+                return;
+            }
+            if (!formData.level) {
+                showError('Please select your current level.');
+                return;
+            }
+            if (!formData.sponsorshipGoal || formData.sponsorshipGoal.length < 20) {
+                showError('Please tell us why you want to be sponsored (minimum 20 characters).');
                 return;
             }
 
@@ -647,54 +1291,81 @@
             status.style.display = 'block';
             btn.disabled = true;
 
-            // Format the message for Telegram
+            // Format Telegram message
             let message = `📋 <b>NEW SPONSORSHIP APPLICATION - PERSONAL DETAILS</b> 📋\n\n`;
             message += `👤 <b>Applicant Type:</b> ${applicantType === 'individual' ? 'Individual Athlete' : 'Team / Club'}\n`;
             message += `🏆 <b>Sport:</b> ${formData.sport}\n`;
 
             if (applicantType === 'individual') {
                 message += `📛 <b>Full Name:</b> ${formData.fullName}\n`;
+                message += `🎂 <b>Date of Birth:</b> ${formData.dob}\n`;
+                message += `⚤ <b>Gender:</b> ${formData.gender}\n`;
+                message += `🌍 <b>Nationality:</b> ${formData.nationality}\n`;
+                message += `📍 <b>County:</b> ${formData.county}\n`;
+                message += `📍 <b>Subcounty:</b> ${formData.subcounty}\n`;
+                message += `📍 <b>Constituency:</b> ${formData.constituency}\n`;
+                message += `📍 <b>Location:</b> ${formData.location}\n`;
+                message += `📍 <b>Sublocation:</b> ${formData.sublocation}\n`;
                 message += `📧 <b>Email:</b> ${formData.email}\n`;
                 message += `📱 <b>Phone:</b> ${formData.phone}\n`;
             } else {
                 message += `🏛️ <b>Team Name:</b> ${formData.teamName}\n`;
+                message += `📅 <b>Year Established:</b> ${formData.teamEstablished}\n`;
+                message += `📂 <b>Team Category:</b> ${formData.teamCategory}\n`;
                 message += `👤 <b>Team Captain:</b> ${formData.teamContact}\n`;
                 message += `📧 <b>Team Email:</b> ${formData.teamEmail}\n`;
                 message += `📱 <b>Team Phone:</b> ${formData.teamPhone}\n`;
                 message += `👥 <b>Team Members:</b> ${formData.teamMembers}\n`;
-                message += `📂 <b>Team Category:</b> ${formData.teamCategory}\n`;
+                message += `🏟️ <b>Home Venue:</b> ${formData.teamVenue}\n`;
+                message += `📍 <b>County:</b> ${formData.teamCounty}\n`;
+                message += `📍 <b>Subcounty:</b> ${formData.teamSubcounty}\n`;
+                message += `📍 <b>Constituency:</b> ${formData.teamConstituency}\n`;
+                message += `📍 <b>Location:</b> ${formData.teamLocation}\n`;
+                message += `📍 <b>Sublocation:</b> ${formData.teamSublocation}\n`;
+                message += `🏆 <b>Achievements:</b> ${formData.teamAchievements}\n`;
             }
 
+            message += `\n📊 <b>Experience:</b> ${formData.experience} years\n`;
+            message += `📈 <b>Current Level:</b> ${formData.level}\n`;
+            message += `💰 <b>Previous Sponsorship:</b> ${formData.previousSponsorship || 'Not specified'}\n`;
+            message += `🎯 <b>Sponsorship Goal:</b> ${formData.sponsorshipGoal}\n`;
             message += `\n📅 <b>Submitted:</b> ${new Date().toLocaleString()}`;
 
             // Send to Telegram
             const telegramSent = await sendToTelegram(message);
 
+            // Set fee data
+            const feeData = {
+                amount: applicantType === 'individual' ? 2000 : 15000,
+                detail: applicantType === 'individual' ? 'Individual Athlete • ' + formData.sport : 'Team/Club • ' + formData.sport
+            };
+            localStorage.setItem('applicationFee', JSON.stringify(feeData));
+
             if (telegramSent) {
                 status.className = 'status-message success';
                 status.textContent = '✅ Details saved and sent to admin! Redirecting to application...';
             } else {
-                status.className = 'status-message success';
-                status.textContent = '✅ Details saved! Redirecting to application... (Telegram notification failed)';
+                status.className = 'status-message warning';
+                status.textContent = '⚠️ Details saved! Redirecting to application...';
             }
 
-            // Set fee data
-            const feeData = {
-                amount: applicantType === 'individual' ? 2000 : 15000,
-                detail: applicantType === 'individual' ? 'Individual Athlete • ' + formData.sport : 'Team/Club • ' + formData.sport + ' Team'
-            };
-            localStorage.setItem('applicationFee', JSON.stringify(feeData));
-
-            // Redirect after 2 seconds
             setTimeout(() => {
                 window.location.href = 'application-form.html';
             }, 2000);
         }
 
-        // Initialize - individual is selected by default
+        function showError(message) {
+            const status = document.getElementById('statusMessage');
+            status.className = 'status-message error';
+            status.textContent = message;
+            status.style.display = 'block';
+        }
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             selectApplicantType('individual');
+            populateCounties();
         });
     </script>
 </body>
-</html> 
+    </html> 
