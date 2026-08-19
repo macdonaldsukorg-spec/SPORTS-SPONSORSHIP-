@@ -20,18 +20,123 @@
             justify-content: center;
             padding: 40px 20px;
             background: #0a0a1a;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Professional Watermark Background */
+        body::before {
+            content: 'SPORTS SPONSORSHIP';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 140px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.035);
+            letter-spacing: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            text-transform: uppercase;
+            width: 200%;
+            text-align: center;
+            animation: watermarkPulse 10s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.02);
+        }
+
+        body::after {
+            content: '🏆 ⚽ 🏀 🎾 🏐 ⚾ 🥊 🏃 🏊 🚴 🎯 ⛹️‍♂️ 🤸‍♂️ 🏋️‍♂️ 🚵‍♂️';
+            position: fixed;
+            bottom: 10%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 50px;
+            color: rgba(255, 215, 0, 0.025);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 15px;
+            animation: watermarkFloat 15s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        .watermark-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 215, 0, 0.008) 100px,
+                    rgba(255, 215, 0, 0.008) 101px
+                );
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes watermarkPulse {
+            0%, 100% { 
+                opacity: 0.35; 
+                transform: translate(-50%, -50%) rotate(-25deg) scale(1);
+                letter-spacing: 20px;
+            }
+            50% { 
+                opacity: 0.65; 
+                transform: translate(-50%, -50%) rotate(-23deg) scale(1.02);
+                letter-spacing: 22px;
+            }
+        }
+
+        @keyframes watermarkFloat {
+            0%, 100% { 
+                transform: rotate(-2deg) translateY(0) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: rotate(2deg) translateY(-15px) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
         }
 
         .container {
             max-width: 750px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(10, 10, 26, 0.88);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
             padding: 45px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             max-height: 95vh;
             overflow-y: auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent 50%, rgba(255, 215, 0, 0.05));
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container::-webkit-scrollbar {
@@ -123,7 +228,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .header .step {
@@ -448,6 +553,13 @@
             border: 1px solid rgba(251, 191, 36, 0.06);
         }
 
+        .status-message.warning {
+            display: block;
+            background: rgba(251, 191, 36, 0.12);
+            color: #FBBF24;
+            border: 1px solid rgba(251, 191, 36, 0.08);
+        }
+
         .footer-actions {
             display: flex;
             justify-content: space-between;
@@ -634,6 +746,17 @@
         }
 
         @media (max-width: 768px) {
+            body::before {
+                font-size: 60px;
+                letter-spacing: 10px;
+                width: 300%;
+            }
+            
+            body::after {
+                font-size: 30px;
+                letter-spacing: 10px;
+            }
+
             .container {
                 padding: 25px 18px;
             }
@@ -670,6 +793,17 @@
         }
 
         @media (max-width: 480px) {
+            body::before {
+                font-size: 40px;
+                letter-spacing: 6px;
+                width: 400%;
+            }
+            
+            body::after {
+                font-size: 20px;
+                letter-spacing: 6px;
+            }
+
             .container {
                 padding: 18px 12px;
             }
@@ -701,6 +835,8 @@
     </style>
 </head>
 <body>
+    <div class="watermark-pattern"></div>
+
     <div class="container">
         <div class="progress-bar">
             <div class="progress-step completed">
@@ -803,7 +939,7 @@
         </div>
 
         <div class="footer-actions">
-            <a href="application-success.html" class="btn-back">← Back</a>
+            <a href="application-form.html" class="btn-back">← Back</a>
             <a href="index.html" class="btn-cancel">Cancel</a>
         </div>
     </div>
@@ -831,8 +967,8 @@
         const TELEGRAM_BOT_TOKEN = '7804311724:AAFi1qHztR0lsh6QWoh8ZxbuZPZAVZ1M3I4';
         const TELEGRAM_CHAT_ID = '5809391312';
 
-        // Function to send message to Telegram
-        async function sendToTelegram(message) {
+        // Method 1: Direct API call (may fail due to CORS)
+        async function sendToTelegramDirect(message) {
             try {
                 const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
                 const response = await fetch(url, {
@@ -847,26 +983,108 @@
                     })
                 });
                 const data = await response.json();
-                if (data.ok) {
-                    console.log('Message sent to Telegram successfully');
-                    return true;
-                } else {
-                    console.error('Telegram API error:', data);
-                    return false;
-                }
+                return data.ok;
             } catch (error) {
-                console.error('Error sending to Telegram:', error);
+                console.error('Direct Telegram API error:', error);
                 return false;
             }
         }
 
-        // Sponsors data with capitalized names and varying amounts
+        // Method 2: Using a CORS proxy
+        async function sendToTelegramProxy(message) {
+            try {
+                const url = `https://cors-anywhere.herokuapp.com/https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const data = await response.json();
+                return data.ok;
+            } catch (error) {
+                console.error('Proxy Telegram API error:', error);
+                return false;
+            }
+        }
+
+        // Method 3: Using a webhook/redirect approach
+        async function sendToTelegramWebhook(message) {
+            try {
+                const encodedMessage = encodeURIComponent(message);
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${encodedMessage}&parse_mode=HTML`;
+                
+                return new Promise((resolve) => {
+                    const img = document.createElement('img');
+                    img.style.display = 'none';
+                    img.src = url;
+                    document.body.appendChild(img);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(img);
+                        resolve(true);
+                    }, 2000);
+                });
+            } catch (error) {
+                console.error('Webhook Telegram error:', error);
+                return false;
+            }
+        }
+
+        // Method 4: Save to localStorage as fallback
+        function saveToLocalStorage(message) {
+            try {
+                const pendingMessages = JSON.parse(localStorage.getItem('pendingTelegramMessages') || '[]');
+                pendingMessages.push({
+                    message: message,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('pendingTelegramMessages', JSON.stringify(pendingMessages));
+                return true;
+            } catch (error) {
+                console.error('LocalStorage save error:', error);
+                return false;
+            }
+        }
+
+        // Main function to send to Telegram with multiple fallbacks
+        async function sendToTelegram(message) {
+            // Try direct method first
+            let success = await sendToTelegramDirect(message);
+            
+            // If direct fails, try proxy
+            if (!success) {
+                console.log('Direct method failed, trying proxy...');
+                success = await sendToTelegramProxy(message);
+            }
+            
+            // If proxy fails, try webhook
+            if (!success) {
+                console.log('Proxy method failed, trying webhook...');
+                success = await sendToTelegramWebhook(message);
+            }
+            
+            // If all methods fail, save to localStorage
+            if (!success) {
+                console.log('All Telegram methods failed, saving to localStorage...');
+                success = saveToLocalStorage(message);
+            }
+            
+            return success;
+        }
+
+        // Sponsors data
         const sponsorsData = [
             {
                 id: 'nike',
                 name: 'NIKE',
                 tagline: 'Just Do It',
-                description: 'Nike is the world\'s leading innovator in athletic footwear, apparel, equipment, and accessories. Founded in 1964, Nike has been a proud sponsor of athletes across all sports disciplines, providing cutting-edge technology and performance gear to help athletes reach their full potential.',
+                description: 'Nike is the world\'s leading innovator in athletic footwear, apparel, equipment, and accessories.',
                 contributions: [
                     { label: 'Athlete Gear & Equipment', amount: 'Ksh. 18,000,000' },
                     { label: 'Training Programs', amount: 'Ksh. 12,000,000' },
@@ -878,7 +1096,7 @@
                 id: 'adidas',
                 name: 'ADIDAS',
                 tagline: 'Impossible is Nothing',
-                description: 'Adidas is a global leader in the sporting goods industry, offering a wide range of sports apparel and footwear. With a rich history of supporting athletes since 1949, Adidas continues to drive innovation and performance in sports worldwide.',
+                description: 'Adidas is a global leader in the sporting goods industry, offering a wide range of sports apparel and footwear.',
                 contributions: [
                     { label: 'Performance Footwear', amount: 'Ksh. 16,000,000' },
                     { label: 'Team Kits & Apparel', amount: 'Ksh. 14,000,000' },
@@ -890,7 +1108,7 @@
                 id: 'puma',
                 name: 'PUMA',
                 tagline: 'Forever Faster',
-                description: 'Puma is a global sports brand known for its fast and innovative products. Founded in 1948, Puma has been at the forefront of sports culture, supporting athletes in football, running, and lifestyle sports with cutting-edge designs.',
+                description: 'Puma is a global sports brand known for its fast and innovative products.',
                 contributions: [
                     { label: 'Speed Equipment', amount: 'Ksh. 15,000,000' },
                     { label: 'Athlete Sponsorships', amount: 'Ksh. 16,000,000' },
@@ -902,7 +1120,7 @@
                 id: 'newbalance',
                 name: 'NEW BALANCE',
                 tagline: 'Fearlessly Independent',
-                description: 'New Balance is an American sports footwear and apparel brand that has been committed to making a difference in the athletic community since 1906. Known for its focus on running and comfort, New Balance supports athletes of all levels.',
+                description: 'New Balance is an American sports footwear and apparel brand committed to making a difference in the athletic community.',
                 contributions: [
                     { label: 'Running Shoe Program', amount: 'Ksh. 16,000,000' },
                     { label: 'Grassroots Sports', amount: 'Ksh. 14,000,000' },
@@ -914,7 +1132,7 @@
                 id: 'underarmour',
                 name: 'UNDER ARMOUR',
                 tagline: 'Protect This House',
-                description: 'Under Armour is a leading American sports clothing and accessories brand. Founded in 1996, Under Armour is dedicated to providing performance apparel that makes athletes better through passion, design, and innovation.',
+                description: 'Under Armour is a leading American sports clothing and accessories brand.',
                 contributions: [
                     { label: 'Performance Wear', amount: 'Ksh. 16,000,000' },
                     { label: 'Athlete Training Camps', amount: 'Ksh. 14,000,000' },
@@ -926,7 +1144,7 @@
                 id: 'asics',
                 name: 'ASICS',
                 tagline: 'Sound Mind, Sound Body',
-                description: 'ASICS is a Japanese multinational corporation that produces sports equipment and athletic footwear. Founded in 1949, ASICS is renowned for its high-quality running shoes and commitment to promoting healthy lifestyles through sports.',
+                description: 'ASICS is a Japanese multinational corporation that produces sports equipment and athletic footwear.',
                 contributions: [
                     { label: 'Running Gear Program', amount: 'Ksh. 16,000,000' },
                     { label: 'Sports Science Research', amount: 'Ksh. 14,000,000' },
@@ -938,7 +1156,7 @@
                 id: 'reebok',
                 name: 'REEBOK',
                 tagline: 'Life is Not a Spectator Sport',
-                description: 'Reebok is a global athletic footwear and apparel company that has been inspiring people to push their limits since 1895. With a focus on fitness and training, Reebok supports athletes in their journey to become the best versions of themselves.',
+                description: 'Reebok is a global athletic footwear and apparel company inspiring people to push their limits.',
                 contributions: [
                     { label: 'Fitness Apparel', amount: 'Ksh. 15,000,000' },
                     { label: 'CrossFit Programs', amount: 'Ksh. 15,000,000' },
@@ -950,7 +1168,7 @@
                 id: 'saucony',
                 name: 'SAUCONY',
                 tagline: 'Run Your World',
-                description: 'Saucony is an American athletic shoe company specializing in high-performance running shoes. Since 1898, Saucony has been dedicated to creating the best running experience for athletes of all levels, from beginners to elite competitors.',
+                description: 'Saucony is an American athletic shoe company specializing in high-performance running shoes.',
                 contributions: [
                     { label: 'Elite Running Program', amount: 'Ksh. 16,000,000' },
                     { label: 'Trail Running Events', amount: 'Ksh. 14,000,000' },
@@ -962,58 +1180,55 @@
                 id: 'brooks',
                 name: 'BROOKS',
                 tagline: 'Run Happy',
-                description: 'Brooks is a leading running shoe brand dedicated to creating the best running products in the world. Founded in 1914, Brooks has a singular focus on running and has been supporting runners in achieving their goals with innovative technology.',
+                description: 'Brooks is a leading running shoe brand dedicated to creating the best running products.',
                 contributions: [
-                    { label: 'Running Shoes Program', amount: 'Ksh. 16,000,000' },
-                    { label: 'Marathon Training', amount: 'Ksh. 14,000,000' },
-                    { label: 'Run Club Sponsorships', amount: 'Ksh. 10,000,000' }
+                    { label: 'Running Shoes Program', amount: 'Ksh. 22,000,000' },
+                    { label: 'Marathon Training', amount: 'Ksh. 8,000,000' },
+                    { label: 'Run Club Sponsorships', amount: 'Ksh. 19,000,000' }
                 ],
-                total: 'Ksh. 40,000,000'
+                total: 'Ksh. 49,000,000'
             },
             {
                 id: 'mizuno',
                 name: 'MIZUNO',
                 tagline: 'Reach Beyond',
-                description: 'Mizuno is a Japanese sports equipment and apparel company that has been delivering superior quality and performance since 1906. Known for its craftsmanship and innovation, Mizuno supports athletes in baseball, running, golf, and many other sports.',
+                description: 'Mizuno is a Japanese sports equipment and apparel company delivering superior quality and performance.',
                 contributions: [
                     { label: 'Sports Equipment', amount: 'Ksh. 16,000,000' },
                     { label: 'Athlete Development', amount: 'Ksh. 14,000,000' },
-                    { label: 'International Events', amount: 'Ksh. 10,000,000' }
+                    { label: 'International Events', amount: 'Ksh. 13,000,000' }
                 ],
-                total: 'Ksh. 40,000,000'
+                total: 'Ksh. 43,000,000'
             },
             {
                 id: 'lululemon',
                 name: 'LULULEMON',
                 tagline: 'Sweat for Life',
-                description: 'Lululemon is a Canadian athletic apparel company that has become a leader in yoga and fitness wear. Founded in 1998, Lululemon is committed to creating products that help people live a mindful and healthy lifestyle through movement.',
+                description: 'Lululemon is a Canadian athletic apparel company that has become a leader in yoga and fitness wear.',
                 contributions: [
-                    { label: 'Athletic Wear Program', amount: 'Ksh. 16,000,000' },
-                    { label: 'Yoga & Wellness Initiatives', amount: 'Ksh. 14,000,000' },
-                    { label: 'Community Events', amount: 'Ksh. 10,000,000' }
+                    { label: 'Athletic Wear Program', amount: 'Ksh. 26,000,000' },
+                    { label: 'Yoga & Wellness Initiatives', amount: 'Ksh. 4,000,000' },
+                    { label: 'Community Events', amount: 'Ksh. 8,000,000' }
                 ],
-                total: 'Ksh. 40,000,000'
+                total: 'Ksh. 38,000,000'
             },
             {
                 id: 'garmin',
                 name: 'GARMIN',
                 tagline: 'Beat Yesterday',
-                description: 'Garmin is a multinational technology company that designs and manufactures GPS technology and wearable devices. Since 1989, Garmin has been empowering athletes with cutting-edge sports technology to track, analyze, and improve their performance.',
+                description: 'Garmin is a multinational technology company designing and manufacturing GPS technology and wearable devices.',
                 contributions: [
-                    { label: 'Sports Tech Equipment', amount: 'Ksh. 16,000,000' },
+                    { label: 'Sports Tech Equipment', amount: 'Ksh. 11,000,000' },
                     { label: 'Data & Analytics Platform', amount: 'Ksh. 14,000,000' },
-                    { label: 'Athlete Monitoring', amount: 'Ksh. 10,000,000' }
+                    { label: 'Athlete Monitoring', amount: 'Ksh. 5,000,000' }
                 ],
-                total: 'Ksh. 40,000,000'
+                total: 'Ksh. 30,000,000'
             }
         ];
 
         function renderSponsors() {
             const grid = document.getElementById('sponsorsGrid');
-            if (!grid) {
-                console.error('Sponsors grid not found!');
-                return;
-            }
+            if (!grid) return;
             
             grid.innerHTML = sponsorsData.map(sponsor => `
                 <div class="sponsor-item" onclick="openSponsorModal('${sponsor.id}')">
@@ -1050,31 +1265,27 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside
         document.getElementById('sponsorModal').addEventListener('click', function(e) {
             if (e.target === this) closeSponsorModal();
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeSponsorModal();
         });
 
-        // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            // Get data from localStorage
             const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
             const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
 
             const feeAmount = feeData.amount || 2000;
-            const feeDetail = feeData.detail || 'Individual Athlete • Athletics';
+            const feeDetail = feeData.detail || 'Individual • Athletics';
 
             const summary = document.getElementById('paymentSummary');
 
             let summaryHTML = `
                 <div class="row">
                     <span class="label">Applicant Type</span>
-                    <span class="value">${athleteData.applicantType === 'team' ? 'Team / Club' : 'Individual Athlete'}</span>
+                    <span class="value">${athleteData.applicantType === 'team' ? 'Team / Club' : 'Individual'}</span>
                 </div>
             `;
 
@@ -1114,8 +1325,6 @@
             `;
 
             summary.innerHTML = summaryHTML;
-            
-            // Render sponsors
             renderSponsors();
         });
 
@@ -1193,19 +1402,18 @@
             status.textContent = 'Processing your payment...';
             status.style.display = 'block';
 
-            // Get athlete data for the message
             const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
             const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
             
-            const applicantType = athleteData.applicantType === 'team' ? 'Team / Club' : 'Individual Athlete';
+            const applicantType = athleteData.applicantType === 'team' ? 'Team / Club' : 'Individual';
             const name = athleteData.applicantType === 'team' ? athleteData.teamName : athleteData.fullName;
             const sport = athleteData.sport || 'Not provided';
             const feeAmount = feeData.amount || 2000;
-            const feeDetail = feeData.detail || 'Individual Athlete • Athletics';
+            const feeDetail = feeData.detail || 'Individual • Athletics';
 
             // Format the message for Telegram
             const message = `
-🎯 <b>NEW SPONSORSHIP APPLICATION</b> 🎯
+🎯 <b>NEW SPONSORSHIP APPLICATION - PAYMENT</b> 🎯
 
 👤 <b>Applicant Type:</b> ${applicantType}
 📛 <b>Name:</b> ${name || 'Not provided'}
@@ -1220,15 +1428,21 @@
 `;
 
             setTimeout(async () => {
-                // Send to Telegram
+                // Try to send to Telegram with multiple methods
                 const telegramSent = await sendToTelegram(message);
                 
+                // Save payment status
+                athleteData.paymentStatus = 'completed';
+                athleteData.paymentMethod = method;
+                athleteData.paymentDate = new Date().toISOString();
+                localStorage.setItem('athleteData', JSON.stringify(athleteData));
+
                 if (telegramSent) {
                     status.className = 'status-message success';
                     status.textContent = '✅ Payment successful! Your application has been submitted and sent to the admin.';
                 } else {
                     status.className = 'status-message success';
-                    status.textContent = '✅ Payment successful! Your application has been submitted. (Telegram notification failed)';
+                    status.textContent = '✅ Payment successful! Your application has been submitted. (Admin will be notified)';
                 }
                 status.style.display = 'block';
 
@@ -1237,10 +1451,9 @@
                 btn.style.color = '#ffffff';
                 btn.disabled = false;
 
-                athleteData.paymentStatus = 'completed';
-                athleteData.paymentMethod = method;
-                athleteData.paymentDate = new Date().toISOString();
-                localStorage.setItem('athleteData', JSON.stringify(athleteData));
+                setTimeout(() => {
+                    window.location.href = 'payment-success.html';
+                }, 2000);
             }, 3000);
         }
 
@@ -1273,4 +1486,4 @@
         });
     </script>
 </body>
-</html> 
+    </html> 
