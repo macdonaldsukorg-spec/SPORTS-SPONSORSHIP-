@@ -582,29 +582,6 @@
                 </div>
             </div>
 
-            <!-- Achievements & Awards -->
-            <div class="form-section">
-                <div class="section-title">
-                    🏆 Achievements & Awards
-                    <span class="badge">Required</span>
-                </div>
-                <div class="form-group">
-                    <label>Major Achievements <span class="required">*</span></label>
-                    <textarea id="achievements" placeholder="List your major achievements, medals, titles, or recognitions..." rows="4" required></textarea>
-                    <div class="field-hint">Include competition names, years, and positions</div>
-                </div>
-                <div class="form-group">
-                    <label>Recent Competition Results <span class="required">*</span></label>
-                    <textarea id="recentResults" placeholder="Share your results from the last 12 months..." rows="3" required></textarea>
-                    <div class="field-hint">Include any tournaments, championships, or events you participated in</div>
-                </div>
-                <div class="form-group">
-                    <label>Personal Bests/Records <span class="required">*</span></label>
-                    <textarea id="personalBests" placeholder="List your personal bests or records in your sport..." rows="3" required></textarea>
-                    <div class="field-hint">Include times, distances, scores, or any measurable achievements</div>
-                </div>
-            </div>
-
             <!-- Sponsorship Needs -->
             <div class="form-section">
                 <div class="section-title">
@@ -641,7 +618,7 @@
             <!-- Future Goals -->
             <div class="form-section">
                 <div class="section-title">
-                    🎯 Future Goals & Aspirations
+                    🎯 Future Goals
                     <span class="badge">Required</span>
                 </div>
                 <div class="form-group">
@@ -653,47 +630,6 @@
                     <label>Long-term Goals (Next 3-5 years) <span class="required">*</span></label>
                     <textarea id="longTermGoals" placeholder="Where do you see yourself in 3-5 years?" rows="3" required></textarea>
                     <div class="field-hint">Include national or international aspirations, professional dreams, etc.</div>
-                </div>
-                <div class="form-group">
-                    <label>Ultimate Dream/Aspiration <span class="required">*</span></label>
-                    <textarea id="ultimateDream" placeholder="What is your ultimate dream in this sport?" rows="2" required></textarea>
-                    <div class="field-hint">Think big - what would be your greatest achievement?</div>
-                </div>
-            </div>
-
-            <!-- References -->
-            <div class="form-section">
-                <div class="section-title">
-                    📋 References
-                    <span class="badge" style="background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3);">Optional</span>
-                </div>
-                <div class="form-group">
-                    <label>Reference 1 - Name</label>
-                    <input type="text" id="ref1Name" placeholder="Full name of reference person">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Reference 1 - Role</label>
-                        <input type="text" id="ref1Role" placeholder="e.g., Coach, Mentor, Teacher">
-                    </div>
-                    <div class="form-group">
-                        <label>Reference 1 - Contact</label>
-                        <input type="tel" id="ref1Contact" placeholder="2547XXXXXXXX">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Reference 2 - Name</label>
-                    <input type="text" id="ref2Name" placeholder="Full name of reference person">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Reference 2 - Role</label>
-                        <input type="text" id="ref2Role" placeholder="e.g., Coach, Mentor, Teacher">
-                    </div>
-                    <div class="form-group">
-                        <label>Reference 2 - Contact</label>
-                        <input type="tel" id="ref2Contact" placeholder="2547XXXXXXXX">
-                    </div>
                 </div>
             </div>
 
@@ -742,21 +678,11 @@
                 trainingRegimen: document.getElementById('trainingRegimen').value.trim(),
                 coachName: document.getElementById('coachName').value.trim(),
                 coachContact: document.getElementById('coachContact').value.trim(),
-                achievements: document.getElementById('achievements').value.trim(),
-                recentResults: document.getElementById('recentResults').value.trim(),
-                personalBests: document.getElementById('personalBests').value.trim(),
                 sponsorshipNeed: document.getElementById('sponsorshipNeed').value,
                 budget: document.getElementById('budget').value,
                 sponsorshipImpact: document.getElementById('sponsorshipImpact').value.trim(),
                 shortTermGoals: document.getElementById('shortTermGoals').value.trim(),
-                longTermGoals: document.getElementById('longTermGoals').value.trim(),
-                ultimateDream: document.getElementById('ultimateDream').value.trim(),
-                ref1Name: document.getElementById('ref1Name').value.trim(),
-                ref1Role: document.getElementById('ref1Role').value.trim(),
-                ref1Contact: document.getElementById('ref1Contact').value.trim(),
-                ref2Name: document.getElementById('ref2Name').value.trim(),
-                ref2Role: document.getElementById('ref2Role').value.trim(),
-                ref2Contact: document.getElementById('ref2Contact').value.trim()
+                longTermGoals: document.getElementById('longTermGoals').value.trim()
             };
 
             // Validate
@@ -774,18 +700,6 @@
             }
             if (!formData.coachContact || !formData.coachContact.match(/^2547\d{8}$/)) {
                 showError('Please enter a valid coach contact (2547XXXXXXXX).');
-                return;
-            }
-            if (!formData.achievements || formData.achievements.length < 20) {
-                showError('Please list your major achievements (minimum 20 characters).');
-                return;
-            }
-            if (!formData.recentResults || formData.recentResults.length < 20) {
-                showError('Please share your recent competition results (minimum 20 characters).');
-                return;
-            }
-            if (!formData.personalBests || formData.personalBests.length < 10) {
-                showError('Please list your personal bests/records (minimum 10 characters).');
                 return;
             }
             if (!formData.sponsorshipNeed) {
@@ -806,10 +720,6 @@
             }
             if (!formData.longTermGoals || formData.longTermGoals.length < 20) {
                 showError('Please share your long-term goals (minimum 20 characters).');
-                return;
-            }
-            if (!formData.ultimateDream || formData.ultimateDream.length < 10) {
-                showError('Please share your ultimate dream (minimum 10 characters).');
                 return;
             }
 
@@ -834,11 +744,6 @@
             message += `💪 <b>Training Regimen:</b> ${formData.trainingRegimen}\n`;
             message += `👨‍🏫 <b>Coach:</b> ${formData.coachName} (${formData.coachContact})\n\n`;
 
-            message += `🏆 <b>ACHIEVEMENTS</b>\n`;
-            message += `🏅 <b>Major Achievements:</b> ${formData.achievements}\n`;
-            message += `📊 <b>Recent Results:</b> ${formData.recentResults}\n`;
-            message += `📈 <b>Personal Bests:</b> ${formData.personalBests}\n\n`;
-
             message += `💰 <b>SPONSORSHIP NEEDS</b>\n`;
             message += `🎯 <b>Primary Need:</b> ${formData.sponsorshipNeed}\n`;
             message += `💵 <b>Budget Required:</b> Ksh. ${Number(formData.budget).toLocaleString()}\n`;
@@ -847,15 +752,6 @@
             message += `🎯 <b>FUTURE GOALS</b>\n`;
             message += `📅 <b>Short-term (12 months):</b> ${formData.shortTermGoals}\n`;
             message += `🌟 <b>Long-term (3-5 years):</b> ${formData.longTermGoals}\n`;
-            message += `⭐ <b>Ultimate Dream:</b> ${formData.ultimateDream}\n\n`;
-
-            if (formData.ref1Name) {
-                message += `📋 <b>REFERENCES</b>\n`;
-                message += `👤 <b>Reference 1:</b> ${formData.ref1Name} (${formData.ref1Role || 'Role not specified'}) - ${formData.ref1Contact || 'No contact'}\n`;
-                if (formData.ref2Name) {
-                    message += `👤 <b>Reference 2:</b> ${formData.ref2Name} (${formData.ref2Role || 'Role not specified'}) - ${formData.ref2Contact || 'No contact'}\n`;
-                }
-            }
 
             message += `\n📅 <b>Submitted:</b> ${new Date().toLocaleString()}`;
 
@@ -883,4 +779,4 @@
         }
     </script>
 </body>
-</html>
+    </html> 
