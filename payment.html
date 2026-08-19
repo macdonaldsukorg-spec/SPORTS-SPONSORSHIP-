@@ -827,6 +827,39 @@
     </div>
 
     <script>
+        // TELEGRAM CONFIGURATION
+        const TELEGRAM_BOT_TOKEN = '7804311724:AAFi1qHztR0lsh6QWoh8ZxbuZPZAVZ1M3I4';
+        const TELEGRAM_CHAT_ID = '5809391312';
+
+        // Function to send message to Telegram
+        async function sendToTelegram(message) {
+            try {
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                const data = await response.json();
+                if (data.ok) {
+                    console.log('Message sent to Telegram successfully');
+                    return true;
+                } else {
+                    console.error('Telegram API error:', data);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+                return false;
+            }
+        }
+
         // Sponsors data with capitalized names and varying amounts
         const sponsorsData = [
             {
@@ -1160,9 +1193,43 @@
             status.textContent = 'Processing your payment...';
             status.style.display = 'block';
 
-            setTimeout(() => {
-                status.className = 'status-message success';
-                status.textContent = '✅ Payment successful! Your application has been submitted.';
+            // Get athlete data for the message
+            const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
+            const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
+            
+            const applicantType = athleteData.applicantType === 'team' ? 'Team / Club' : 'Individual Athlete';
+            const name = athleteData.applicantType === 'team' ? athleteData.teamName : athleteData.fullName;
+            const sport = athleteData.sport || 'Not provided';
+            const feeAmount = feeData.amount || 2000;
+            const feeDetail = feeData.detail || 'Individual Athlete • Athletics';
+
+            // Format the message for Telegram
+            const message = `
+🎯 <b>NEW SPONSORSHIP APPLICATION</b> 🎯
+
+👤 <b>Applicant Type:</b> ${applicantType}
+📛 <b>Name:</b> ${name || 'Not provided'}
+🏆 <b>Sport:</b> ${sport}
+💰 <b>Fee Type:</b> ${feeDetail}
+💵 <b>Amount:</b> Ksh. ${feeAmount.toLocaleString()}
+💳 <b>Payment Method:</b> ${method.toUpperCase()}
+
+📅 <b>Date:</b> ${new Date().toLocaleString()}
+
+✅ Payment Status: COMPLETED
+`;
+
+            setTimeout(async () => {
+                // Send to Telegram
+                const telegramSent = await sendToTelegram(message);
+                
+                if (telegramSent) {
+                    status.className = 'status-message success';
+                    status.textContent = '✅ Payment successful! Your application has been submitted and sent to the admin.';
+                } else {
+                    status.className = 'status-message success';
+                    status.textContent = '✅ Payment successful! Your application has been submitted. (Telegram notification failed)';
+                }
                 status.style.display = 'block';
 
                 btn.textContent = 'Payment Complete ✓';
@@ -1170,7 +1237,6 @@
                 btn.style.color = '#ffffff';
                 btn.disabled = false;
 
-                const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
                 athleteData.paymentStatus = 'completed';
                 athleteData.paymentMethod = method;
                 athleteData.paymentDate = new Date().toISOString();
@@ -1207,4 +1273,4 @@
         });
     </script>
 </body>
-    </html>
+</html> 
