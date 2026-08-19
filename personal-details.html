@@ -20,18 +20,125 @@
             justify-content: center;
             padding: 40px 20px;
             background: #0a0a1a;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Professional Watermark Background */
+        body::before {
+            content: 'SPORTS SPONSORSHIP';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 140px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.035);
+            letter-spacing: 20px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            text-transform: uppercase;
+            width: 200%;
+            text-align: center;
+            animation: watermarkPulse 10s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(255, 215, 0, 0.02);
+        }
+
+        /* Secondary watermark with sports icons */
+        body::after {
+            content: '🏆 ⚽ 🏀 🎾 🏐 ⚾ 🥊 🏃 🏊 🚴 🎯 ⛹️‍♂️ 🤸‍♂️ 🏋️‍♂️ 🚵‍♂️';
+            position: fixed;
+            bottom: 10%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 50px;
+            color: rgba(255, 215, 0, 0.025);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 15px;
+            animation: watermarkFloat 15s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        /* Third watermark layer - diagonal pattern */
+        .watermark-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(255, 215, 0, 0.008) 100px,
+                    rgba(255, 215, 0, 0.008) 101px
+                );
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes watermarkPulse {
+            0%, 100% { 
+                opacity: 0.35; 
+                transform: translate(-50%, -50%) rotate(-25deg) scale(1);
+                letter-spacing: 20px;
+            }
+            50% { 
+                opacity: 0.65; 
+                transform: translate(-50%, -50%) rotate(-23deg) scale(1.02);
+                letter-spacing: 22px;
+            }
+        }
+
+        @keyframes watermarkFloat {
+            0%, 100% { 
+                transform: rotate(-2deg) translateY(0) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: rotate(2deg) translateY(-15px) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
         }
 
         .container {
             max-width: 750px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(10, 10, 26, 0.88);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
             padding: 45px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             max-height: 95vh;
             overflow-y: auto;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent 50%, rgba(255, 215, 0, 0.05));
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container::-webkit-scrollbar {
@@ -124,6 +231,7 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
+            position: relative;
         }
 
         .header .step {
@@ -158,6 +266,18 @@
             border-radius: 16px;
             padding: 22px 25px;
             margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
         }
 
         .form-section .section-title {
@@ -393,17 +513,18 @@
             color: #ffffff;
         }
 
-        .location-group {
-            border-left: 2px solid rgba(251, 191, 36, 0.15);
-            padding-left: 16px;
-            margin-left: 4px;
-        }
-
-        .location-group .form-group:last-child {
-            margin-bottom: 0;
-        }
-
         @media (max-width: 768px) {
+            body::before {
+                font-size: 60px;
+                letter-spacing: 10px;
+                width: 300%;
+            }
+            
+            body::after {
+                font-size: 30px;
+                letter-spacing: 10px;
+            }
+
             .container {
                 padding: 25px 18px;
             }
@@ -428,14 +549,20 @@
             .form-section {
                 padding: 18px 16px;
             }
-
-            .location-group {
-                padding-left: 8px;
-                margin-left: 2px;
-            }
         }
 
         @media (max-width: 480px) {
+            body::before {
+                font-size: 40px;
+                letter-spacing: 6px;
+                width: 400%;
+            }
+            
+            body::after {
+                font-size: 20px;
+                letter-spacing: 6px;
+            }
+
             .container {
                 padding: 18px 12px;
             }
@@ -451,6 +578,9 @@
     </style>
 </head>
 <body>
+    <!-- Watermark Pattern Layer -->
+    <div class="watermark-pattern"></div>
+
     <div class="container">
         <div class="progress-bar">
             <div class="progress-step completed">
@@ -490,7 +620,7 @@
                     <div class="applicant-type-toggle">
                         <div class="toggle-option selected" data-type="individual" onclick="selectApplicantType('individual')">
                             <span class="toggle-icon">🏃</span>
-                            Individual Athlete
+                            Individual
                         </div>
                         <div class="toggle-option" data-type="team" onclick="selectApplicantType('team')">
                             <span class="toggle-icon">👥</span>
@@ -530,51 +660,69 @@
                         <input type="text" id="nationality" placeholder="e.g., Kenyan" required>
                     </div>
                 </div>
-                
-                <!-- Location Hierarchy -->
-                <div class="location-group">
+                <div class="form-row">
                     <div class="form-group">
                         <label>County <span class="required">*</span></label>
-                        <select id="county" required onchange="updateSubcounties('county', 'subcounty', 'constituency', 'location', 'sublocation')">
+                        <select id="county" required>
                             <option value="">Select County...</option>
+                            <option value="baringo">Baringo</option>
+                            <option value="bomet">Bomet</option>
+                            <option value="bungoma">Bungoma</option>
+                            <option value="busia">Busia</option>
+                            <option value="elgeyo-marakwet">Elgeyo-Marakwet</option>
+                            <option value="embu">Embu</option>
+                            <option value="garissa">Garissa</option>
+                            <option value="homa-bay">Homa Bay</option>
+                            <option value="isiolo">Isiolo</option>
+                            <option value="kajiado">Kajiado</option>
+                            <option value="kakamega">Kakamega</option>
+                            <option value="kericho">Kericho</option>
+                            <option value="kiambu">Kiambu</option>
+                            <option value="kilifi">Kilifi</option>
+                            <option value="kirinyaga">Kirinyaga</option>
+                            <option value="kisii">Kisii</option>
+                            <option value="kisumu">Kisumu</option>
+                            <option value="kitui">Kitui</option>
+                            <option value="kwale">Kwale</option>
+                            <option value="laikipia">Laikipia</option>
+                            <option value="lamu">Lamu</option>
+                            <option value="machakos">Machakos</option>
+                            <option value="makueni">Makueni</option>
+                            <option value="mandera">Mandera</option>
+                            <option value="marsabit">Marsabit</option>
+                            <option value="meru">Meru</option>
+                            <option value="migori">Migori</option>
+                            <option value="mombasa">Mombasa</option>
+                            <option value="muranga">Murang'a</option>
+                            <option value="nairobi">Nairobi</option>
+                            <option value="nakuru">Nakuru</option>
+                            <option value="nandi">Nandi</option>
+                            <option value="narok">Narok</option>
+                            <option value="nyamira">Nyamira</option>
+                            <option value="nyandarua">Nyandarua</option>
+                            <option value="nyeri">Nyeri</option>
+                            <option value="samburu">Samburu</option>
+                            <option value="siaya">Siaya</option>
+                            <option value="taita-taveta">Taita-Taveta</option>
+                            <option value="tana-river">Tana River</option>
+                            <option value="tharaka-nithi">Tharaka-Nithi</option>
+                            <option value="trans-nzoia">Trans-Nzoia</option>
+                            <option value="turkana">Turkana</option>
+                            <option value="uasin-gishu">Uasin Gishu</option>
+                            <option value="vihiga">Vihiga</option>
+                            <option value="wajir">Wajir</option>
+                            <option value="west-pokot">West Pokot</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Subcounty <span class="required">*</span></label>
-                        <select id="subcounty" required onchange="updateConstituencies('county', 'subcounty', 'constituency', 'location', 'sublocation')">
-                            <option value="">Select Subcounty...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Constituency <span class="required">*</span></label>
-                        <select id="constituency" required onchange="updateLocations('county', 'constituency', 'location', 'sublocation')">
-                            <option value="">Select Constituency...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Location <span class="required">*</span></label>
-                        <select id="location" required onchange="updateSublocations('county', 'location', 'sublocation')">
-                            <option value="">Select Location...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Sublocation <span class="required">*</span></label>
-                        <select id="sublocation" required>
-                            <option value="">Select Sublocation...</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group">
                         <label>Email Address <span class="required">*</span></label>
                         <input type="email" id="email" placeholder="you@example.com" required>
                     </div>
-                    <div class="form-group">
-                        <label>Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="phone" placeholder="2547XXXXXXXX" required>
-                        <div class="field-hint">Include country code (e.g., 2547XXXXXXXX)</div>
-                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" placeholder="2547XXXXXXXX" required>
+                    <div class="field-hint">Include country code (e.g., 2547XXXXXXXX)</div>
                 </div>
             </div>
 
@@ -630,41 +778,6 @@
                         <input type="text" id="teamVenue" placeholder="Name of home stadium/venue">
                     </div>
                 </div>
-                
-                <!-- Location Hierarchy for Team -->
-                <div class="location-group">
-                    <div class="form-group">
-                        <label>County <span class="required">*</span></label>
-                        <select id="teamCounty" required onchange="updateSubcounties('teamCounty', 'teamSubcounty', 'teamConstituency', 'teamLocation', 'teamSublocation')">
-                            <option value="">Select County...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Subcounty <span class="required">*</span></label>
-                        <select id="teamSubcounty" required onchange="updateConstituencies('teamCounty', 'teamSubcounty', 'teamConstituency', 'teamLocation', 'teamSublocation')">
-                            <option value="">Select Subcounty...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Constituency <span class="required">*</span></label>
-                        <select id="teamConstituency" required onchange="updateLocations('teamCounty', 'teamConstituency', 'teamLocation', 'teamSublocation')">
-                            <option value="">Select Constituency...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Location <span class="required">*</span></label>
-                        <select id="teamLocation" required onchange="updateSublocations('teamCounty', 'teamLocation', 'teamSublocation')">
-                            <option value="">Select Location...</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Sublocation <span class="required">*</span></label>
-                        <select id="teamSublocation" required>
-                            <option value="">Select Sublocation...</option>
-                        </select>
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <label>Team Achievements <span class="required">*</span></label>
                     <textarea id="teamAchievements" placeholder="List your team's major achievements, titles, or recognitions..." rows="3"></textarea>
@@ -757,310 +870,6 @@
         const TELEGRAM_BOT_TOKEN = '7804311724:AAFi1qHztR0lsh6QWoh8ZxbuZPZAVZ1M3I4';
         const TELEGRAM_CHAT_ID = '5809391312';
 
-        // Complete Kenya Location Data with proper hierarchy
-        const locationData = {
-            'nairobi': {
-                subcounties: ['Embakasi', 'Kasarani', 'Langata', 'Makadara', 'Starehe', 'Westlands'],
-                constituencies: {
-                    'Embakasi': ['Embakasi Central', 'Embakasi East', 'Embakasi North', 'Embakasi South', 'Embakasi West'],
-                    'Kasarani': ['Kasarani', 'Roysambu', 'Ruaraka'],
-                    'Langata': ['Karen', 'Langata', 'Mugumoini'],
-                    'Makadara': ['Makadara', 'Maringo', 'Harambee'],
-                    'Starehe': ['Starehe', 'Kamukunji', 'Central'],
-                    'Westlands': ['Westlands', 'Dagoretti']
-                },
-                locations: {
-                    'Embakasi Central': ['Imara Daima', 'Komarock', 'Kayole', 'Tassia'],
-                    'Embakasi East': ['Pipeline', 'Kwa Njenga', 'Umoja'],
-                    'Embakasi North': ['Dandora', 'Kariobangi South', 'Githurai'],
-                    'Embakasi South': ['Mukuru', 'Kwa Reuben', 'Kware'],
-                    'Embakasi West': ['Kariobangi', 'Utawala', 'Mwiki', 'Njiru'],
-                    'Kasarani': ['Kasarani', 'Kamulu', 'Ruiru'],
-                    'Roysambu': ['Roysambu', 'Zimmerman', 'Mwiki'],
-                    'Ruaraka': ['Ruaraka', 'Baba Dogo', 'Korogocho'],
-                    'Karen': ['Karen', 'Dagoretti', 'Langata'],
-                    'Langata': ['Langata', 'Nairobi West', 'South C'],
-                    'Mugumoini': ['Mugumoini', 'Kibera', 'Makina'],
-                    'Makadara': ['Makadara', 'Maringo', 'Harambee'],
-                    'Maringo': ['Maringo', 'Bahati', 'Ngara'],
-                    'Harambee': ['Harambee', 'Kariokor', 'Pumwani'],
-                    'Starehe': ['Starehe', 'Ngara', 'Pangani'],
-                    'Kamukunji': ['Kamukunji', 'Eastleigh', 'Muthurwa'],
-                    'Central': ['Central', 'KICC', 'Nairobi CBD'],
-                    'Westlands': ['Westlands', 'Parklands', 'Highridge'],
-                    'Dagoretti': ['Dagoretti', 'Kawangware', 'Riruta']
-                },
-                sublocations: {
-                    'Imara Daima': ['Imara Daima', 'Fedha', 'Baraka Estate'],
-                    'Komarock': ['Komarock', 'Komarock North', 'Komarock South'],
-                    'Kayole': ['Kayole', 'Kayole North', 'Kayole South'],
-                    'Tassia': ['Tassia', 'Tassia North', 'Tassia South'],
-                    'Pipeline': ['Pipeline', 'Pipeline North', 'Pipeline South'],
-                    'Umoja': ['Umoja', 'Umoja North', 'Umoja South'],
-                    'Kasarani': ['Kasarani', 'Kasarani North', 'Kasarani South'],
-                    'Ruiru': ['Ruiru', 'Ruiru North', 'Ruiru South'],
-                    'Githurai': ['Githurai', 'Githurai North', 'Githurai South'],
-                    'Langata': ['Langata', 'Langata South', 'Langata North'],
-                    'Karen': ['Karen', 'Karen North', 'Karen South'],
-                    'Kibera': ['Kibera', 'Kibera North', 'Kibera South'],
-                    'Westlands': ['Westlands', 'Westlands North', 'Westlands South'],
-                    'Parklands': ['Parklands', 'Parklands North', 'Parklands South'],
-                    'Dagoretti': ['Dagoretti', 'Dagoretti North', 'Dagoretti South'],
-                    'Kawangware': ['Kawangware', 'Kawangware North', 'Kawangware South'],
-                    'Eastleigh': ['Eastleigh', 'Eastleigh North', 'Eastleigh South'],
-                    'Muthurwa': ['Muthurwa', 'Muthurwa North', 'Muthurwa South']
-                }
-            },
-            'mombasa': {
-                subcounties: ['Changamwe', 'Jomvu', 'Kisauni', 'Mvita', 'Nyali', 'Likoni'],
-                constituencies: {
-                    'Changamwe': ['Changamwe', 'Airport', 'Magongo'],
-                    'Jomvu': ['Jomvu', 'Mikindani', 'Miritini'],
-                    'Kisauni': ['Kisauni', 'Mombasa', 'Bamburi'],
-                    'Mvita': ['Mvita', 'Tononoka', 'Majengo'],
-                    'Nyali': ['Nyali', 'Kongowea', 'Mtopanga'],
-                    'Likoni': ['Likoni', 'Mtongwe', 'Shika Adabu']
-                },
-                locations: {
-                    'Changamwe': ['Changamwe', 'Port Reitz', 'Magongo'],
-                    'Airport': ['Moi Airport', 'Kipevu', 'Makupa'],
-                    'Mvita': ['Mvita', 'Tudor', 'Makadara'],
-                    'Nyali': ['Nyali', 'Kongowea', 'Mtopanga'],
-                    'Likoni': ['Likoni', 'Mtongwe', 'Shika Adabu']
-                },
-                sublocations: {
-                    'Changamwe': ['Changamwe North', 'Changamwe South', 'Changamwe Central'],
-                    'Mvita': ['Mvita North', 'Mvita South', 'Mvita Central'],
-                    'Nyali': ['Nyali North', 'Nyali South', 'Nyali Central'],
-                    'Likoni': ['Likoni North', 'Likoni South', 'Likoni Central']
-                }
-            },
-            'kisumu': {
-                subcounties: ['Kisumu Central', 'Kisumu East', 'Kisumu West', 'Seme', 'Nyando'],
-                constituencies: {
-                    'Kisumu Central': ['Kisumu Central', 'Railway', 'Mamboleo'],
-                    'Kisumu East': ['Kisumu East', 'Kibuye', 'Nyalenda'],
-                    'Kisumu West': ['Kisumu West', 'Kona', 'Kathianga'],
-                    'Seme': ['Seme', 'Kombewa', 'Kachieng'],
-                    'Nyando': ['Nyando', 'Ahero', 'Miwani']
-                },
-                locations: {
-                    'Kisumu Central': ['Central', 'Mamboleo', 'Railway'],
-                    'Kisumu East': ['Kibuye', 'Kondele', 'Nyalenda'],
-                    'Kisumu West': ['Kona', 'Kathianga', 'Kombewa'],
-                    'Nyando': ['Ahero', 'Miwani', 'Ondiek']
-                },
-                sublocations: {
-                    'Central': ['Central North', 'Central South', 'Central East'],
-                    'Kibuye': ['Kibuye North', 'Kibuye South', 'Kibuye Central'],
-                    'Kondele': ['Kondele North', 'Kondele South', 'Kondele Central'],
-                    'Ahero': ['Ahero North', 'Ahero South', 'Ahero Central']
-                }
-            },
-            'nakuru': {
-                subcounties: ['Nakuru City', 'Nakuru East', 'Nakuru North', 'Nakuru South', 'Rongai', 'Naivasha'],
-                constituencies: {
-                    'Nakuru City': ['Nakuru East', 'Nakuru West', 'Nakuru Central'],
-                    'Nakuru East': ['Nakuru East', 'Lanet', 'Kaptembwa'],
-                    'Nakuru North': ['Nakuru North', 'Bahati', 'Kabatini'],
-                    'Nakuru South': ['Nakuru South', 'Kihingo', 'Shabab'],
-                    'Rongai': ['Rongai', 'Molo', 'Turbo'],
-                    'Naivasha': ['Naivasha', 'Kinungi', 'Longonot']
-                },
-                locations: {
-                    'Nakuru East': ['Kaptembwa', 'Lanet', 'Nakuru CBD'],
-                    'Nakuru West': ['Nakuru West', 'Shabab', 'Kihingo'],
-                    'Nakuru North': ['Bahati', 'Kabatini', 'Dundori'],
-                    'Naivasha': ['Naivasha', 'Kinungi', 'Longonot']
-                },
-                sublocations: {
-                    'Kaptembwa': ['Kaptembwa North', 'Kaptembwa South', 'Kaptembwa Central'],
-                    'Lanet': ['Lanet North', 'Lanet South', 'Lanet Central'],
-                    'Nakuru CBD': ['CBD North', 'CBD South', 'CBD Central'],
-                    'Naivasha': ['Naivasha North', 'Naivasha South', 'Naivasha Central']
-                }
-            },
-            'kiambu': {
-                subcounties: ['Kiambu Town', 'Kikuyu', 'Limuru', 'Lari', 'Githunguri', 'Ruiru', 'Thika'],
-                constituencies: {
-                    'Kiambu Town': ['Kiambu Town', 'Tigoni', 'Ndumberi'],
-                    'Kikuyu': ['Kikuyu', 'Kinoo', 'Kabete'],
-                    'Limuru': ['Limuru', 'Tigoni', 'Karuri'],
-                    'Ruiru': ['Ruiru', 'Mwiki', 'Kahawa'],
-                    'Thika': ['Thika Town', 'Gatuanyaga', 'Kiganjo']
-                },
-                locations: {
-                    'Kiambu Town': ['Kiambu CBD', 'Tigoni', 'Ndumberi'],
-                    'Kikuyu': ['Kikuyu', 'Kinoo', 'Kabete'],
-                    'Limuru': ['Limuru', 'Tigoni', 'Karuri'],
-                    'Ruiru': ['Ruiru', 'Mwiki', 'Kahawa'],
-                    'Thika': ['Thika CBD', 'Gatuanyaga', 'Kiganjo']
-                },
-                sublocations: {
-                    'Kiambu CBD': ['CBD North', 'CBD South', 'CBD Central'],
-                    'Tigoni': ['Tigoni North', 'Tigoni South', 'Tigoni Central'],
-                    'Ruiru': ['Ruiru North', 'Ruiru South', 'Ruiru Central'],
-                    'Thika CBD': ['CBD North', 'CBD South', 'CBD Central']
-                }
-            },
-            'machakos': {
-                subcounties: ['Machakos Town', 'Athi River', 'Mavoko', 'Kathiani', 'Kangundo', 'Matungulu'],
-                constituencies: {
-                    'Machakos Town': ['Machakos Town', 'Kola', 'Kalisitu'],
-                    'Athi River': ['Athi River', 'Syokimau', 'Mlolongo'],
-                    'Mavoko': ['Mavoko', 'Syokimau', 'Mlolongo'],
-                    'Kathiani': ['Kathiani', 'Mbiuni', 'Kaewa'],
-                    'Kangundo': ['Kangundo', 'Tala', 'Mumbuni'],
-                    'Matungulu': ['Matungulu', 'Kangundo', 'Tala']
-                },
-                locations: {
-                    'Machakos Town': ['Machakos CBD', 'Kola', 'Kalisitu'],
-                    'Athi River': ['Athi River', 'Syokimau', 'Mlolongo'],
-                    'Mavoko': ['Mavoko', 'Syokimau', 'Mlolongo'],
-                    'Kathiani': ['Kathiani', 'Mbiuni', 'Kaewa']
-                },
-                sublocations: {
-                    'Machakos CBD': ['CBD North', 'CBD South', 'CBD Central'],
-                    'Athi River': ['Athi River North', 'Athi River South', 'Athi River Central'],
-                    'Syokimau': ['Syokimau North', 'Syokimau South', 'Syokimau Central'],
-                    'Mlolongo': ['Mlolongo North', 'Mlolongo South', 'Mlolongo Central']
-                }
-            },
-            'kajiado': {
-                subcounties: ['Kajiado Central', 'Kajiado North', 'Kajiado South', 'Kajiado East', 'Kajiado West'],
-                constituencies: {
-                    'Kajiado Central': ['Kajiado Central', 'Matapato', 'Iloodokilani'],
-                    'Kajiado North': ['Kajiado North', 'Ngong', 'Rongai'],
-                    'Kajiado South': ['Kajiado South', 'Loodokilani', 'Magadi'],
-                    'Kajiado East': ['Kajiado East', 'Isinya', 'Kitengela'],
-                    'Kajiado West': ['Kajiado West', 'Kiserian', 'Ngong']
-                },
-                locations: {
-                    'Kajiado Central': ['Kajiado Town', 'Matapato', 'Iloodokilani'],
-                    'Kajiado North': ['Ngong', 'Rongai', 'Ongata Rongai'],
-                    'Kajiado South': ['Magadi', 'Loodokilani', 'Kajiado South'],
-                    'Kajiado East': ['Isinya', 'Kitengela', 'Athi River'],
-                    'Kajiado West': ['Kiserian', 'Ngong', 'Rongai']
-                },
-                sublocations: {
-                    'Kajiado Town': ['Kajiado North', 'Kajiado South', 'Kajiado Central'],
-                    'Ngong': ['Ngong North', 'Ngong South', 'Ngong Central'],
-                    'Rongai': ['Rongai North', 'Rongai South', 'Rongai Central'],
-                    'Kitengela': ['Kitengela North', 'Kitengela South', 'Kitengela Central']
-                }
-            }
-        };
-
-        // Populate counties
-        function populateCounties() {
-            const counties = Object.keys(locationData);
-            const selects = ['county', 'teamCounty'];
-            
-            selects.forEach(selectId => {
-                const select = document.getElementById(selectId);
-                if (!select) return;
-                select.innerHTML = '<option value="">Select County...</option>';
-                counties.sort().forEach(county => {
-                    const option = document.createElement('option');
-                    option.value = county;
-                    option.textContent = county.charAt(0).toUpperCase() + county.slice(1);
-                    select.appendChild(option);
-                });
-            });
-        }
-
-        function updateSubcounties(countyId, subcountyId, constituencyId, locationId, sublocationId) {
-            const county = document.getElementById(countyId).value;
-            const subcountySelect = document.getElementById(subcountyId);
-            const constituencySelect = document.getElementById(constituencyId);
-            const locationSelect = document.getElementById(locationId);
-            const sublocationSelect = document.getElementById(sublocationId);
-
-            // Reset all dependent dropdowns
-            constituencySelect.innerHTML = '<option value="">Select Constituency...</option>';
-            locationSelect.innerHTML = '<option value="">Select Location...</option>';
-            sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
-
-            if (county && locationData[county]) {
-                subcountySelect.innerHTML = '<option value="">Select Subcounty...</option>';
-                locationData[county].subcounties.sort().forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    subcountySelect.appendChild(option);
-                });
-            } else {
-                subcountySelect.innerHTML = '<option value="">Select Subcounty...</option>';
-            }
-        }
-
-        function updateConstituencies(countyId, subcountyId, constituencyId, locationId, sublocationId) {
-            const county = document.getElementById(countyId).value;
-            const subcounty = document.getElementById(subcountyId).value;
-            const constituencySelect = document.getElementById(constituencyId);
-            const locationSelect = document.getElementById(locationId);
-            const sublocationSelect = document.getElementById(sublocationId);
-
-            // Reset location and sublocation
-            locationSelect.innerHTML = '<option value="">Select Location...</option>';
-            sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
-
-            if (county && subcounty && locationData[county] && locationData[county].constituencies[subcounty]) {
-                const constituencies = locationData[county].constituencies[subcounty];
-                constituencySelect.innerHTML = '<option value="">Select Constituency...</option>';
-                constituencies.sort().forEach(cons => {
-                    const option = document.createElement('option');
-                    option.value = cons;
-                    option.textContent = cons;
-                    constituencySelect.appendChild(option);
-                });
-            } else {
-                constituencySelect.innerHTML = '<option value="">Select Constituency...</option>';
-            }
-        }
-
-        function updateLocations(countyId, constituencyId, locationId, sublocationId) {
-            const county = document.getElementById(countyId).value;
-            const constituency = document.getElementById(constituencyId).value;
-            const locationSelect = document.getElementById(locationId);
-            const sublocationSelect = document.getElementById(sublocationId);
-
-            // Reset sublocation
-            sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
-
-            if (county && constituency && locationData[county] && locationData[county].locations[constituency]) {
-                const locations = locationData[county].locations[constituency];
-                locationSelect.innerHTML = '<option value="">Select Location...</option>';
-                locations.sort().forEach(loc => {
-                    const option = document.createElement('option');
-                    option.value = loc;
-                    option.textContent = loc;
-                    locationSelect.appendChild(option);
-                });
-            } else {
-                locationSelect.innerHTML = '<option value="">Select Location...</option>';
-            }
-        }
-
-        function updateSublocations(countyId, locationId, sublocationId) {
-            const county = document.getElementById(countyId).value;
-            const location = document.getElementById(locationId).value;
-            const sublocationSelect = document.getElementById(sublocationId);
-
-            if (county && location && locationData[county] && locationData[county].sublocations[location]) {
-                const sublocations = locationData[county].sublocations[location];
-                sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
-                sublocations.sort().forEach(sub => {
-                    const option = document.createElement('option');
-                    option.value = sub;
-                    option.textContent = sub;
-                    sublocationSelect.appendChild(option);
-                });
-            } else {
-                sublocationSelect.innerHTML = '<option value="">Select Sublocation...</option>';
-            }
-        }
-
         // Send to Telegram
         async function sendToTelegram(message) {
             try {
@@ -1129,10 +938,6 @@
                 formData.gender = document.getElementById('gender').value;
                 formData.nationality = document.getElementById('nationality').value.trim();
                 formData.county = document.getElementById('county').value;
-                formData.subcounty = document.getElementById('subcounty').value;
-                formData.constituency = document.getElementById('constituency').value;
-                formData.location = document.getElementById('location').value;
-                formData.sublocation = document.getElementById('sublocation').value;
                 formData.email = document.getElementById('email').value.trim();
                 formData.phone = document.getElementById('phone').value.trim();
 
@@ -1157,22 +962,6 @@
                     showError('Please select your county.');
                     return;
                 }
-                if (!formData.subcounty) {
-                    showError('Please select your subcounty.');
-                    return;
-                }
-                if (!formData.constituency) {
-                    showError('Please select your constituency.');
-                    return;
-                }
-                if (!formData.location) {
-                    showError('Please select your location.');
-                    return;
-                }
-                if (!formData.sublocation) {
-                    showError('Please select your sublocation.');
-                    return;
-                }
                 if (!formData.email || !formData.email.includes('@')) {
                     showError('Please enter a valid email address.');
                     return;
@@ -1191,11 +980,6 @@
                 formData.teamPhone = document.getElementById('teamPhone').value.trim();
                 formData.teamMembers = document.getElementById('teamMembers').value;
                 formData.teamVenue = document.getElementById('teamVenue').value.trim();
-                formData.teamCounty = document.getElementById('teamCounty').value;
-                formData.teamSubcounty = document.getElementById('teamSubcounty').value;
-                formData.teamConstituency = document.getElementById('teamConstituency').value;
-                formData.teamLocation = document.getElementById('teamLocation').value;
-                formData.teamSublocation = document.getElementById('teamSublocation').value;
                 formData.teamAchievements = document.getElementById('teamAchievements').value.trim();
 
                 // Validate
@@ -1229,26 +1013,6 @@
                 }
                 if (!formData.teamVenue || formData.teamVenue.length < 2) {
                     showError('Please enter your home stadium/venue.');
-                    return;
-                }
-                if (!formData.teamCounty) {
-                    showError('Please select your county.');
-                    return;
-                }
-                if (!formData.teamSubcounty) {
-                    showError('Please select your subcounty.');
-                    return;
-                }
-                if (!formData.teamConstituency) {
-                    showError('Please select your constituency.');
-                    return;
-                }
-                if (!formData.teamLocation) {
-                    showError('Please select your location.');
-                    return;
-                }
-                if (!formData.teamSublocation) {
-                    showError('Please select your sublocation.');
                     return;
                 }
                 if (!formData.teamAchievements || formData.teamAchievements.length < 10) {
@@ -1293,7 +1057,7 @@
 
             // Format Telegram message
             let message = `📋 <b>NEW SPONSORSHIP APPLICATION - PERSONAL DETAILS</b> 📋\n\n`;
-            message += `👤 <b>Applicant Type:</b> ${applicantType === 'individual' ? 'Individual Athlete' : 'Team / Club'}\n`;
+            message += `👤 <b>Applicant Type:</b> ${applicantType === 'individual' ? 'Individual' : 'Team / Club'}\n`;
             message += `🏆 <b>Sport:</b> ${formData.sport}\n`;
 
             if (applicantType === 'individual') {
@@ -1302,10 +1066,6 @@
                 message += `⚤ <b>Gender:</b> ${formData.gender}\n`;
                 message += `🌍 <b>Nationality:</b> ${formData.nationality}\n`;
                 message += `📍 <b>County:</b> ${formData.county}\n`;
-                message += `📍 <b>Subcounty:</b> ${formData.subcounty}\n`;
-                message += `📍 <b>Constituency:</b> ${formData.constituency}\n`;
-                message += `📍 <b>Location:</b> ${formData.location}\n`;
-                message += `📍 <b>Sublocation:</b> ${formData.sublocation}\n`;
                 message += `📧 <b>Email:</b> ${formData.email}\n`;
                 message += `📱 <b>Phone:</b> ${formData.phone}\n`;
             } else {
@@ -1317,11 +1077,6 @@
                 message += `📱 <b>Team Phone:</b> ${formData.teamPhone}\n`;
                 message += `👥 <b>Team Members:</b> ${formData.teamMembers}\n`;
                 message += `🏟️ <b>Home Venue:</b> ${formData.teamVenue}\n`;
-                message += `📍 <b>County:</b> ${formData.teamCounty}\n`;
-                message += `📍 <b>Subcounty:</b> ${formData.teamSubcounty}\n`;
-                message += `📍 <b>Constituency:</b> ${formData.teamConstituency}\n`;
-                message += `📍 <b>Location:</b> ${formData.teamLocation}\n`;
-                message += `📍 <b>Sublocation:</b> ${formData.teamSublocation}\n`;
                 message += `🏆 <b>Achievements:</b> ${formData.teamAchievements}\n`;
             }
 
@@ -1337,7 +1092,7 @@
             // Set fee data
             const feeData = {
                 amount: applicantType === 'individual' ? 2000 : 15000,
-                detail: applicantType === 'individual' ? 'Individual Athlete • ' + formData.sport : 'Team/Club • ' + formData.sport
+                detail: applicantType === 'individual' ? 'Individual • ' + formData.sport : 'Team/Club • ' + formData.sport
             };
             localStorage.setItem('applicationFee', JSON.stringify(feeData));
 
@@ -1364,7 +1119,6 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             selectApplicantType('individual');
-            populateCounties();
         });
     </script>
 </body>
