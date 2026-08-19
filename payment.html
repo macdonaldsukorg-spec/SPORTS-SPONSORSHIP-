@@ -394,27 +394,20 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
-        .sponsor-item .sponsor-logo {
-            width: 100%;
-            height: 42px;
-            object-fit: contain;
-            margin: 0 auto 8px;
-            display: block;
-            background: #ffffff;
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s;
-        }
-
-        .sponsor-item:hover .sponsor-logo {
-            border-color: rgba(255, 215, 0, 0.2);
-        }
-
         .sponsor-item .sponsor-name {
-            font-size: 0.7rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sponsor-item .sponsor-amount {
+            font-size: 0.6rem;
+            color: #FBBF24;
+            margin-top: 4px;
+            display: block;
+            font-weight: 600;
         }
 
         .sponsor-item .click-hint {
@@ -549,18 +542,6 @@
         .sponsor-modal-close:hover {
             color: #ffffff;
             transform: rotate(90deg);
-        }
-
-        .sponsor-modal-logo {
-            width: 90px;
-            height: 60px;
-            object-fit: contain;
-            background: #ffffff;
-            padding: 8px 14px;
-            border-radius: 10px;
-            margin: 0 auto 16px;
-            display: block;
-            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .sponsor-modal h2 {
@@ -713,11 +694,6 @@
                 padding: 22px 14px;
             }
 
-            .sponsor-modal-logo {
-                width: 70px;
-                height: 45px;
-            }
-
             .sponsor-modal h2 {
                 font-size: 1.4rem;
             }
@@ -836,7 +812,6 @@
     <div class="sponsor-modal" id="sponsorModal">
         <div class="sponsor-modal-content">
             <button class="sponsor-modal-close" onclick="closeSponsorModal()">✕</button>
-            <img class="sponsor-modal-logo" id="modalLogo" src="" alt="">
             <h2 id="modalName"></h2>
             <div class="sponsor-tagline" id="modalTagline"></div>
             <p class="sponsor-description" id="modalDescription"></p>
@@ -852,12 +827,11 @@
     </div>
 
     <script>
-        // Simple sponsor data with text-based logos (no external images)
+        // Sponsors data with capitalized names and varying amounts
         const sponsorsData = [
             {
                 id: 'nike',
-                name: 'Nike',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3ENIKE%3C/text%3E%3C/svg%3E',
+                name: 'NIKE',
                 tagline: 'Just Do It',
                 description: 'Nike is the world\'s leading innovator in athletic footwear, apparel, equipment, and accessories. Founded in 1964, Nike has been a proud sponsor of athletes across all sports disciplines, providing cutting-edge technology and performance gear to help athletes reach their full potential.',
                 contributions: [
@@ -869,8 +843,7 @@
             },
             {
                 id: 'adidas',
-                name: 'Adidas',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EADIDAS%3C/text%3E%3C/svg%3E',
+                name: 'ADIDAS',
                 tagline: 'Impossible is Nothing',
                 description: 'Adidas is a global leader in the sporting goods industry, offering a wide range of sports apparel and footwear. With a rich history of supporting athletes since 1949, Adidas continues to drive innovation and performance in sports worldwide.',
                 contributions: [
@@ -882,8 +855,7 @@
             },
             {
                 id: 'puma',
-                name: 'Puma',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EPUMA%3C/text%3E%3C/svg%3E',
+                name: 'PUMA',
                 tagline: 'Forever Faster',
                 description: 'Puma is a global sports brand known for its fast and innovative products. Founded in 1948, Puma has been at the forefront of sports culture, supporting athletes in football, running, and lifestyle sports with cutting-edge designs.',
                 contributions: [
@@ -895,8 +867,7 @@
             },
             {
                 id: 'newbalance',
-                name: 'New Balance',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3ENEW BALANCE%3C/text%3E%3C/svg%3E',
+                name: 'NEW BALANCE',
                 tagline: 'Fearlessly Independent',
                 description: 'New Balance is an American sports footwear and apparel brand that has been committed to making a difference in the athletic community since 1906. Known for its focus on running and comfort, New Balance supports athletes of all levels.',
                 contributions: [
@@ -908,8 +879,7 @@
             },
             {
                 id: 'underarmour',
-                name: 'Under Armour',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EUNDER ARMOUR%3C/text%3E%3C/svg%3E',
+                name: 'UNDER ARMOUR',
                 tagline: 'Protect This House',
                 description: 'Under Armour is a leading American sports clothing and accessories brand. Founded in 1996, Under Armour is dedicated to providing performance apparel that makes athletes better through passion, design, and innovation.',
                 contributions: [
@@ -922,7 +892,6 @@
             {
                 id: 'asics',
                 name: 'ASICS',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EASICS%3C/text%3E%3C/svg%3E',
                 tagline: 'Sound Mind, Sound Body',
                 description: 'ASICS is a Japanese multinational corporation that produces sports equipment and athletic footwear. Founded in 1949, ASICS is renowned for its high-quality running shoes and commitment to promoting healthy lifestyles through sports.',
                 contributions: [
@@ -934,8 +903,7 @@
             },
             {
                 id: 'reebok',
-                name: 'Reebok',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EREEBOK%3C/text%3E%3C/svg%3E',
+                name: 'REEBOK',
                 tagline: 'Life is Not a Spectator Sport',
                 description: 'Reebok is a global athletic footwear and apparel company that has been inspiring people to push their limits since 1895. With a focus on fitness and training, Reebok supports athletes in their journey to become the best versions of themselves.',
                 contributions: [
@@ -947,8 +915,7 @@
             },
             {
                 id: 'saucony',
-                name: 'Saucony',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3ESAUCONY%3C/text%3E%3C/svg%3E',
+                name: 'SAUCONY',
                 tagline: 'Run Your World',
                 description: 'Saucony is an American athletic shoe company specializing in high-performance running shoes. Since 1898, Saucony has been dedicated to creating the best running experience for athletes of all levels, from beginners to elite competitors.',
                 contributions: [
@@ -960,8 +927,7 @@
             },
             {
                 id: 'brooks',
-                name: 'Brooks',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EBROOKS%3C/text%3E%3C/svg%3E',
+                name: 'BROOKS',
                 tagline: 'Run Happy',
                 description: 'Brooks is a leading running shoe brand dedicated to creating the best running products in the world. Founded in 1914, Brooks has a singular focus on running and has been supporting runners in achieving their goals with innovative technology.',
                 contributions: [
@@ -973,8 +939,7 @@
             },
             {
                 id: 'mizuno',
-                name: 'Mizuno',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EMIZUNO%3C/text%3E%3C/svg%3E',
+                name: 'MIZUNO',
                 tagline: 'Reach Beyond',
                 description: 'Mizuno is a Japanese sports equipment and apparel company that has been delivering superior quality and performance since 1906. Known for its craftsmanship and innovation, Mizuno supports athletes in baseball, running, golf, and many other sports.',
                 contributions: [
@@ -986,8 +951,7 @@
             },
             {
                 id: 'lululemon',
-                name: 'Lululemon',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3ELULULEMON%3C/text%3E%3C/svg%3E',
+                name: 'LULULEMON',
                 tagline: 'Sweat for Life',
                 description: 'Lululemon is a Canadian athletic apparel company that has become a leader in yoga and fitness wear. Founded in 1998, Lululemon is committed to creating products that help people live a mindful and healthy lifestyle through movement.',
                 contributions: [
@@ -999,8 +963,7 @@
             },
             {
                 id: 'garmin',
-                name: 'Garmin',
-                logo: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="80"%3E%3Crect width="200" height="80" fill="%23fff" rx="8"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="%23333" text-anchor="middle" dominant-baseline="central"%3EGARMIN%3C/text%3E%3C/svg%3E',
+                name: 'GARMIN',
                 tagline: 'Beat Yesterday',
                 description: 'Garmin is a multinational technology company that designs and manufactures GPS technology and wearable devices. Since 1989, Garmin has been empowering athletes with cutting-edge sports technology to track, analyze, and improve their performance.',
                 contributions: [
@@ -1019,24 +982,19 @@
                 return;
             }
             
-            console.log('Rendering sponsors...');
             grid.innerHTML = sponsorsData.map(sponsor => `
                 <div class="sponsor-item" onclick="openSponsorModal('${sponsor.id}')">
-                    <img class="sponsor-logo" src="${sponsor.logo}" alt="${sponsor.name}" loading="lazy">
                     <div class="sponsor-name">${sponsor.name}</div>
+                    <span class="sponsor-amount">${sponsor.total}</span>
                     <span class="click-hint">👆 Tap for details</span>
                 </div>
             `).join('');
-            
-            console.log('Sponsors rendered successfully!');
         }
 
         function openSponsorModal(id) {
             const sponsor = sponsorsData.find(s => s.id === id);
             if (!sponsor) return;
 
-            document.getElementById('modalLogo').src = sponsor.logo;
-            document.getElementById('modalLogo').alt = sponsor.name;
             document.getElementById('modalName').textContent = sponsor.name;
             document.getElementById('modalTagline').textContent = sponsor.tagline;
             document.getElementById('modalDescription').textContent = sponsor.description;
@@ -1071,8 +1029,6 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, initializing page...');
-            
             // Get data from localStorage
             const feeData = JSON.parse(localStorage.getItem('applicationFee') || '{}');
             const athleteData = JSON.parse(localStorage.getItem('athleteData') || '{}');
@@ -1251,4 +1207,4 @@
         });
     </script>
 </body>
-    </html> 
+    </html>
